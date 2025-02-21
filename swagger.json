@@ -1,0 +1,1352 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Gristle API",
+    "description": "API documentation for Gristle document parsing services, based on the OpenAPI 3.0 specification.\n\nAll API calls can be accessed using _Basic Authentication_, an authentication token is returned with every response as an optional form of authentication for future requests.\n\nIf you're simply pushing files to be parsed jump to the [parse service call](#/parse/postInvokeParser) section, as it's likely all you need.  The traditional workflow of which goes as follows:\n\n- Upload a file using a HTTP POST request with _Basic Authentication_ or an authentication token.\n- If you intend to download immediately, poll using a HTTP HEAD request to verify the file has been processed.\n- Use a HTTP GET request to download the processed output.\n\nIf you are using our push output support, or are manually downloading output files, you may skip the 2nd and 3rd steps above.  Code snippets are available in various languages at [www.gristle.com](https://www.gristle.com) to demonstrate this functionality.\n\nThe remaining service calls are available to use, but are traditionally met by the UI at [www.gristle.com](https://www.gristle.com), including the creation of the parsers and mappings.\n\n- [www.gristle.com](https://www.gristle.com) (frontend)\n- [api.gristle.com](https://api.gristle.com) (backend)\n- [app.swaggerhub.com](https://app.swaggerhub.com/apis/gristle/api) (this documentation)",
+    "contact": {
+      "email": "support@gristle.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "v1"
+  },
+  "servers": [
+    {
+      "url": "https://api.gristle.com"
+    }
+  ],
+  "tags": [
+    {
+      "name": "user",
+      "description": "User settings and authentication"
+    },
+    {
+      "name": "parse",
+      "description": "Upload files to a parser for processing and download the corresponding outputs"
+    },
+    {
+      "name": "parser",
+      "description": "Review and update parser settings"
+    },
+    {
+      "name": "map",
+      "description": "Associate a document file to a parser for future mapping (required to parse)"
+    },
+    {
+      "name": "issue",
+      "description": "Submit and review issues (tickets) for parsers, parsed outputs, and overall account"
+    }
+  ],
+  "paths": {
+    "/user": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Get user settings",
+        "description": "This can also act as _/user/auth_, the username and password are provided via _Basic Authentication_.",
+        "operationId": "getUserByName",
+        "responses": {
+          "200": {
+            "description": "(2xx) Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_200"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "(4xx) Client error"
+          }
+        },
+        "security": [
+          {
+            "basic_auth": [
+              "write:parsers",
+              "read:parsers"
+            ]
+          },
+          {
+            "bearer_auth": [
+              "write:parsers",
+              "read:parsers"
+            ]
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Create or update user settings",
+        "description": "Create or update user settings, __all outside authentication tokens are wiped upon update__. The username and password are provided via _Basic Authentication_.",
+        "operationId": "updateUserByName",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "(2xx) Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_200"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "(4xx) Client error"
+          }
+        },
+        "security": [
+          {
+            "basic_auth": [
+              "write:parsers",
+              "read:parsers"
+            ]
+          },
+          {
+            "bearer_auth": [
+              "write:parsers",
+              "read:parsers"
+            ]
+          }
+        ]
+      }
+    },
+    "/user/auth": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Get an authentication token",
+        "description": "Return an authentication (_Bearer_) token from a username and password using _Basic Authentication_.  Any path can include this _Basic Authentication_, which may make this a redundant and unnecessary step for some use-cases.  The header _GRISTLE-TOKEN_ can be used instead of the _Bearer_ authentication model, for ease of use with various tools like _curl_.",
+        "operationId": "login",
+        "responses": {
+          "200": {
+            "description": "(2xx) Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "(4xx) Client error"
+          }
+        },
+        "security": [
+          {
+            "basic_auth": [
+              "write:parsers",
+              "read:parsers"
+            ]
+          },
+          {
+            "bearer_auth": [
+              "write:parsers",
+              "read:parsers"
+            ]
+          }
+        ]
+      }
+    },
+    "/user/verify": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Send an email to verify the user's email",
+        "description": "Send an email to verify the user's email.  The email comes from @gristle.net.",
+        "operationId": "sendUserEmailToVerify",
+        "responses": {
+          "200": {
+            "description": "(2xx) Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "(4xx) Client error"
+          }
+        },
+        "security": [
+          {
+            "basic_auth": [
+              "write:parsers",
+              "read:parsers"
+            ]
+          },
+          {
+            "bearer_auth": [
+              "write:parsers",
+              "read:parsers"
+            ]
+          }
+        ]
+      }
+    },
+    "/user/verify/{code}": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Send back the emailed code to verify the user's email",
+        "description": "Send back the emailed code to verify the user's email  The email comes from @gristle.net.",
+        "operationId": "verifyUserEmail",
+        "parameters": [
+          {
+            "name": "code",
+            "in": "path",
+            "description": "The code sent in the email",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "(2xx) Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "(4xx) Client error"
+          }
+        },
+        "security": [
+          {
+            "basic_auth": [
+              "write:parsers",
+              "read:parsers"
+            ]
+          },
+          {
+            "bearer_auth": [
+              "write:parsers",
+              "read:parsers"
+            ]
+          }
+        ]
+      }
+    },
+    "/user/{username}": {
+      "head": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Determine if a user exists",
+        "description": "Determine if a user exists.",
+        "operationId": "findUserByName",
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "(2xx) Successful operation"
+          },
+          "400": {
+            "description": "(4xx) Client error"
+          }
+        }
+      }
+    },
+    "/parse/{parserId}": {
+      "get": {
+        "tags": [
+          "parse"
+        ],
+        "summary": "Return a list of uploads for a parser",
+        "description": "Return a list of parsed outputs and unprocessed uploads for a parser.  Results are in the _parses_ portion of the returned JSON.",
+        "operationId": "getParsedList",
+        "parameters": [
+          {
+            "name": "parserId",
+            "in": "path",
+            "description": "parser ID to use",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "$ref": "#/components/schemas/ParserId"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "(2xx) Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_200_1"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "(4xx) Client error"
+          }
+        },
+        "security": [
+          {
+            "basic_auth": [
+              "write:parsers",
+              "read:parsers"
+            ]
+          },
+          {
+            "bearer_auth": [
+              "write:parsers",
+              "read:parsers"
+            ]
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "parse"
+        ],
+        "summary": "Upload a file to a parser for processing",
+        "description": "Upload a file to a parser for processing using HTTP multipart/form-data.  For tracking, the _id_ returned in the JSON is referenced as _uploadId_ with future requests.  The HTTP header _Gristle-Parse-Id_ also provides the _id_.",
+        "operationId": "postInvokeParser",
+        "parameters": [
+          {
+            "name": "parserId",
+            "in": "path",
+            "description": "parser ID to use",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "$ref": "#/components/schemas/ParserId"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Upload file body",
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/parse_parserId_body"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "(2xx) Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_200_2"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "(4xx) Client error"
+          }
+        },
+        "security": [
+          {
+            "basic_auth": [
+              "write:parsers",
+              "read:parsers"
+            ]
+          },
+          {
+            "bearer_auth": [
+              "write:parsers",
+              "read:parsers"
+            ]
+          }
+        ]
+      }
+    },
+    "/parse/{parserId}/{uploadId}": {
+      "get": {
+        "tags": [
+          "parse"
+        ],
+        "summary": "Get the parsed output of an uploaded file",
+        "description": "Download the parsed output of an uploaded file using the _uploadId_.",
+        "operationId": "getParsedOutput",
+        "parameters": [
+          {
+            "name": "parserId",
+            "in": "path",
+            "description": "Parser ID",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "$ref": "#/components/schemas/ParserId"
+            }
+          },
+          {
+            "name": "uploadId",
+            "in": "path",
+            "description": "Upload / Output ID",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "$ref": "#/components/schemas/UploadId"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "(2xx) Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              }
+            }
+          },
+          "304": {
+            "description": "Uploaded file has not been processed yet"
+          },
+          "400": {
+            "description": "(4xx) Client error"
+          }
+        },
+        "security": [
+          {
+            "basic_auth": [
+              "write:parsers",
+              "read:parsers"
+            ]
+          },
+          {
+            "bearer_auth": [
+              "write:parsers",
+              "read:parsers"
+            ]
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "parse"
+        ],
+        "summary": "Deletes an uploaded file and/or its parsed output",
+        "description": "Deletes an uploaded file and/or its parsed output.",
+        "operationId": "deleteParsedOutput",
+        "parameters": [
+          {
+            "name": "parserId",
+            "in": "path",
+            "description": "Parser ID",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "$ref": "#/components/schemas/ParserId"
+            }
+          },
+          {
+            "name": "uploadId",
+            "in": "path",
+            "description": "Upload / Output ID",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "$ref": "#/components/schemas/UploadId"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "(2xx) Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "(4xx) Client error"
+          }
+        },
+        "security": [
+          {
+            "basic_auth": [
+              "write:parsers",
+              "read:parsers"
+            ]
+          },
+          {
+            "bearer_auth": [
+              "write:parsers",
+              "read:parsers"
+            ]
+          }
+        ]
+      },
+      "head": {
+        "tags": [
+          "parse"
+        ],
+        "summary": "Check if an uploaded file has been parsed",
+        "description": "Check to see if an uploaded file has been parsed and its corresponding output is ready to download, without downloading it.",
+        "operationId": "checkParsedOutput",
+        "parameters": [
+          {
+            "name": "parserId",
+            "in": "path",
+            "description": "Parser ID",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "$ref": "#/components/schemas/ParserId"
+            }
+          },
+          {
+            "name": "uploadId",
+            "in": "path",
+            "description": "Upload ID (becomes the Output ID)",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "$ref": "#/components/schemas/UploadId"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "(2xx) Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              }
+            }
+          },
+          "304": {
+            "description": "Uploaded file has not been processed yet"
+          },
+          "400": {
+            "description": "(4xx) Client error"
+          }
+        },
+        "security": [
+          {
+            "basic_auth": [
+              "write:parsers",
+              "read:parsers"
+            ]
+          },
+          {
+            "bearer_auth": [
+              "write:parsers",
+              "read:parsers"
+            ]
+          }
+        ]
+      }
+    },
+    "/parser": {
+      "get": {
+        "tags": [
+          "parser"
+        ],
+        "summary": "List all available parsers",
+        "description": "Return a list of all available parsers.  Results are in the _parsers_ portion of the returned JSON.",
+        "operationId": "getParsers",
+        "responses": {
+          "200": {
+            "description": "(2xx) Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_200_3"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "(4xx) Client error"
+          }
+        },
+        "security": [
+          {
+            "basic_auth": [
+              "write:parsers",
+              "read:parsers"
+            ]
+          },
+          {
+            "bearer_auth": [
+              "write:parsers",
+              "read:parsers"
+            ]
+          }
+        ]
+      }
+    },
+    "/parser/{parserId}": {
+      "get": {
+        "tags": [
+          "parser"
+        ],
+        "summary": "Get parser details by ID",
+        "description": "Return a parsers details by its parser ID.",
+        "operationId": "getParserById",
+        "parameters": [
+          {
+            "name": "parserId",
+            "in": "path",
+            "description": "Parser ID to return data for.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "$ref": "#/components/schemas/ParserId"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "(2xx) Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "(4xx) Client error"
+          }
+        },
+        "security": [
+          {
+            "basic_auth": [
+              "write:parsers",
+              "read:parsers"
+            ]
+          },
+          {
+            "bearer_auth": [
+              "write:parsers",
+              "read:parsers"
+            ]
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "parser"
+        ],
+        "summary": "Update parser details by ID",
+        "description": "Update parser details",
+        "operationId": "postParserById",
+        "parameters": [
+          {
+            "name": "parserId",
+            "in": "path",
+            "description": "Parser ID to update.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "$ref": "#/components/schemas/ParserId"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "(2xx) Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "(4xx) Client error"
+          }
+        },
+        "security": [
+          {
+            "basic_auth": [
+              "write:parsers",
+              "read:parsers"
+            ]
+          },
+          {
+            "bearer_auth": [
+              "write:parsers",
+              "read:parsers"
+            ]
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "parser"
+        ],
+        "summary": "Delete a parser",
+        "description": "Delete a parser",
+        "operationId": "deleteParser",
+        "parameters": [
+          {
+            "name": "parserId",
+            "in": "path",
+            "description": "Parser ID to delete.",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "$ref": "#/components/schemas/ParserId"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "(2xx) Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "(4xx) Client error"
+          }
+        },
+        "security": [
+          {
+            "basic_auth": [
+              "write:parsers",
+              "read:parsers"
+            ]
+          },
+          {
+            "bearer_auth": [
+              "write:parsers",
+              "read:parsers"
+            ]
+          }
+        ]
+      }
+    },
+    "/map/{parserId}": {
+      "get": {
+        "tags": [
+          "map"
+        ],
+        "summary": "Get the current mapping data for a parser",
+        "description": "Get the current mapping rules associated to a mapping document for a parser.",
+        "operationId": "getMapParser",
+        "parameters": [
+          {
+            "name": "parserId",
+            "in": "path",
+            "description": "parser ID to use",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "$ref": "#/components/schemas/ParserId"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "(2xx) Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "(4xx) Client error"
+          }
+        },
+        "security": [
+          {
+            "basic_auth": [
+              "write:parsers",
+              "read:parsers"
+            ]
+          },
+          {
+            "bearer_auth": [
+              "write:parsers",
+              "read:parsers"
+            ]
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "map"
+        ],
+        "summary": "Upload a file and associate it to a parser for future mapping",
+        "description": "Upload a file and associate it to a parser for future mapping.  __The file used should be the most complex version of the kind of file you intended to parse to capture edge cases.__",
+        "operationId": "addMapParser",
+        "parameters": [
+          {
+            "name": "parserId",
+            "in": "path",
+            "description": "parser ID to use",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "$ref": "#/components/schemas/ParserId"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Upload file body",
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/map_parserId_body"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "(2xx) Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_200_4"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "(4xx) Client error"
+          }
+        },
+        "security": [
+          {
+            "basic_auth": [
+              "write:parsers",
+              "read:parsers"
+            ]
+          },
+          {
+            "bearer_auth": [
+              "write:parsers",
+              "read:parsers"
+            ]
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "map"
+        ],
+        "summary": "Delete the mapping data for a parser",
+        "description": "Remove the mapping rules and mapping file association from a parser.",
+        "operationId": "deleteAllMapParser",
+        "parameters": [
+          {
+            "name": "parserId",
+            "in": "path",
+            "description": "parser ID to use",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "$ref": "#/components/schemas/ParserId"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "(2xx) Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "(4xx) Client error"
+          }
+        },
+        "security": [
+          {
+            "basic_auth": [
+              "write:parsers",
+              "read:parsers"
+            ]
+          },
+          {
+            "bearer_auth": [
+              "write:parsers",
+              "read:parsers"
+            ]
+          }
+        ]
+      }
+    },
+    "/issue": {
+      "get": {
+        "tags": [
+          "issue"
+        ],
+        "summary": "List all available issues",
+        "description": "Return a list of all available issues.  Results are in the _issues_ portion of the returned JSON.",
+        "operationId": "getIssues",
+        "responses": {
+          "200": {
+            "description": "(2xx) Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_200_5"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "(4xx) Client error"
+          }
+        },
+        "security": [
+          {
+            "basic_auth": [
+              "write:issues",
+              "read:issues"
+            ]
+          },
+          {
+            "bearer_auth": [
+              "write:issues",
+              "read:issues"
+            ]
+          }
+        ]
+      }
+    },
+    "/issue/{assortedId}": {
+      "get": {
+        "tags": [
+          "issue"
+        ],
+        "summary": "Get issue details by ID",
+        "description": "Return the issue discussion data by ID.  Discussion data is in the _data_ portion of the returned JSON.",
+        "operationId": "getIssueById",
+        "parameters": [
+          {
+            "name": "assortedId",
+            "in": "path",
+            "description": "ID of issue to return",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "$ref": "#/components/schemas/Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "(2xx) Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_200_6"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "(4xx) Client error"
+          }
+        },
+        "security": [
+          {
+            "basic_auth": [
+              "write:issues",
+              "read:issues"
+            ]
+          },
+          {
+            "bearer_auth": [
+              "write:issues",
+              "read:issues"
+            ]
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "issue"
+        ],
+        "summary": "Create or add to an issue by ID",
+        "description": "Create or add to an issue by ID.",
+        "operationId": "postIssueById",
+        "parameters": [
+          {
+            "name": "assortedId",
+            "in": "path",
+            "description": "Issue ID to update",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "$ref": "#/components/schemas/Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "(2xx) Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "(4xx) Client error"
+          }
+        },
+        "security": [
+          {
+            "basic_auth": [
+              "write:issues",
+              "read:issues"
+            ]
+          },
+          {
+            "bearer_auth": [
+              "write:issues",
+              "read:issues"
+            ]
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "issue"
+        ],
+        "summary": "Delete an issue by ID",
+        "description": "Delete an issue by ID.",
+        "operationId": "deleteIssue",
+        "parameters": [
+          {
+            "name": "assortedId",
+            "in": "path",
+            "description": "ID of issue to remove",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "$ref": "#/components/schemas/Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "(2xx) Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "(4xx) Client error"
+          }
+        },
+        "security": [
+          {
+            "basic_auth": [
+              "write:issues",
+              "read:issues"
+            ]
+          },
+          {
+            "bearer_auth": [
+              "write:issues",
+              "read:issues"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Id": {
+        "pattern": "^[A-Z]-[A-Z]{8}-[A-Z]{8}-[A-Z0-9]{15}-[A-Z0-9]{15}-[A-F0-9]{8}$",
+        "type": "string",
+        "description": "The first character indicates the type of ID.  A=AUTH_TOKEN, P=PARSER_ID, U=UPLOAD_ID, etc.",
+        "example": "?-LONGWORD-TWOWORDS-ABCDEFGHIJKLMNO-PQRSTUVWXYZ0123-FFFFFFFF"
+      },
+      "ParserId": {
+        "pattern": "^P-[A-Z]{8}-[A-Z]{8}-[A-Z0-9]{15}-[A-Z0-9]{15}-[A-F0-9]{8}$",
+        "type": "string",
+        "example": "P-LONGWORD-TWOWORDS-ABCDEFGHIJKLMNO-PQRSTUVWXYZ0123-FFFFFFFF"
+      },
+      "UploadId": {
+        "pattern": "^U-[A-Z]{8}-[A-Z]{8}-[A-Z0-9]{15}-[A-Z0-9]{15}-[A-F0-9]{8}$",
+        "type": "string",
+        "example": "U-LONGWORD-TWOWORDS-ABCDEFGHIJKLMNO-PQRSTUVWXYZ0123-FFFFFFFF"
+      },
+      "AuthToken": {
+        "pattern": "^A-[A-Z]{8}-[A-Z]{8}-[A-Z0-9]{15}-[A-Z0-9]{15}-[A-F0-9]{8}$",
+        "type": "string",
+        "example": "A-LONGWORD-TWOWORDS-ABCDEFGHIJKLMNO-PQRSTUVWXYZ0123-FFFFFFFF"
+      },
+      "BaseResponse": {
+        "required": [
+          "auth",
+          "http",
+          "user"
+        ],
+        "type": "object",
+        "properties": {
+          "http": {
+            "$ref": "#/components/schemas/BaseResponse_http"
+          },
+          "user": {
+            "type": "string",
+            "example": "username"
+          },
+          "auth": {
+            "$ref": "#/components/schemas/AuthToken"
+          },
+          "error": {
+            "type": "string",
+            "example": ""
+          }
+        }
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "example@domain.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "password"
+          }
+        },
+        "xml": {
+          "name": "user"
+        }
+      },
+      "inline_response_200": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseResponse"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "email": {
+                "type": "string",
+                "example": "example@domain.com"
+              }
+            }
+          }
+        ]
+      },
+      "inline_response_200_1": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseResponse"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "parses": {
+                "type": "object"
+              }
+            }
+          }
+        ]
+      },
+      "parse_parserId_body": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string",
+            "format": "binary"
+          }
+        }
+      },
+      "inline_response_200_2": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseResponse"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "$ref": "#/components/schemas/UploadId"
+              }
+            }
+          }
+        ]
+      },
+      "inline_response_200_3": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseResponse"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "parsers": {
+                "type": "object"
+              }
+            }
+          }
+        ]
+      },
+      "map_parserId_body": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string",
+            "format": "binary"
+          }
+        }
+      },
+      "inline_response_200_4": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseResponse"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "uploadId": {
+                "$ref": "#/components/schemas/UploadId"
+              }
+            }
+          }
+        ]
+      },
+      "inline_response_200_5": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseResponse"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "issues": {
+                "type": "object"
+              }
+            }
+          }
+        ]
+      },
+      "inline_response_200_6": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseResponse"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "data": {
+                "type": "object"
+              }
+            }
+          }
+        ]
+      },
+      "BaseResponse_http": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "example": 200
+          },
+          "string": {
+            "type": "string",
+            "example": "OK"
+          },
+          "detail": {
+            "type": "string",
+            "example": "Task was successful"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "basic_auth": {
+        "type": "http",
+        "scheme": "basic"
+      },
+      "bearer_auth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  }
+}

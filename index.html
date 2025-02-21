@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title>Gristle - Extract Document Data</title>
+ <meta charset="UTF-8" /> 
+ <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, width=device-width" />
+ <link rel="icon" type="image/png" sizes="32x32" href="/icon-32x32.png" />
+ <link rel="icon" type="image/png" sizes="256x256" href="/icon-256x256.png" />
+ <link rel="apple-touch-icon" sizes="256x256" href="/icon-256x256.png">
+ <link rel="canonical" href="https://gristle.com" />
+ <link rel="stylesheet" type="text/css" href="gristle.css" />
+ <link rel="stylesheet" type="text/css" href="swagger.css" />
+ <script src="gristle.js"></script>
+ <script src="swagger.js" defer="defer"></script>
+ <script src="highlight.js" defer="defer"></script>
+</script>
+</head>
+<body onload="$G.LOAD()" class="g_logged_out">
+ <div id="g_error"></div>
+ <div id="g_top" class="g_top_locked">
+  <div id="g_debug"></div>
+  <svg id="g_splash_logo" viewBox="0 0 1028.000000 1028.000000">
+   <g transform="translate(0.000000,1028.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
+    <path d="M1070 8139 l0 -2142 -25 -23 c-35 -32 -34 -85 0 -112 l26 -20 -33 -7 c-43 -10 -139 -58 -212 -108 -266 -180 -448 -564 -448 -942 0 -146 20 -241 73 -355 85 -182 281 -341 495 -402 63 -18 105 -22 204 -22 114 0 133 2 219 31 120 41 132 36 119 -42 -27 -172 -135 -331 -268 -394 -47 -22 -67 -26 -141 -24 -190 4 -368 116 -413 259 -43 139 -39 136 -261 210 -152 51 -204 55 -240 19 -49 -48 -28 -214 43 -349 45 -87 179 -229 274 -292 96 -64 274 -139 415 -175 156 -40 355 -50 483 -25 155 31 301 120 406 246 86 105 130 217 383 980 293 888 292 885 294 939 2 40 -1 47 -30 67 -42 28 -273 104 -340 111 l-51 6 -36 -51 c-38 -52 -55 -65 -74 -53 -6 3 -33 40 -60 81 -92 141 -184 210 -362 273 -75 26 -102 30 -226 34 l-142 5 5 40 c4 23 0 49 -7 63 -19 36 -6 118 27 171 20 31 33 42 43 38 63 -27 110 -1 110 60 0 40 -28 66 -72 66 -21 0 -34 -10 -57 -43 -67 -97 -61 -179 -61 959 0 566 0 1487 0 2047 l0 1017 -30 0 -30 0 0 -2141z m30 -2484 c18 0 26 6 28 22 3 19 7 21 22 13 26 -14 43 -71 31 -103 -12 -30 -47 -57 -76 -57 -11 0 -34 9 -52 19 -51 32 -53 101 -4 138 13 10 17 8 21 -10 4 -15 14 -22 30 -22z m430 -254 c155 -62 242 -182 256 -356 16 -191 -72 -438 -202 -570 -129 -131 -309 -156 -484 -69 -82 42 -140 103 -172 183 -19 48 -23 74 -23 186 0 138 11 195 61 323 52 132 177 272 279 312 67 27 204 22 285 -9z"/>
+    <path d="M2777 8153 c-2 -1171 -7 -2145 -11 -2166 -6 -25 -4 -42 4 -52 11 -13 5 -15 -39 -15 -57 0 -107 -20 -115 -47 -9 -29 -33 -260 -75 -733 -75 -839 -83 -940 -77 -965 12 -47 97 -71 297 -82 137 -7 166 -2 179 33 15 39 38 234 60 510 30 381 51 478 125 595 97 150 228 204 469 192 94 -5 114 -3 128 10 21 21 38 122 45 268 l6 118 -31 30 c-30 30 -32 31 -129 31 -166 0 -282 -45 -419 -161 -38 -32 -76 -59 -86 -59 -23 0 -38 51 -38 131 0 60 -3 70 -22 83 -19 12 -146 36 -191 36 -6 0 -1 9 11 20 25 24 28 58 7 86 -20 27 -18 81 6 134 28 63 47 82 70 70 66 -36 136 54 81 103 -35 32 -112 11 -112 -29 0 -6 -16 -25 -35 -44 l-35 -34 0 730 c0 401 -3 1143 -6 1649 -3 506 -5 1092 -5 1303 l1 382 -30 0 -30 0 -3 -2127z m6 -2413 c7 -26 42 -26 61 1 18 26 31 19 46 -25 14 -44 0 -80 -39 -101 -27 -14 -35 -14 -65 -1 -42 17 -60 48 -52 89 11 52 39 74 49 37z"/>
+    <path d="M4040 8469 l0 -1812 -25 -23 c-36 -34 -29 -114 10 -114 8 0 15 -7 15 -15 0 -12 -15 -15 -71 -15 -83 0 -106 -10 -125 -55 -17 -42 -19 -257 -3 -305 12 -33 56 -60 100 -60 21 0 20 -1 -5 -21 -22 -17 -26 -28 -24 -57 3 -38 24 -55 79 -66 37 -8 47 -51 20 -80 -12 -12 -21 -32 -21 -44 0 -20 -5 -22 -49 -22 -38 0 -56 -6 -78 -24 l-28 -24 0 -871 0 -871 28 -27 27 -28 195 -3 195 -3 30 30 30 29 0 872 0 871 -25 24 c-21 22 -33 25 -102 25 l-78 0 -13 40 c-6 22 -12 87 -12 145 l0 105 74 0 c83 0 132 14 146 40 6 10 10 86 10 169 0 144 -1 151 -24 178 -23 26 -29 28 -120 31 -105 4 -109 7 -79 60 17 29 17 32 0 67 -25 52 -21 94 14 163 26 54 33 61 49 52 33 -18 78 -12 94 12 37 52 8 108 -56 108 -31 0 -38 -6 -67 -50 -18 -27 -37 -50 -42 -50 -5 0 -9 666 -9 1715 l0 1715 -30 0 -30 0 0 -1811z m3 -2129 c3 -14 14 -20 31 -20 19 0 26 5 26 20 0 26 12 25 35 0 25 -27 24 -83 0 -110 l-20 -22 -5 24 c-8 31 -51 32 -65 0 -12 -27 -26 -24 -42 9 -17 33 -16 70 3 97 19 27 30 28 37 2z m-3 -286 c0 -12 -4 -14 -12 -7 -7 6 -20 13 -28 16 -9 3 -3 6 13 6 19 1 27 -4 27 -15z m15 -394 c9 -14 52 -12 59 3 7 18 46 -30 46 -59 0 -93 -113 -125 -155 -43 -20 37 -19 51 6 83 22 28 34 32 44 16z"/>
+    <path d="M5250 8056 c0 -2017 -1 -2225 -16 -2237 -11 -9 -15 -26 -12 -55 l3 -42 -104 -16 c-197 -33 -347 -96 -444 -190 -63 -60 -97 -122 -121 -219 -49 -196 -22 -331 90 -456 81 -90 276 -170 549 -226 249 -50 384 -103 449 -175 31 -35 36 -47 36 -90 0 -96 -50 -163 -148 -200 -84 -32 -155 -41 -233 -30 -152 22 -251 87 -307 204 -46 96 -45 96 -262 96 -174 0 -188 -1 -208 -20 -29 -27 -28 -76 2 -162 57 -160 145 -272 262 -331 94 -48 227 -93 324 -111 94 -18 336 -21 445 -6 205 29 382 104 480 204 177 178 219 473 96 665 -92 142 -279 233 -623 301 -165 32 -307 75 -363 110 -18 11 -47 37 -64 56 -26 29 -31 43 -31 84 0 41 5 55 31 84 61 70 233 104 358 72 104 -27 151 -58 191 -128 19 -33 50 -72 67 -86 32 -24 36 -24 210 -23 223 2 227 4 221 96 -6 92 -62 201 -147 286 -130 129 -283 187 -538 205 l-101 7 5 36 c4 26 0 41 -11 50 -38 32 2 167 62 209 l30 22 16 -25 c33 -50 116 -22 116 40 0 35 -17 60 -49 70 -21 6 -104 -31 -158 -72 l-33 -24 0 2125 0 2126 -35 0 -35 0 0 -2224z m35 -2501 c11 0 24 10 31 23 10 21 11 21 27 4 63 -70 -3 -173 -88 -138 -57 24 -72 82 -34 130 l21 27 12 -23 c6 -13 20 -23 31 -23z"/>
+    <path d="M6750 8398 c-1 -1640 -3 -1886 -15 -1902 -8 -11 -15 -32 -15 -46 0 -14 7 -35 15 -46 23 -30 19 -34 -37 -34 -72 -1 -135 -30 -144 -67 -4 -15 -2 -116 4 -223 6 -107 8 -210 4 -229 -11 -53 -45 -72 -148 -80 -94 -8 -127 -20 -144 -51 -5 -10 -10 -64 -10 -120 0 -172 31 -206 174 -194 94 7 137 -8 155 -55 11 -28 21 -176 51 -776 20 -409 24 -434 83 -540 73 -132 258 -209 482 -200 252 10 325 21 370 57 l27 21 -4 141 c-3 120 -6 146 -24 176 l-20 35 -125 5 c-169 7 -211 31 -230 134 -23 126 -68 902 -55 969 11 61 29 67 268 92 43 5 63 13 83 33 27 27 27 28 20 127 -4 55 -13 116 -21 136 -23 56 -46 63 -171 55 -126 -8 -169 -1 -189 29 -22 34 -34 121 -42 306 l-8 171 -32 29 c-31 28 -36 29 -132 29 l-100 0 20 20 c24 24 26 68 5 96 -21 28 -18 82 9 139 38 80 46 87 82 75 41 -14 78 0 93 38 11 25 10 35 -3 61 -29 55 -103 51 -129 -6 -6 -16 -26 -43 -43 -60 l-31 -33 -6 1148 c-4 631 -7 1434 -7 1785 l0 637 -30 0 -30 0 0 -1882z m2 -2200 c2 -17 10 -23 28 -23 16 0 28 8 35 23 13 29 21 28 40 -8 39 -76 -9 -151 -89 -136 -68 13 -97 87 -55 140 25 32 37 33 41 4z"/>
+    <path d="M7890 8455 c0 -1561 -2 -1826 -14 -1831 -8 -3 -19 -18 -26 -33 -13 -32 0 -78 25 -87 8 -4 15 -14 15 -24 0 -15 -11 -18 -76 -22 -69 -3 -79 -6 -100 -31 l-24 -28 0 -1298 c0 -1222 1 -1300 18 -1320 25 -32 79 -40 263 -41 185 0 189 1 210 71 14 46 12 2539 -2 2591 -8 31 -15 39 -47 48 -20 5 -68 10 -105 10 -77 0 -91 13 -63 60 20 35 20 51 0 87 -21 36 -13 101 19 158 22 39 24 40 70 37 59 -5 77 9 77 59 0 45 -21 69 -61 69 -23 0 -36 -10 -65 -50 -20 -27 -40 -50 -45 -50 -5 0 -9 701 -9 1725 l0 1725 -30 0 -30 0 0 -1825z m18 -2149 c17 -10 42 5 42 26 0 29 22 17 44 -23 17 -31 17 -38 5 -64 -28 -58 -94 -70 -139 -25 -27 27 -26 78 2 107 21 23 23 23 29 4 4 -10 12 -22 17 -25z"/>
+    <path d="M9240 8135 l0 -2144 -25 -25 c-14 -14 -25 -35 -25 -46 0 -30 18 -60 35 -60 8 0 15 -4 15 -9 0 -5 -30 -12 -67 -15 -102 -11 -248 -52 -342 -97 -248 -118 -412 -319 -487 -594 -37 -136 -21 -410 32 -574 28 -84 112 -245 165 -315 107 -140 305 -267 474 -303 123 -26 314 -22 435 10 143 37 255 85 352 149 120 81 186 157 252 292 60 123 76 178 76 260 0 49 -3 58 -26 72 -24 16 -30 16 -132 -10 -59 -15 -124 -31 -144 -35 -57 -12 -84 -35 -120 -103 -18 -34 -59 -91 -91 -125 -93 -99 -203 -143 -362 -143 -79 0 -98 4 -152 29 -74 36 -135 96 -174 173 -31 62 -36 104 -16 132 8 10 56 30 118 47 236 67 768 208 824 219 155 31 245 79 245 129 0 53 -51 205 -95 287 -61 111 -118 187 -211 278 -66 64 -98 87 -189 132 -115 56 -203 84 -267 84 -31 0 -38 4 -38 19 0 11 5 23 11 27 7 4 8 22 5 48 -19 119 -18 129 11 186 19 37 33 54 43 51 75 -20 110 -2 110 55 0 58 -72 86 -108 42 -9 -11 -29 -35 -44 -52 l-27 -31 -1 2053 0 2052 -30 0 -30 0 0 -2145z m3 -2455 c3 -12 14 -20 27 -20 13 0 24 8 27 20 7 26 18 25 37 -2 23 -32 20 -73 -7 -104 -27 -31 -64 -35 -102 -10 -46 30 -52 77 -17 119 20 22 28 22 35 -3z m96 -259 c52 -27 147 -114 167 -153 18 -35 18 -82 0 -97 -27 -22 -609 -181 -663 -181 -28 0 -63 45 -63 82 0 52 30 150 60 192 31 46 105 117 141 137 102 54 273 64 358 20z"/>
+   </g>
+  </svg>
+  <svg id="g_splash_doc" viewBox="0 0 240.000000 310.000000">
+   <g transform="translate(0.000000,310.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
+    <path fill="#FFFFFF" d="M253 2885 c-17 -7 -36 -22 -42 -34 -15 -28 -15 -2574 0 -2603 26 -49 15 -48 989 -48 974 0 963 -1 989 48 8 15 11 335 11 1060 l0 1039 -29 39 c-57 77 -475 483 -513 499 -32 13 -127 15 -705 15 -545 -1 -674 -3 -700 -15z"/>
+    <path d="M252 2940 c-18 -4 -42 -16 -53 -26 -51 -46 -49 20 -49 -1366 0 -1279 0 -1293 20 -1326 12 -19 38 -41 63 -52 40 -19 76 -20 967 -20 891 0 927 1 967 20 25 11 51 33 63 52 20 33 20 48 20 1083 0 1040 0 1050 -21 1084 -27 45 -484 506 -528 534 l-36 22 -690 2 c-379 1 -705 -2 -723 -7z m1322 -136 c14 -13 16 -48 16 -228 0 -201 1 -215 21 -240 41 -52 61 -56 283 -56 173 0 207 -2 220 -16 14 -14 16 -116 16 -977 l0 -961 -22 -23 -21 -23 -886 0 -885 0 -23 22 -23 21 0 1226 0 1225 22 23 21 23 623 0 c553 0 624 -2 638 -16z m300 -243 c80 -80 136 -143 132 -150 -5 -7 -50 -11 -128 -11 -111 0 -124 2 -145 22 -22 20 -23 29 -23 143 0 112 3 135 19 135 4 0 69 -63 145 -139z"/>
+    <path d="M1050 2461 c-5 -11 -10 -29 -10 -41 0 -12 5 -30 10 -41 10 -17 22 -19 148 -19 94 0 142 4 150 12 16 16 16 80 0 96 -8 8 -56 12 -150 12 -126 0 -138 -2 -148 -19z"/>
+    <path d="M1050 2131 c-5 -11 -10 -29 -10 -41 0 -12 5 -30 10 -41 10 -17 22 -19 148 -19 94 0 142 4 150 12 16 16 16 80 0 96 -8 8 -56 12 -150 12 -126 0 -138 -2 -148 -19z"/>
+    <path d="M1470 2131 c-5 -11 -10 -29 -10 -41 0 -12 5 -30 10 -41 10 -18 24 -19 243 -19 168 0 236 3 245 12 16 16 16 80 0 96 -9 9 -77 12 -245 12 -219 0 -233 -1 -243 -19z"/>
+    <path d="M1470 1831 c-5 -11 -10 -29 -10 -41 0 -12 5 -30 10 -41 10 -18 24 -19 243 -19 168 0 236 3 245 12 16 16 16 80 0 96 -9 9 -77 12 -245 12 -219 0 -233 -1 -243 -19z"/>
+    <path d="M1470 1521 c-5 -11 -10 -29 -10 -41 0 -12 5 -30 10 -41 10 -18 24 -19 243 -19 168 0 236 3 245 12 16 16 16 80 0 96 -9 9 -77 12 -245 12 -219 0 -233 -1 -243 -19z"/>
+    <path d="M442 908 c-16 -16 -15 -83 2 -97 9 -8 83 -11 247 -9 l234 3 9 28 c6 17 6 37 0 55 l-9 27 -236 3 c-174 2 -238 -1 -247 -10z"/>
+    <path d="M442 598 c-16 -16 -15 -83 2 -97 9 -8 83 -11 247 -9 l234 3 9 27 c6 18 6 38 0 55 l-9 28 -236 3 c-174 2 -238 -1 -247 -10z"/>
+    <path d="M440 2470 c-19 -19 -20 -33 -20 -210 0 -177 1 -191 20 -210 19 -19 33 -20 243 -20 204 0 225 2 240 18 15 16 17 46 17 215 0 191 -1 196 -22 211 -19 13 -59 16 -240 16 -205 0 -219 -1 -238 -20z m368 -112 c16 -16 16 -180 0 -196 -17 -17 -239 -17 -256 0 -16 16 -16 180 0 196 8 8 51 12 128 12 77 0 120 -4 128 -12z"/>
+    <path d="M442 1838 c-16 -16 -16 -80 0 -96 17 -17 889 -17 906 0 7 7 12 28 12 48 0 20 -5 41 -12 48 -17 17 -889 17 -906 0z"/>
+    <path d="M442 1528 c-16 -16 -16 -80 0 -96 17 -17 889 -17 906 0 7 7 12 28 12 48 0 20 -5 41 -12 48 -17 17 -889 17 -906 0z"/>
+    <path d="M452 1224 c-30 -20 -31 -88 -3 -104 13 -7 266 -10 751 -10 485 0 738 3 751 10 14 8 19 21 19 50 0 74 44 70 -770 70 -640 0 -728 -2 -748 -16z"/>
+    <path d="M1052 908 c-7 -7 -12 -28 -12 -48 0 -20 5 -41 12 -48 17 -17 889 -17 906 0 7 7 12 28 12 48 0 20 -5 41 -12 48 -17 17 -889 17 -906 0z"/>
+    <path d="M1052 598 c-7 -7 -12 -28 -12 -48 0 -20 5 -41 12 -48 17 -17 889 -17 906 0 7 7 12 28 12 48 0 20 -5 41 -12 48 -17 17 -889 17 -906 0z"/>
+    <path opacity="0" fill="#FFFFFF" d="M325 2768 c-3 -7 -4 -560 -3 -1228 l3 -1215 875 0 875 0 3 948 2 947 -238 0 -238 0 -37 38 -37 38 0 242 0 242 -600 0 c-471 0 -602 -3 -605 -12z"/>
+    <path opacity="0" d="M448 2469 c-26 -15 -25 -95 1 -109 12 -6 99 -10 214 -10 175 0 195 2 210 18 25 27 22 78 -5 96 -18 13 -56 16 -213 16 -110 0 -197 -5 -207 -11z"/>
+    <path opacity="0" d="M448 2139 c-26 -15 -25 -95 1 -109 12 -6 99 -10 214 -10 175 0 195 2 210 18 25 27 22 78 -5 96 -18 13 -56 16 -213 16 -110 0 -197 -5 -207 -11z"/>
+    <path opacity="0" d="M448 1829 c-26 -15 -25 -95 1 -109 12 -6 99 -10 214 -10 175 0 195 2 210 18 25 27 22 78 -5 96 -18 13 -56 16 -213 16 -110 0 -197 -5 -207 -11z"/>
+    <path opacity="0" d="M448 1529 c-26 -15 -25 -95 1 -109 12 -6 99 -10 214 -10 175 0 195 2 210 18 25 27 22 78 -5 96 -18 13 -56 16 -213 16 -110 0 -197 -5 -207 -11z"/>
+    <path opacity="0" d="M448 1219 c-26 -15 -25 -95 1 -109 12 -6 99 -10 214 -10 175 0 195 2 210 18 25 27 22 78 -5 96 -18 13 -56 16 -213 16 -110 0 -197 -5 -207 -11z"/>
+    <path opacity="0" d="M448 909 c-26 -15 -25 -95 1 -109 12 -6 99 -10 214 -10 175 0 195 2 210 18 25 27 22 78 -5 96 -18 13 -56 16 -213 16 -110 0 -197 -5 -207 -11z"/>
+    <path opacity="0" d="M448 599 c-26 -15 -25 -95 1 -109 12 -6 99 -10 214 -10 175 0 195 2 210 18 25 27 22 78 -5 96 -18 13 -56 16 -213 16 -110 0 -197 -5 -207 -11z"/>
+    <path opacity="0" d="M978 2469 c-26 -15 -25 -95 1 -109 12 -6 101 -10 219 -10 180 0 200 2 215 18 25 27 22 78 -5 96 -19 13 -57 16 -218 16 -114 0 -202 -5 -212 -11z"/>
+    <path opacity="0" d="M978 2139 c-26 -15 -25 -95 1 -109 12 -6 101 -10 219 -10 180 0 200 2 215 18 25 27 22 78 -5 96 -19 13 -57 16 -218 16 -114 0 -202 -5 -212 -11z"/>
+    <path opacity="0" d="M978 1829 c-26 -15 -25 -95 1 -109 12 -6 101 -10 219 -10 180 0 200 2 215 18 25 27 22 78 -5 96 -19 13 -57 16 -218 16 -114 0 -202 -5 -212 -11z"/>
+    <path opacity="0" d="M978 1529 c-26 -15 -25 -95 1 -109 12 -6 101 -10 219 -10 180 0 200 2 215 18 25 27 22 78 -5 96 -19 13 -57 16 -218 16 -114 0 -202 -5 -212 -11z"/>
+    <path opacity="0" d="M978 1219 c-26 -15 -25 -95 1 -109 12 -6 101 -10 219 -10 180 0 200 2 215 18 25 27 22 78 -5 96 -19 13 -57 16 -218 16 -114 0 -202 -5 -212 -11z"/>
+    <path opacity="0" d="M978 909 c-26 -15 -25 -95 1 -109 12 -6 101 -10 219 -10 180 0 200 2 215 18 25 27 22 78 -5 96 -19 13 -57 16 -218 16 -114 0 -202 -5 -212 -11z"/>
+    <path opacity="0" d="M978 599 c-26 -15 -25 -95 1 -109 12 -6 101 -10 219 -10 180 0 200 2 215 18 25 27 22 78 -5 96 -19 13 -57 16 -218 16 -114 0 -202 -5 -212 -11z"/>
+    <path opacity="0" d="M1518 2139 c-26 -15 -25 -95 1 -109 12 -6 101 -10 219 -10 180 0 200 2 215 18 25 27 22 78 -5 96 -19 13 -57 16 -218 16 -114 0 -202 -5 -212 -11z"/>
+    <path opacity="0" d="M1518 1829 c-26 -15 -25 -95 1 -109 12 -6 101 -10 219 -10 180 0 200 2 215 18 25 27 22 78 -5 96 -19 13 -57 16 -218 16 -114 0 -202 -5 -212 -11z"/>
+    <path opacity="0" d="M1518 1529 c-26 -15 -25 -95 1 -109 12 -6 101 -10 219 -10 180 0 200 2 215 18 25 27 22 78 -5 96 -19 13 -57 16 -218 16 -114 0 -202 -5 -212 -11z"/>
+    <path opacity="0" d="M1518 1219 c-26 -15 -25 -95 1 -109 12 -6 101 -10 219 -10 180 0 200 2 215 18 25 27 22 78 -5 96 -19 13 -57 16 -218 16 -114 0 -202 -5 -212 -11z"/>
+    <path opacity="0" d="M1518 909 c-26 -15 -25 -95 1 -109 12 -6 101 -10 219 -10 180 0 200 2 215 18 25 27 22 78 -5 96 -19 13 -57 16 -218 16 -114 0 -202 -5 -212 -11z"/>
+    <path opacity="0" d="M1518 599 c-26 -15 -25 -95 1 -109 12 -6 101 -10 219 -10 180 0 200 2 215 18 25 27 22 78 -5 96 -19 13 -57 16 -218 16 -114 0 -202 -5 -212 -11z"/>
+   </g>
+  </svg>
+  <svg id="g_menu_button" fill="#000000" viewBox="0 0 297 297">
+   <g transform="translate(0.000000,266.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
+    <title>Toggle menu</title>
+    <path d="M542 1934 c3 -648 1 -723 -12 -703 -8 13 -23 30 -32 38 -10 9 -18 21 -18 28 0 19 -46 45 -72 41 -13 -2 -28 -15 -36 -31 -12 -24 -11 -31 3 -53 13 -21 23 -25 53 -23 47 4 58 -3 81 -49 30 -60 36 -100 16 -122 -12 -13 -16 -31 -13 -55 l4 -35 -161 0 c-88 0 -177 -5 -197 -10 -33 -9 -39 -16 -49 -53 -16 -58 -8 -163 14 -185 15 -15 44 -17 217 -20 166 -3 200 -6 200 -18 0 -12 -29 -14 -172 -14 -95 0 -190 -5 -210 -10 -33 -9 -39 -16 -49 -53 -16 -58 -8 -163 14 -185 15 -15 44 -17 217 -20 166 -3 200 -6 200 -18 0 -12 -29 -14 -172 -14 -95 0 -190 -5 -210 -10 -33 -9 -39 -16 -49 -53 -16 -58 -8 -163 14 -185 16 -16 52 -17 442 -17 493 0 457 -8 463 103 2 37 0 83 -5 102 -13 51 -46 59 -250 59 -144 1 -173 3 -173 15 0 12 33 15 195 18 231 4 227 2 233 106 2 37 0 83 -5 102 -13 51 -46 59 -250 59 -144 1 -173 3 -173 15 0 12 33 15 195 18 231 4 227 2 233 106 2 37 0 83 -5 102 -13 51 -46 59 -243 59 l-166 1 -3 38 c-1 20 -4 400 -7 845 l-4 807 -31 0 -30 0 3 -726z m94 -1058 c3 -12 0 -35 -6 -51 -10 -26 -13 -28 -21 -12 -12 21 -38 22 -45 2 -9 -23 -23 -18 -35 12 -7 19 -7 35 1 52 10 22 12 23 24 6 15 -21 46 -14 46 9 0 23 29 8 36 -18z m0 -300 c3 -12 0 -35 -6 -51 -10 -26 -13 -28 -21 -12 -12 21 -38 22 -45 2 -9 -23 -23 -18 -35 12 -7 19 -7 35 1 52 10 22 12 23 24 6 15 -21 46 -14 46 9 0 23 29 8 36 -18z m1 -304 c10 -42 -16 -77 -57 -77 -44 0 -69 41 -51 82 11 24 13 25 25 8 15 -21 46 -14 46 9 0 25 29 7 37 -22z"/>
+   </g>
+  </svg>
+  <div id="g_splash_banner">We pull stuff out of your documents</div>
+  <div id="g_top_control">
+  </div>
+ </div>
+ <div id="g_support"><div>
+  <span id="g_support_select">
+   <div data-x="contact">Contact Us</div>
+   <div data-x="terms">Terms &amp; Conditions</div>
+   <div data-x="privacy">Privacy Policy</div>
+  </span>
+  <span id="g_support_text">
+   <h3 id="g_support_select_contact_header">Contact Us</h3>
+    <div class="g_logged_in_show">
+     <input id="g_contact_issue" type="button" value="Open" /> a <select id="g_contact_issue_type">
+      <option value="General" selected="selected">General purpose</option>
+      <option value="Account">Account related</option>
+      <option value="Billing">Billing related</option>
+     </select> ticket.
+    </div>
+    <div class="g_logged_out_show">
+     Mail: <a href="mailto:support@gristle.com">support@gristle.com</a><br /><br />
+     (<i>must be logged in to create tickets, which yields faster responses</i>)
+    </div>
+   <br />
+   <hr />
+   <h3 id="g_support_select_terms_header">Terms and Conditions</h3>
+   <ol>
+    <li><dl>
+     <dt>General Terms</dt>
+     <dd>By using our document parsing service you agree to be bound by these Terms, as well as our Privacy Policy. If you do not agree to these Terms, please do not access or use our services.</dd>
+    </dl></li>
+    <li><dl>
+     <dt>Services and Payment</dt>
+     <dd>Our document services run on a subscription period model, with varying capabilities dependent on the account type. Payments for these services are due according to the billing cycle associated with your account.</dd>
+    </dl></li>
+    <li><dl>
+     <dt>No Refunds for Current Period</dt>
+     <dd>Once a payment has been made for the current billing period, we do not offer any refunds. This applies to all payments, including those for subscriptions, regardless of whether the service is fully utilized during that period. By making a payment, you acknowledge and agree that no refunds will be granted for the current period.</dd>
+    </dl></li>
+    <li><dl>
+     <dt>Cancellation of Services</dt>
+     <dd>While we do not offer refunds, you may cancel your subscription or service at any time. Upon cancellation, your access to the services will continue until the end of the current billing period, but no further charges will be applied after the cancellation.</dd>
+    </dl></li>
+    <li><dl>
+     <dt>Billing and Renewals</dt>
+     <dd>By agreeing to these Terms, you authorize us to automatically charge your account for any renewals or subsequent billing periods, unless you cancel your service before the next billing cycle. We will notify you prior to any renewal.</dd>
+    </dl></li>
+    <li><dl>
+     <dt>Modifications to the Terms and Services</dt>
+     <dd>We reserve the right to modify these Terms and the services provided at any time. Any changes to these Terms will be posted on this page with an updated &quot;Effective Date.&quot; Continued use of the services after such modifications constitutes your acceptance of the updated Terms.</dd>
+    </dl></li>
+    <li><dl>
+     <dt>Documents and Materials</dt>
+     <dd>The Client represents and warrants that all documents, images, content, or other materials provided to Gristle for the purposes of this Agreement are either owned by the Client or that the Client has secured all necessary permissions, licenses, and rights to use such materials.
+      <ul>
+	   <li>If the Client provides materials they do not have permission to use or that infringe upon the rights of any third party, Gristle shall not be held liable for any claims, losses, or damages arising from such materials.</li>
+       <li>The Client shall indemnify, defend, and hold Gristle harmless from any claims, damages, or liabilities, including legal fees, arising from the Client’s use of such unauthorized materials.</li>
+      </ul>
+     </dd>
+    </dl></li>
+    <li><dl>
+     <dt>Termination</dt>
+     <dd>Gristle reserves the right to terminate this Agreement immediately, without notice, if the Client:
+      <ul>
+       <li>Fails to comply with any of the terms set forth in this Agreement;</li>
+       <li>Provides false, misleading, or unauthorized information;</li>
+       <li>Provides any materials, including but not limited to documents, images, or intellectual property, that they do not have proper authorization or rights to use;</li>
+       <li>Exceeds usage beyond the bounds of the account intention, which is defined at the discretion of Gristle.</li>
+      </ul>
+	  In the event of such termination, the Client shall remain liable for any and all fees or costs incurred up to the date of termination, including the current subscription period.
+     </dd>
+    </dl></li>
+    <li><dl>
+     <dt>Effect of Termination:</dt>
+     <dd>Termination of this Agreement will not relieve the Client of any outstanding payment obligations for services rendered or costs incurred up to the termination date. All rights and licenses granted under this Agreement will immediately cease, and the Client must promptly return or destroy any materials related to Gristle as per the instructions given.</dd>
+    </dl></li>
+    <li><dl>
+     <dt>Limitation of Liability</dt>
+     <dd>Gristle shall not be liable for any claims, losses, or damages arising out of the Client’s use of materials for which they do not have proper authorization. This includes, but is not limited to, claims from third parties regarding intellectual property infringement, breach of privacy, or misuse of content. The Client assumes full responsibility for any legal consequences or actions resulting from their provision of unauthorized materials.</dd>
+    </dl></li>
+    <li><dl>
+     <dt>Governing Law</dt>
+     <dd>These Terms are governed by and construed in accordance with the laws of the United States. Any dispute arising from these Terms shall be resolved in the competent courts of the United States.</dd>
+    </dl></li>
+    <li><dl>
+     <dt>Contact Information</dt>
+     <dd>If you have any questions about these Terms or our services, please contact us.</dd>
+    </dl></li>
+   </ol>
+   <hr />
+   <h3 id="g_support_select_privacy_header">Privacy Policy</h3>
+   <ol>
+    <li><dl>
+     <dt>Information We Collect</dt>
+     <dd>We do not collect personal information from users browsing our website. However, to provide access to our API, we may collect a unique identification token or key that is used for authentication purposes. This identification is necessary to grant access to our API and may be associated with your account or session. This information is used solely for the purpose of providing API access and is not shared with third parties.</dd>
+    </dl></li>
+    <li><dl>
+     <dt>Use of API Keys</dt>
+     <dd>When accessing our API, we issue a unique API key that serves as a form of authentication. This key is used to identify your requests and ensure that only authorized users can access the API. The API key is stored locally on your system and is not stored or retained on our servers after the session ends. We do not collect or retain any personally identifiable information in relation to the API key.</dd>
+    </dl></li>
+    <li><dl>
+     <dt>No Use of Cookies</dt>
+     <dd>Our website does not use cookies, web beacons, or any other tracking technologies to collect data about your browsing activity. We do not track or retain any data related to your visit to our website.</dd>
+    </dl></li>
+    <li><dl>
+     <dt>No Data Retention</dt>
+     <dd>We do not retain or store any personal information from website visitors. The only information that is retained temporarily is the local API key, which is only used to authenticate access to the API and is not shared or stored beyond the duration of your session.</dd>
+    </dl></li>
+    <li><dl>
+     <dt>Third-Party Services</dt>
+     <dd>Our website may contain links to third-party websites, tools, or services. Please be aware that we are not responsible for the privacy practices of these external sites. We encourage you to review the privacy policies of any third-party services you engage with.</dd>
+    </dl></li>
+    <li><dl>
+     <dt>Security</dt>
+     <dd>We take reasonable measures to protect your API key and any information transmitted through our website. However, please be aware that no method of online communication or data storage can be guaranteed to be 100% secure. While we strive to ensure the security of your information, we cannot guarantee its absolute security.</dd>
+    </dl></li>
+    <li><dl>
+     <dt>Children’s Privacy</dt>
+     <dd>Our website and API are not intended for use by children under the age of 13. We do not knowingly collect any personal information from children. If you believe we have inadvertently collected information from a child, please contact us immediately so we can remove it.</dd>
+    </dl></li>
+    <li><dl>
+     <dt>Changes to This Privacy Policy</dt>
+     <dd>We may update this Privacy Policy periodically. Any changes will be posted on this page with an updated &quot;Effective Date.&quot; We encourage you to review this Privacy Policy regularly to stay informed about how we protect your privacy.</dd>
+    </dl></li>
+    <li><dl>
+     <dt>Contact Us</dt>
+     <dd>If you have any questions or concerns about this Privacy Policy, open a ticket (issue) under your account or contact us at support@gristle.com.</dd>
+    </dl></li>
+   </ol>
+  </span>
+  <span id="g_support_buttons">
+   <div id="g_support_button_agree">I Agree</div>
+   <div id="g_support_button_close">Close</div>
+  </span>
+ </div></div>
+ <div id="g_modal"><div>
+  <span id="g_modal_text"></span>
+  <span id="g_modal_yn">
+   <input type="button" value="Yes" data-x="yes" />
+   <input type="button" value="No" data-x="no" />
+  </span>
+  <span id="g_modal_ok">
+   <input type="button" value="Ok" data-x="ok" />
+  </span>
+ </div></div>
+ <div id="g_busy"><div></div></div>
+ <div id="g_body">
+  <div id="g_menu_cover"></div>
+  <div id="g_menu">
+   <div id="g_home_label"><span>Home</span><b>Admin</b></div><ul>
+    <li data-x="about">About</li>
+    <li data-x="account">Account</li>
+    <li data-x="billing" id="g_menu_billing">Billing</li>
+   </ul>
+   <span class="g_logged_in_show">
+    <div id="g_menu_issues_header">Issues</div><ul data-x="issues" id="g_menu_issues"></ul>
+    <div>Parsers</div><ul data-x="parsers" id="g_menu_parsers"></ul>
+   </span>
+   <div>Developers</div><ul>
+    <li data-x="snippets">Snippets</li>
+    <li data-x="api">API</li>
+   </ul>
+   <div>Support</div><ul id="g_menu_support">
+    <li data-x="contact">Contact</li>
+    <li data-x="terms">Terms</li>
+    <li data-x="privacy">Privacy</li>
+   </ul>
+  </div>
+  <div id="g_content">
+   <div id="g_content_about">
+    <div id="g_about_doc_container">
+     <div id="g_about_doc_left"><span>Documents come in...</span><span>Docs in...</span></div>
+     <div id="g_about_doc_right"><span>...and the data comes out</span><span>...Data out</span></div>
+     <svg id="g_about_doc" viewBox="0 0 240.000000 310.000000">
+      <g transform="translate(0.000000,310.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
+       <path fill="#FFFFFF" d="M253 2885 c-17 -7 -36 -22 -42 -34 -15 -28 -15 -2574 0 -2603 26 -49 15 -48 989 -48 974 0 963 -1 989 48 8 15 11 335 11 1060 l0 1039 -29 39 c-57 77 -475 483 -513 499 -32 13 -127 15 -705 15 -545 -1 -674 -3 -700 -15z"/>
+       <path d="M252 2940 c-18 -4 -42 -16 -53 -26 -51 -46 -49 20 -49 -1366 0 -1279 0 -1293 20 -1326 12 -19 38 -41 63 -52 40 -19 76 -20 967 -20 891 0 927 1 967 20 25 11 51 33 63 52 20 33 20 48 20 1083 0 1040 0 1050 -21 1084 -27 45 -484 506 -528 534 l-36 22 -690 2 c-379 1 -705 -2 -723 -7z m1322 -136 c14 -13 16 -48 16 -228 0 -201 1 -215 21 -240 41 -52 61 -56 283 -56 173 0 207 -2 220 -16 14 -14 16 -116 16 -977 l0 -961 -22 -23 -21 -23 -886 0 -885 0 -23 22 -23 21 0 1226 0 1225 22 23 21 23 623 0 c553 0 624 -2 638 -16z m300 -243 c80 -80 136 -143 132 -150 -5 -7 -50 -11 -128 -11 -111 0 -124 2 -145 22 -22 20 -23 29 -23 143 0 112 3 135 19 135 4 0 69 -63 145 -139z"/>
+       <path d="M1050 2461 c-5 -11 -10 -29 -10 -41 0 -12 5 -30 10 -41 10 -17 22 -19 148 -19 94 0 142 4 150 12 16 16 16 80 0 96 -8 8 -56 12 -150 12 -126 0 -138 -2 -148 -19z"/>
+       <path d="M1050 2131 c-5 -11 -10 -29 -10 -41 0 -12 5 -30 10 -41 10 -17 22 -19 148 -19 94 0 142 4 150 12 16 16 16 80 0 96 -8 8 -56 12 -150 12 -126 0 -138 -2 -148 -19z"/>
+       <path d="M1470 2131 c-5 -11 -10 -29 -10 -41 0 -12 5 -30 10 -41 10 -18 24 -19 243 -19 168 0 236 3 245 12 16 16 16 80 0 96 -9 9 -77 12 -245 12 -219 0 -233 -1 -243 -19z"/>
+       <path d="M1470 1831 c-5 -11 -10 -29 -10 -41 0 -12 5 -30 10 -41 10 -18 24 -19 243 -19 168 0 236 3 245 12 16 16 16 80 0 96 -9 9 -77 12 -245 12 -219 0 -233 -1 -243 -19z"/>
+       <path d="M1470 1521 c-5 -11 -10 -29 -10 -41 0 -12 5 -30 10 -41 10 -18 24 -19 243 -19 168 0 236 3 245 12 16 16 16 80 0 96 -9 9 -77 12 -245 12 -219 0 -233 -1 -243 -19z"/>
+       <path d="M442 908 c-16 -16 -15 -83 2 -97 9 -8 83 -11 247 -9 l234 3 9 28 c6 17 6 37 0 55 l-9 27 -236 3 c-174 2 -238 -1 -247 -10z"/>
+       <path d="M442 598 c-16 -16 -15 -83 2 -97 9 -8 83 -11 247 -9 l234 3 9 27 c6 18 6 38 0 55 l-9 28 -236 3 c-174 2 -238 -1 -247 -10z"/>
+       <path d="M440 2470 c-19 -19 -20 -33 -20 -210 0 -177 1 -191 20 -210 19 -19 33 -20 243 -20 204 0 225 2 240 18 15 16 17 46 17 215 0 191 -1 196 -22 211 -19 13 -59 16 -240 16 -205 0 -219 -1 -238 -20z m368 -112 c16 -16 16 -180 0 -196 -17 -17 -239 -17 -256 0 -16 16 -16 180 0 196 8 8 51 12 128 12 77 0 120 -4 128 -12z"/>
+       <path d="M442 1838 c-16 -16 -16 -80 0 -96 17 -17 889 -17 906 0 7 7 12 28 12 48 0 20 -5 41 -12 48 -17 17 -889 17 -906 0z"/>
+       <path d="M442 1528 c-16 -16 -16 -80 0 -96 17 -17 889 -17 906 0 7 7 12 28 12 48 0 20 -5 41 -12 48 -17 17 -889 17 -906 0z"/>
+       <path d="M452 1224 c-30 -20 -31 -88 -3 -104 13 -7 266 -10 751 -10 485 0 738 3 751 10 14 8 19 21 19 50 0 74 44 70 -770 70 -640 0 -728 -2 -748 -16z"/>
+       <path d="M1052 908 c-7 -7 -12 -28 -12 -48 0 -20 5 -41 12 -48 17 -17 889 -17 906 0 7 7 12 28 12 48 0 20 -5 41 -12 48 -17 17 -889 17 -906 0z"/>
+       <path d="M1052 598 c-7 -7 -12 -28 -12 -48 0 -20 5 -41 12 -48 17 -17 889 -17 906 0 7 7 12 28 12 48 0 20 -5 41 -12 48 -17 17 -889 17 -906 0z"/>
+       <path opacity="0" fill="#FFFFFF" d="M325 2768 c-3 -7 -4 -560 -3 -1228 l3 -1215 875 0 875 0 3 948 2 947 -238 0 -238 0 -37 38 -37 38 0 242 0 242 -600 0 c-471 0 -602 -3 -605 -12z"/>
+       <path opacity="0" d="M448 2469 c-26 -15 -25 -95 1 -109 12 -6 99 -10 214 -10 175 0 195 2 210 18 25 27 22 78 -5 96 -18 13 -56 16 -213 16 -110 0 -197 -5 -207 -11z"/>
+       <path opacity="0" d="M448 2139 c-26 -15 -25 -95 1 -109 12 -6 99 -10 214 -10 175 0 195 2 210 18 25 27 22 78 -5 96 -18 13 -56 16 -213 16 -110 0 -197 -5 -207 -11z"/>
+       <path opacity="0" d="M448 1829 c-26 -15 -25 -95 1 -109 12 -6 99 -10 214 -10 175 0 195 2 210 18 25 27 22 78 -5 96 -18 13 -56 16 -213 16 -110 0 -197 -5 -207 -11z"/>
+       <path opacity="0" d="M448 1529 c-26 -15 -25 -95 1 -109 12 -6 99 -10 214 -10 175 0 195 2 210 18 25 27 22 78 -5 96 -18 13 -56 16 -213 16 -110 0 -197 -5 -207 -11z"/>
+       <path opacity="0" d="M448 1219 c-26 -15 -25 -95 1 -109 12 -6 99 -10 214 -10 175 0 195 2 210 18 25 27 22 78 -5 96 -18 13 -56 16 -213 16 -110 0 -197 -5 -207 -11z"/>
+       <path opacity="0" d="M448 909 c-26 -15 -25 -95 1 -109 12 -6 99 -10 214 -10 175 0 195 2 210 18 25 27 22 78 -5 96 -18 13 -56 16 -213 16 -110 0 -197 -5 -207 -11z"/>
+       <path opacity="0" d="M448 599 c-26 -15 -25 -95 1 -109 12 -6 99 -10 214 -10 175 0 195 2 210 18 25 27 22 78 -5 96 -18 13 -56 16 -213 16 -110 0 -197 -5 -207 -11z"/>
+       <path opacity="0" d="M978 2469 c-26 -15 -25 -95 1 -109 12 -6 101 -10 219 -10 180 0 200 2 215 18 25 27 22 78 -5 96 -19 13 -57 16 -218 16 -114 0 -202 -5 -212 -11z"/>
+       <path opacity="0" d="M978 2139 c-26 -15 -25 -95 1 -109 12 -6 101 -10 219 -10 180 0 200 2 215 18 25 27 22 78 -5 96 -19 13 -57 16 -218 16 -114 0 -202 -5 -212 -11z"/>
+       <path opacity="0" d="M978 1829 c-26 -15 -25 -95 1 -109 12 -6 101 -10 219 -10 180 0 200 2 215 18 25 27 22 78 -5 96 -19 13 -57 16 -218 16 -114 0 -202 -5 -212 -11z"/>
+       <path opacity="0" d="M978 1529 c-26 -15 -25 -95 1 -109 12 -6 101 -10 219 -10 180 0 200 2 215 18 25 27 22 78 -5 96 -19 13 -57 16 -218 16 -114 0 -202 -5 -212 -11z"/>
+       <path opacity="0" d="M978 1219 c-26 -15 -25 -95 1 -109 12 -6 101 -10 219 -10 180 0 200 2 215 18 25 27 22 78 -5 96 -19 13 -57 16 -218 16 -114 0 -202 -5 -212 -11z"/>
+       <path opacity="0" d="M978 909 c-26 -15 -25 -95 1 -109 12 -6 101 -10 219 -10 180 0 200 2 215 18 25 27 22 78 -5 96 -19 13 -57 16 -218 16 -114 0 -202 -5 -212 -11z"/>
+       <path opacity="0" d="M978 599 c-26 -15 -25 -95 1 -109 12 -6 101 -10 219 -10 180 0 200 2 215 18 25 27 22 78 -5 96 -19 13 -57 16 -218 16 -114 0 -202 -5 -212 -11z"/>
+       <path opacity="0" d="M1518 2139 c-26 -15 -25 -95 1 -109 12 -6 101 -10 219 -10 180 0 200 2 215 18 25 27 22 78 -5 96 -19 13 -57 16 -218 16 -114 0 -202 -5 -212 -11z"/>
+       <path opacity="0" d="M1518 1829 c-26 -15 -25 -95 1 -109 12 -6 101 -10 219 -10 180 0 200 2 215 18 25 27 22 78 -5 96 -19 13 -57 16 -218 16 -114 0 -202 -5 -212 -11z"/>
+       <path opacity="0" d="M1518 1529 c-26 -15 -25 -95 1 -109 12 -6 101 -10 219 -10 180 0 200 2 215 18 25 27 22 78 -5 96 -19 13 -57 16 -218 16 -114 0 -202 -5 -212 -11z"/>
+       <path opacity="0" d="M1518 1219 c-26 -15 -25 -95 1 -109 12 -6 101 -10 219 -10 180 0 200 2 215 18 25 27 22 78 -5 96 -19 13 -57 16 -218 16 -114 0 -202 -5 -212 -11z"/>
+       <path opacity="0" d="M1518 909 c-26 -15 -25 -95 1 -109 12 -6 101 -10 219 -10 180 0 200 2 215 18 25 27 22 78 -5 96 -19 13 -57 16 -218 16 -114 0 -202 -5 -212 -11z"/>
+       <path opacity="0" d="M1518 599 c-26 -15 -25 -95 1 -109 12 -6 101 -10 219 -10 180 0 200 2 215 18 25 27 22 78 -5 96 -19 13 -57 16 -218 16 -114 0 -202 -5 -212 -11z"/>
+      </g>
+     </svg>
+    </div>
+    <div id="g_about_start"><input id="g_start_button" type="button" value="Start App" /></div>
+    <div id="g_about_text">
+     <h1>We cut the gristle out of document ingestion, extracting and normalizing your data.</h1>
+     <p>Is your company wasting time tediously transcribing data from the same third-party documents day in and day out? If so, you're not alone. Whether it's PDFs, Word documents, or even images, we understand that you want ordered and predictable data extracted from your documents to streamline your workflows&mdash;and that's exactly what we do.</p>
+     <p>We take on the gristly task of transforming unstructured documents into structured data, enabling automated extraction and eliminating the need for manual transcription. Our solution includes an intuitive UI, a robust API, and clear ingestion examples, along with multiple automated export options for seamless integration.</p>
+     <h1>Where does it fall in the AI landscape?</h1>
+     <p>Querying LLMs to pull arbitrary, one-time data from documents is where AI truly shines. However, when it comes to procedural and routine extraction from similarly structured documents, using AI quickly becomes impractical. This is not only because it wastes computational credits on your AI accounts to perform the same repetitive tasks, but also because it removes the ability for controlled and granular fine-tuning—the essence of what our service provides.</p>
+     <h1>What's the process?</h1>
+     <p>From experience, we've realized that there is a wide spectrum of document formats, and depending on the structure of your documents, cookie-cutter solutions may not always be the answer. With that in mind, we approach the problem with an expansive, two-pronged strategy:</p>
+     <div id="g_about_direction_container">
+      <svg id="g_about_direction" viewBox="0 0 640.000000 640.000000">
+       <g transform="translate(0.000000,640.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
+        <path d="M3085 5815 c-50 -18 -95 -26 -160 -28 -107 -3 -160 -24 -230 -88 -62 -57 -93 -104 -172 -257 -70 -135 -116 -200 -154 -219 -13 -6 -45 -21 -70 -32 -72 -33 -91 -103 -43 -160 27 -33 186 -132 241 -151 l31 -11 4 -192 c4 -177 6 -197 30 -259 51 -136 159 -275 272 -353 31 -21 56 -43 56 -49 0 -6 -16 -50 -36 -98 l-37 -88 -151 0 c-184 0 -262 -15 -375 -71 -161 -79 -280 -231 -316 -404 -11 -52 -15 -143 -15 -352 l0 -281 26 -31 26 -31 384 0 384 0 0 -313 0 -312 -346 -200 c-191 -110 -352 -201 -358 -203 -6 -1 -39 47 -74 108 -35 61 -72 115 -82 120 -26 14 -83 12 -103 -2 -15 -12 -143 -269 -433 -869 -63 -130 -114 -249 -114 -264 0 -34 50 -85 83 -85 13 0 271 -18 573 -40 302 -22 570 -40 595 -40 36 0 51 5 70 26 39 42 31 83 -39 204 -34 57 -58 107 -54 111 4 4 164 98 355 209 l348 201 342 -197 c188 -108 348 -202 355 -209 10 -9 1 -32 -47 -116 -33 -57 -62 -115 -65 -129 -9 -34 26 -88 61 -96 34 -9 1211 75 1235 87 26 14 48 50 48 80 0 33 -514 1098 -542 1122 -27 23 -92 23 -117 -2 -10 -10 -44 -64 -76 -120 -44 -78 -61 -101 -74 -96 -9 3 -170 95 -358 203 l-343 197 0 313 0 312 419 0 419 0 26 31 26 31 0 281 c0 209 -4 300 -15 352 -36 173 -155 325 -316 404 -113 56 -191 71 -375 71 l-151 0 -37 88 c-20 48 -36 90 -36 94 0 4 26 25 58 47 85 58 190 175 239 267 63 120 73 172 73 385 0 160 3 192 21 249 47 143 22 344 -56 461 -210 311 -575 484 -830 394z m270 -179 c112 -35 208 -97 305 -195 108 -110 142 -170 148 -267 l5 -73 -81 40 c-150 74 -301 116 -618 175 -29 5 -34 29 -34 167 0 129 8 150 67 163 16 3 33 7 38 9 31 10 103 2 170 -19z m-456 -166 c0 -72 3 -141 7 -154 5 -21 -1 -29 -38 -52 -50 -31 -129 -96 -210 -171 -31 -29 -62 -53 -68 -53 -17 0 -90 40 -90 49 0 5 7 11 15 15 26 10 106 129 165 246 71 141 105 192 150 225 64 47 67 42 69 -105z m332 -360 c196 -40 393 -108 490 -171 l50 -32 -3 -197 -3 -196 -39 -80 c-104 -210 -352 -357 -549 -323 -192 32 -391 204 -447 386 -17 55 -20 92 -20 232 l1 166 95 85 c52 47 120 102 152 124 55 37 59 38 117 31 33 -3 103 -15 156 -25z m44 -1185 c152 13 133 22 173 -78 l36 -88 -109 -110 c-61 -61 -117 -114 -126 -119 -12 -7 -43 17 -140 109 l-124 118 34 84 c19 46 38 89 43 95 6 8 25 7 71 -3 44 -11 85 -13 142 -8z m-256 -450 c166 -162 182 -175 216 -175 33 0 50 13 217 175 l180 175 143 0 c166 0 227 -10 312 -50 120 -56 209 -169 232 -294 19 -103 27 -96 -104 -96 l-115 0 0 34 c0 22 -9 45 -26 65 -35 42 -93 44 -129 5 -25 -27 -25 -27 -25 -250 l0 -224 -685 0 -685 0 0 224 c0 223 0 223 -25 250 -36 39 -94 37 -129 -5 -17 -20 -26 -43 -26 -65 l0 -34 -115 0 c-85 0 -115 3 -115 13 0 6 5 41 11 77 21 129 109 243 233 301 86 40 126 47 304 48 l152 1 179 -175z m-651 -543 l3 -93 -113 3 -113 3 -3 79 c-2 44 -1 85 2 93 4 11 29 13 113 11 l108 -3 3 -93z m1957 3 l0 -90 -112 -3 -113 -3 0 89 c0 49 3 92 7 96 4 3 54 5 112 4 l106 -3 0 -90z m-885 -637 c5 -341 6 -358 25 -377 11 -10 212 -129 447 -265 293 -169 436 -246 456 -246 40 0 66 23 110 99 20 35 41 64 46 63 9 -1 366 -730 366 -749 0 -7 -10 -13 -23 -13 -36 0 -715 -49 -769 -55 -28 -3 -48 -2 -48 4 0 5 18 40 40 79 22 38 40 78 40 90 0 29 -18 66 -38 79 -105 65 -860 495 -877 499 -13 3 -37 -2 -56 -12 -105 -53 -838 -481 -859 -501 -37 -35 -32 -83 18 -167 23 -39 40 -71 39 -72 -1 -1 -177 11 -392 27 -214 15 -405 28 -423 29 -24 0 -33 4 -30 14 5 24 361 756 368 756 3 0 21 -28 40 -62 45 -82 71 -108 111 -108 23 0 145 66 458 246 234 135 436 255 449 267 l22 20 0 352 c0 193 3 355 7 359 4 3 110 5 237 4 l231 -3 5 -357z"/>
+        <path d="M1183 5386 c-342 -66 -597 -300 -684 -631 -28 -107 -31 -280 -5 -388 63 -276 249 -498 508 -605 218 -91 492 -81 703 26 221 111 388 323 446 569 18 74 20 110 17 223 -4 118 -9 147 -37 230 -94 280 -316 488 -597 560 -102 27 -257 34 -351 16z m302 -192 c111 -26 221 -89 305 -173 130 -132 188 -260 197 -437 24 -439 -372 -779 -802 -689 -38 8 -112 35 -163 60 -154 77 -270 209 -329 377 -35 96 -43 271 -19 368 26 103 89 222 159 296 175 187 405 257 652 198z"/>
+        <path d="M1193 4902 l-53 -26 0 -73 c0 -80 8 -88 60 -58 14 8 28 14 33 15 4 0 7 -128 7 -285 l0 -285 90 0 90 0 0 370 0 370 -87 -1 c-74 0 -96 -4 -140 -27z"/>
+        <path d="M4933 5386 c-101 -19 -167 -42 -252 -88 -198 -105 -339 -272 -412 -488 -28 -83 -33 -112 -37 -230 -3 -113 -1 -149 17 -223 70 -293 283 -525 571 -618 181 -59 402 -50 578 23 327 136 529 444 525 798 -5 454 -358 816 -813 835 -66 3 -132 -1 -177 -9z m306 -192 c171 -38 350 -182 429 -344 61 -124 75 -191 70 -330 -7 -187 -62 -312 -195 -446 -56 -57 -92 -82 -165 -119 -201 -99 -398 -100 -598 -3 -120 57 -239 177 -299 298 -182 371 3 807 396 934 110 36 230 39 362 10z"/>
+        <path d="M5007 4936 c-89 -25 -158 -102 -172 -193 -11 -75 -4 -83 75 -83 90 0 100 5 100 47 0 38 37 83 68 83 35 0 72 -38 72 -73 -1 -26 -29 -66 -161 -222 l-159 -190 2 -55 3 -55 245 0 245 0 3 77 3 77 -122 3 -122 3 102 115 c121 137 141 174 141 257 0 52 -5 68 -32 109 -58 86 -185 130 -291 100z"/>
+       </g>
+      </svg>
+     </div>
+     <div id="g_about_left_container"><div>
+      <svg id="g_about_diy" viewBox="0 0 640.000000 640.000000">
+       <g transform="translate(0.000000,640.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
+        <path d="M2911 5469 c-334 -31 -701 -169 -918 -345 -23 -19 -51 -34 -63 -34 -11 0 -33 -6 -48 -14 -15 -8 -242 -230 -504 -493 -474 -475 -478 -479 -478 -520 0 -33 7 -49 39 -85 l40 -45 -54 -53 -54 -53 -41 36 c-34 32 -47 37 -87 37 l-47 0 -208 -208 -208 -208 0 -44 0 -45 278 -277 c255 -256 280 -278 312 -278 31 0 53 19 247 213 118 116 216 222 219 235 9 35 -4 69 -42 112 l-36 40 53 54 54 54 42 -39 c40 -37 60 -44 108 -39 11 1 66 47 121 102 56 55 108 98 115 96 8 -1 66 -30 129 -63 l115 -60 393 -392 c215 -215 392 -395 392 -400 0 -5 -12 -20 -26 -34 -34 -31 -55 -79 -47 -110 3 -13 37 -56 75 -95 l69 -71 -36 -43 c-45 -54 -55 -72 -71 -135 -19 -68 -18 -92 7 -171 17 -56 31 -77 78 -125 56 -56 93 -74 192 -93 23 -5 27 -12 32 -56 14 -121 129 -232 265 -255 39 -6 42 -9 42 -38 0 -18 13 -59 29 -92 44 -94 125 -157 232 -179 19 -4 30 -18 48 -60 28 -69 107 -144 177 -169 96 -34 215 -15 296 47 19 14 39 26 43 26 5 0 53 -43 107 -96 95 -94 99 -96 135 -91 33 6 78 47 370 339 184 183 336 343 339 356 11 39 -4 65 -70 132 -36 36 -65 69 -66 75 0 5 141 151 314 325 l314 315 30 92 30 92 221 220 c219 219 221 221 221 263 l0 43 -558 558 c-602 602 -579 582 -642 541 -14 -9 -99 -90 -190 -180 l-165 -164 -170 46 c-261 71 -313 80 -420 66 -71 -9 -107 -20 -174 -53 -75 -37 -103 -60 -257 -212 -191 -187 -224 -234 -224 -320 0 -27 5 -67 12 -89 11 -37 10 -41 -15 -66 l-27 -27 -404 404 c-336 336 -415 421 -475 508 l-72 104 86 89 c74 77 85 93 85 124 0 24 -9 46 -28 68 -63 75 -31 199 84 326 101 112 291 248 499 357 61 32 118 67 127 79 26 31 23 89 -6 123 -23 26 -30 28 -108 30 -45 0 -125 -3 -177 -8z m-252 -252 c-172 -126 -308 -276 -355 -391 -11 -25 -21 -46 -24 -46 -3 0 -43 38 -89 84 -55 56 -82 89 -78 99 21 55 371 228 522 259 19 4 33 1 24 -5z m-546 -545 l177 -177 -400 -400 c-219 -219 -401 -397 -402 -394 -2 3 -82 84 -178 182 l-175 177 395 395 c217 217 397 395 400 395 3 0 85 -80 183 -178z m148 -603 l41 -61 -133 -133 -132 -134 -56 29 c-31 16 -63 34 -71 39 -12 9 14 40 140 166 85 85 158 155 162 155 4 0 26 -27 49 -61z m3182 -487 l457 -457 -118 -118 -117 -117 -460 460 -460 460 115 115 c63 63 117 115 120 115 3 0 211 -206 463 -458z m-2646 -94 l363 -363 -117 -117 -118 -118 -362 362 c-200 200 -363 367 -363 373 0 13 212 225 225 225 5 0 173 -163 372 -362z m1448 320 c60 -16 142 -38 180 -49 39 -11 82 -22 96 -25 17 -4 196 -176 513 -493 l488 -488 -32 -99 -33 -99 -296 -297 c-162 -164 -300 -298 -306 -298 -5 0 -257 248 -560 550 l-550 550 113 113 113 113 111 -23 c62 -13 117 -22 123 -19 11 4 51 174 43 180 -2 2 -73 17 -159 35 -169 35 -180 34 -236 -13 -53 -44 -117 -67 -189 -67 -93 0 -144 21 -144 60 0 9 75 92 168 183 172 172 209 198 305 218 58 12 122 4 252 -32z m-3067 -71 l52 -53 -55 -54 -55 -54 -55 54 -55 54 52 53 c29 29 55 53 58 53 3 0 29 -24 58 -53z m-191 -544 l-117 -118 -180 180 -180 180 117 117 118 118 180 -180 180 -180 -118 -117z m3178 -823 l740 -740 -242 -242 -243 -243 -50 50 -50 49 94 96 c112 114 138 159 144 255 5 84 -7 136 -49 198 -38 58 -94 100 -164 122 -42 13 -55 22 -55 36 0 32 -47 115 -87 155 -42 41 -125 84 -163 84 -37 0 -47 11 -55 55 -11 57 -49 128 -91 171 -41 40 -125 84 -164 84 -38 0 -48 11 -60 64 -23 104 -84 180 -179 225 -45 21 -71 26 -131 26 -106 0 -160 -28 -278 -145 l-93 -92 -25 23 -25 23 238 241 c131 133 240 243 243 243 3 1 338 -331 745 -738z m-719 216 c28 -28 34 -41 34 -78 0 -59 -22 -88 -196 -259 -168 -164 -187 -179 -231 -179 -75 0 -123 49 -123 127 l0 47 188 188 188 188 53 0 c47 0 57 -4 87 -34z m310 -310 c30 -30 34 -40 34 -87 l0 -53 -172 -174 c-95 -95 -185 -180 -200 -188 -57 -30 -135 -8 -163 46 -20 39 -19 89 3 121 9 14 95 103 191 197 l173 172 50 0 c44 0 54 -4 84 -34z m305 -302 c12 -10 27 -32 34 -48 12 -28 11 -31 -34 -67 -53 -42 -358 -353 -382 -389 -12 -19 -21 -22 -43 -16 -35 9 -73 46 -82 80 -16 64 -2 84 195 280 l190 189 51 -5 c29 -3 59 -13 71 -24z m275 -278 c28 -28 34 -41 34 -77 0 -42 -3 -46 -182 -226 -201 -202 -215 -211 -285 -177 -21 11 -44 31 -52 45 -14 25 -12 27 178 214 105 104 201 204 212 222 26 42 52 42 95 -1z"/>
+       </g>
+      </svg></div>
+      <p><b>1.</b> Start with our mapping editor, which enables you to map the data points on your own. This allows you to determine if you can handle it independently or create a ticket using it as a blueprint to indicate the support you need.</p>
+     </div>
+     <div id="g_about_right_container"><div>
+      <svg id="g_about_help" viewBox="0 0 640.000000 640.000000">
+       <g transform="translate(0.000000,640.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
+        <path d="M1368 5042 l-448 -447 0 -45 0 -44 216 -216 215 -217 -49 -32 c-85 -54 -132 -141 -132 -245 0 -120 78 -228 192 -267 l53 -18 6 -63 c13 -134 86 -229 204 -263 l51 -15 -4 -39 c-2 -22 4 -65 13 -97 23 -79 108 -166 186 -188 l54 -16 1 -58 c2 -152 134 -282 285 -282 25 0 114 21 199 46 117 34 155 42 161 33 17 -28 20 -167 9 -396 -10 -213 -10 -249 4 -296 23 -80 74 -140 150 -177 60 -30 71 -32 138 -27 40 3 82 8 94 12 17 5 23 1 34 -24 18 -43 98 -115 152 -135 47 -18 151 -19 204 -1 17 5 23 1 34 -24 17 -41 91 -108 147 -133 38 -17 60 -19 122 -15 42 2 83 7 92 11 10 5 19 -1 26 -17 19 -40 73 -96 121 -124 64 -38 179 -44 247 -14 l49 21 145 -144 c142 -141 177 -165 218 -152 10 3 222 210 471 459 331 331 452 459 452 475 0 43 -29 77 -249 297 -163 162 -221 226 -221 243 0 46 -42 228 -75 328 -42 127 -115 283 -144 308 -32 29 -89 25 -118 -9 -33 -38 -29 -70 22 -176 42 -91 105 -266 105 -295 0 -16 -16 -19 -25 -4 -9 15 -196 135 -263 169 -82 42 -136 53 -190 39 -52 -13 -105 -70 -121 -131 -7 -24 -18 -224 -26 -457 -23 -683 -25 -725 -47 -760 -39 -65 -132 -71 -178 -12 -21 26 -22 32 -15 272 l7 245 -26 25 c-36 33 -88 33 -122 -1 -24 -24 -25 -33 -33 -185 -4 -90 -13 -169 -20 -182 -28 -52 -106 -71 -157 -37 -48 31 -52 59 -41 303 9 214 9 225 -10 250 -28 37 -68 48 -108 29 -44 -21 -52 -52 -58 -219 -3 -76 -11 -146 -17 -160 -34 -65 -116 -79 -172 -29 l-33 30 5 178 c9 308 8 319 -18 345 -30 31 -93 31 -124 1 -20 -20 -23 -38 -32 -194 l-11 -171 -33 -29 c-48 -43 -102 -41 -149 6 l-35 35 9 192 c11 254 9 401 -5 466 l-12 54 49 46 c110 103 130 255 50 376 -34 51 -105 102 -164 118 l-40 11 -1 61 c-2 73 -29 138 -82 191 -37 38 -122 85 -154 85 -15 0 -18 10 -18 63 0 76 -30 145 -86 199 -40 37 -115 77 -146 78 -15 0 -18 9 -18 53 0 73 -24 137 -72 192 -57 64 -107 87 -198 92 -64 3 -92 -1 -190 -31 l-115 -35 -210 209 -210 210 360 360 c198 198 363 359 367 358 4 -2 68 -63 141 -136 l134 -133 -62 -62 c-73 -74 -95 -127 -95 -231 0 -119 66 -228 170 -281 25 -13 106 -41 180 -63 297 -88 475 -144 504 -159 17 -9 123 -107 236 -218 181 -178 214 -206 280 -238 76 -37 164 -57 253 -57 126 0 328 -68 489 -163 58 -35 106 -57 124 -57 54 0 94 58 80 115 -8 33 -115 103 -256 169 l-105 49 -335 454 c-184 250 -351 467 -370 482 -19 16 -54 38 -76 49 -34 17 -404 132 -714 222 l-75 22 -230 229 -231 229 -44 0 -45 0 -447 -448z m1057 -213 c55 -16 221 -66 369 -110 150 -45 283 -90 302 -103 20 -14 142 -168 292 -372 142 -192 262 -355 266 -363 7 -11 -5 -13 -75 -9 -141 7 -169 25 -409 263 -167 165 -218 210 -264 231 -31 14 -197 68 -369 119 -297 90 -313 96 -343 130 -37 42 -48 86 -34 134 17 60 80 110 140 110 14 1 70 -13 125 -30z m-541 -813 c45 -19 66 -52 66 -102 0 -74 -26 -90 -266 -162 -115 -34 -220 -62 -234 -62 -55 0 -99 48 -100 107 0 76 27 94 235 157 289 87 256 80 299 62z m274 -352 c36 -24 55 -78 42 -119 -6 -18 -20 -41 -30 -50 -24 -21 -421 -144 -469 -145 -51 0 -101 54 -101 110 0 62 35 92 146 125 49 15 145 44 214 66 127 39 155 41 198 13z m252 -343 c35 -25 53 -66 46 -105 -12 -61 -45 -79 -266 -145 -113 -33 -220 -61 -238 -61 -76 0 -126 99 -83 167 18 29 35 37 148 72 338 106 343 107 393 72z m266 -355 c24 -24 34 -43 34 -65 0 -39 -18 -77 -44 -95 -33 -21 -419 -136 -458 -136 -95 0 -140 117 -70 183 32 31 391 145 461 146 36 1 48 -4 77 -33z m1767 -402 c60 -31 183 -113 312 -208 49 -36 183 -159 298 -273 l208 -207 -364 -364 -363 -363 -110 111 c-79 82 -108 118 -107 133 9 73 23 393 32 717 12 402 17 480 32 480 5 0 33 -12 62 -26z"/>
+        <path d="M4445 3365 c-38 -37 -35 -95 6 -129 17 -14 41 -26 54 -26 39 0 85 46 85 85 0 47 -8 64 -41 80 -41 22 -77 18 -104 -10z"/>
+       </g>
+      </svg></div>
+      <p><b>2.</b> Escalate to custom support for your parser if the do-it-yourself approach is too overwhelming, generates too many false positives, or is inadequate to accommodate the complexity of your needs.</p>
+     </div>
+     <div style="clear:both"></div>
+     <h1>How do I get started?</h1>
+     <p>Click <b id="g_start_button_alt">Start App</b> to begin creating your account. After email verification, a read-only example parser will be shared with your account. This basic parser includes the example PDFs used to create the <b>Map</b> within its description, along with several successfully parsed outputs on the <b>Parse</b> tab.</p>
+     <p>After reviewing this parser to determine if we are the right tool for your needs, we recommend creating your first parser, where tooltips will guide you throughout the process. If you need assistance, create an <b>Issue</b> (ticket), attach any relevant files, and we'll get back to you as soon as possible.</p>
+     <h1>What's the backstory?</h1>
+     <p>Our service was born out of necessity when onboarding our clients' traffic instructions from the television industry. We've provided this capability to countless clients for nearly <b>two decades</b>, and now we've made it available to the masses.</p>
+     <h1>Where are the Terms and Conditions?</h1>
+     <p id="g_about_links">The <b data-x="terms">Terms</b>, <b data-x="terms">Conditions</b>, and <b data-x="privacy">Privacy Statement</b> are displayed and must be approved during the account creation process.  However, you can view them at any time in the app's side panel. For any other questions or concerns, you can create a ticket under your account or contact us at:</p>
+     <p><a href="mailto:support@gristle.com">support@gristle.com</a></p>
+    </div>
+   </div>
+   <div id="g_content_account"> 
+    <div class="g_logged_out_show">
+     <form id="g_login_container" onsubmit="return false">
+      <span>Username</span>
+      <input id="g_username" type="text" />
+      <div class="g_login_inputs">
+       <span>Password</span>
+       <input id="g_password" type="password" />
+      </div>
+      <div id="g_login_signup">
+       <div class="g_login_inputs">
+        <span>Password <i>(again)</i></span>
+        <input id="g_password_again" type="password" />
+        <span>E-Mail <i>(verified from @gristle.net)</i></span>
+        <input id="g_email" type="text" />
+       </div>
+       <span>Human? <i>(repeat the 6 letters below)</i></span>
+       <div id="g_captcha_container">
+        <input id="g_captcha" type="text" maxlength="6" />
+        <img id="g_captcha_image" src="" />
+       </div>
+       <div class="g_login_inputs">
+        <span id="g_support_checkbox_container">
+         <input id="g_support_checkbox" type="checkbox" />
+         <label for="g_support_checkbox">Agree to Terms &amp; Conditions</label>
+        </span>
+        <input id="g_signup_button" type="submit" value="Sign Up" />
+       </div>
+       <div class="g_recovery_inputs">
+        <input id="g_recovery_button" type="submit" value="Send E-Mail" />
+       </div>
+      </div>
+      <div id="g_login_only">
+       <input id="g_login_button" type="submit" value="Sign In" />
+       <span><u id="g_signup_link">Create an account</u> - <u id="g_recovery_link">Forgot password</u></span>
+      </div>
+     </form>
+    </div>
+    <div class="g_logged_in_show">
+     <div>Account: <span id="g_account_user">[USER]</span> <span id="g_verify_notification">(email not verified)</span></div>     
+     <hr />
+     <div id="g_account_container">
+      <span>E-Mail<b id="g_account_email_checked">&nbsp;&#10003;</b></span>
+      <div><input id="g_account_email" type="text" /></div>
+      <span>Change Password</span>
+      <div id="g_account_password_container">
+       <div><input id="g_account_password" type="password" /></div>
+       <div>Confirm</div>
+       <div><input id="g_account_password_confirm" type="password" /></div>
+      </div>
+      <span>Contact (First, Last)</span>
+      <div><input id="g_account_contact" type="text" /></div>
+      <span>Quota Parameters</span>
+      <div><input id="g_account_quota" type="text" placeholder="defaults=all" /></div>
+      <span>Options</span>
+      <div>
+       <label for="g_account_opt_auto_trim"><input type="checkbox" value="1" id="g_account_opt_auto_trim" /> Automatically trim old content when storage limits are hit.</label><br />
+       <label for="g_account_opt_parser_infer"><input type="checkbox" value="2" id="g_account_opt_parser_infer" /> Enable automatic parser inference based on similar file contents.</label><br />
+       <label for="g_account_opt_parser_infer_filename_match"><input type="checkbox" value="4" id="g_account_opt_parser_infer_filename_match" /> Enable automatic parser inference based on filename matching.</label><br />
+       <label for="g_account_opt_parser_explicit_filename_match"><input type="checkbox" value="8" id="g_account_opt_parser_explicit_filename_match" /> Require parser to only parse files with matched filename criteria.</label><br />
+      </div>
+     </div>
+     <hr />
+     <div id="g_account_input_container">
+      <button type="button" id="g_account_save">Save</button>
+      <button type="button" id="g_logout_button">Logout</button>
+      <button type="button" id="g_verify_button">Verify</button>
+     </div>
+    </div>
+   </div>
+   <div id="g_content_billing">
+    <div id="g_billing_container" class="g_billing_loading">
+     <div id="g_billing_table">
+      <div id="g_billing_free">
+       <u>Current Plan</u>
+       <h2>Free</h2>
+       <b>$<span>0</span>/mo</b>
+       <p>Provides access to demonstrational material. <b>No actual parsing is available on the free tier</b>; however, the mapping editor is available to a limited extent to help determine if we are the right tool for your needs, and support can be consulted.</p>
+       <ul>
+        <li>Read-only parsers</li>
+        <li>No resources</li>
+        <li>Consultatory support</li>
+        <li>Limited editor access</li>
+       </ul>
+       <div>
+        <button>Current</button>
+        <button data-x="portal">Update</button>
+        <button>Loading...</button>
+       </div>
+      </div>
+      <div id="g_billing_basic">
+       <div id="g_billing_popular">Most Popular</div>
+       <u>Current Plan</u>
+       <h2>Basic (DIY)</h2>
+       <b>$<span>12</span>/mo</b>
+       <p>Complete access to create and maintain your own parsers. Strict resource limitations may lead to the termination of large or complex files. <b>Support is provided at our discretion and may require upgrading to a higher account tier.</b></p>
+       <ul>
+        <li>5 parsers</li>
+        <li>Low resource allotment</li>
+        <li>Discretionary support</li>
+        <li>Full editor access</li>
+       </ul>
+       <div>
+        <button type="button" data-x="basic">Subscribe</button>
+        <button type="button" data-x="portal">Update</button>
+        <button type="button">Loading...</button>
+       </div>
+      </div>
+      <div id="g_billing_managed">
+       <u>Current Plan</u>
+       <h2>Managed</h2>
+       <b>$<span>48</span>/mo</b>
+       <p>The first tier of continuous support for mapping your parsers, with additional resources allocated. <b>This option should <u>only</u> be selected if you have been approved for support and directed to choose it.</b></p>
+       <ul>
+        <li>25 parsers</li>
+        <li>High resource allotment</li>
+        <li>Continuous support</li>
+        <li>Full editor access</li>
+       </ul>
+       <div>
+        <button type="button" data-x="managed">Subscribe</button>
+        <button type="button" data-x="portal">Update</button>
+        <button type="button">Loading...</button>
+       </div>
+      </div>
+      <div id="g_billing_enterprise">
+       <u>Current Plan</u>
+       <h2>Enterprise</h2>
+       <b>$<span>98</span>/mo</b>
+       <p>The premier tier of continuous support for mapping your parsers, offering expedited support resolution and the highest resource allocation. <b>This option should <u>only</u> be selected if you have been explicitly instructed to.</b></p>
+       <ul>
+        <li>100+ parsers</li>
+        <li>Highest resource allotment</li>
+        <li>Expedited support</li>
+        <li>Full editor access</li>
+       </ul>
+       <div>
+        <button type="button" data-x="enterprise">Subscribe</button>
+        <button type="button" data-x="portal">Update</button>
+        <button type="button">Loading...</button>
+       </div>
+      </div>
+     </div>
+     <button type="button" id="g_billing_portal_button" data-x="portal">Billing Portal</button>
+    </div>
+   </div>
+   <div id="g_content_issues">
+    <div id="g_issue_content">
+    </div>
+    <div id="g_issue_input_container">
+     <input type="text" style="width:50%" id="g_issue_input" placeholder="Type message here..." />
+     <div class="g_issue_icon" id="g_issue_send_button" title="Send message"><svg viewBox="-20 -20 550 550"><g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"><path d="M4778 5112 c-15 -3 -653 -336 -2683 -1401 -269 -142 -773 -406 -1119 -587 -432 -226 -640 -341 -667 -366 -125 -121 -124 -324 3 -445 41 -39 1015 -655 1044 -661 17 -3 45 16 111 74 91 82 877 784 1922 1719 332 297 613 543 623 547 40 16 86 -42 60 -75 -5 -6 -471 -591 -1035 -1299 -565 -708 -1033 -1299 -1042 -1312 -10 -14 -14 -33 -10 -45 7 -23 1393 -904 1457 -927 54 -19 153 -18 211 2 59 20 139 91 166 147 29 59 1091 4515 1084 4549 -9 47 -77 91 -125 80z"/><path d="M1621 1021 c-21 -21 -21 -31 -21 -433 0 -381 2 -416 19 -453 22 -47 74 -99 114 -114 42 -16 133 -13 170 5 50 25 507 485 507 510 0 11 -8 28 -17 36 -29 26 -708 455 -731 462 -14 5 -27 1 -41 -13z"/></g></svg></div>
+     <div class="g_issue_icon" id="g_issue_attach_button" title="Attach file"><input type="file" id="g_issue_file" class="g_file" /><svg viewBox="-25 -40 1070 1070"><g transform="translate(0.000000,1024.000000) scale(0.100000,-0.100000)" stroke="none"><path d="M5105 10015 c-33 -9 -94 -32 -135 -52 -73 -35 -113 -75 -1939 -1897 -1024 -1024 -1908 -1910 -1963 -1971 -497 -546 -796 -1215 -890 -1990 -16 -135 -16 -601 0 -740 86 -730 350 -1352 808 -1898 110 -133 335 -356 454 -453 576 -469 1237 -736 1966 -795 183 -15 561 -6 724 16 481 65 924 215 1325 447 113 66 321 210 440 304 79 62 605 582 1846 1823 1845 1845 1804 1802 1959 2051 282 452 419 1032 370 1565 -31 329 -108 608 -250 900 -327 672 -931 1165 -1656 1351 -226 57 -388 77 -639 77 -176 0 -249 -4 -364 -22 -471 -72 -871 -246 -1251 -547 -89 -71 -2870 -2839 -3041 -3028 -55 -60 -126 -150 -160 -200 -315 -470 -352 -1087 -98 -1591 172 -338 467 -613 811 -752 237 -97 497 -137 735 -115 228 22 384 66 578 162 238 118 195 79 1563 1444 689 688 1270 1274 1292 1301 86 111 130 239 130 381 1 458 -473 750 -890 548 -73 -35 -110 -72 -1330 -1289 -690 -688 -1271 -1262 -1291 -1273 -20 -12 -64 -29 -99 -38 -161 -41 -326 38 -402 193 -28 57 -32 76 -32 147 -1 71 3 89 32 151 32 67 87 124 1500 1536 1555 1553 1525 1525 1709 1618 279 140 573 181 875 120 388 -77 731 -339 913 -695 187 -366 191 -823 9 -1186 -98 -197 -33 -129 -1803 -1901 -911 -912 -1699 -1695 -1751 -1739 -322 -272 -701 -443 -1135 -515 -154 -25 -514 -25 -675 0 -254 40 -473 109 -695 221 -1036 523 -1516 1717 -1133 2816 49 140 137 325 211 442 142 225 123 206 2112 2198 1780 1783 1914 1920 1947 1985 52 101 71 182 71 300 0 169 -62 314 -185 431 -72 69 -133 107 -227 142 -85 31 -255 39 -346 17z"/></g></svg></div>
+     <div class="g_issue_icon" id="g_issue_close_button" title="Close issue"><svg viewBox="0 0 32 32"><path d="M6,12v15c0,1.654,1.346,3,3,3h14c1.654,0,3-1.346,3-3V12H6z M12,25c0,0.552-0.448,1-1,1s-1-0.448-1-1v-9  c0-0.552,0.448-1,1-1s1,0.448,1,1V25z M17,25c0,0.552-0.448,1-1,1s-1-0.448-1-1v-9c0-0.552,0.448-1,1-1s1,0.448,1,1V25z M22,25  c0,0.552-0.448,1-1,1s-1-0.448-1-1v-9c0-0.552,0.448-1,1-1s1,0.448,1,1V25z" /><path d="M27,6h-6V5c0-1.654-1.346-3-3-3h-4c-1.654,0-3,1.346-3,3v1H5C3.897,6,3,6.897,3,8v1c0,0.552,0.448,1,1,1h24  c0.552,0,1-0.448,1-1V8C29,6.897,28.103,6,27,6z M13,5c0-0.551,0.449-1,1-1h4c0.551,0,1,0.449,1,1v1h-6V5z" /></svg></div>
+    </div>
+   </div>
+   <div id="g_content_parsers">
+    <form id="g_parser_form">
+     <div id="g_menu_parser">
+      <div data-x="info"><i class="g_tooltip_onscreen" data-x="top:30px;left:0px|Before determining what you want to map and extract from your document, you
+must define how the source document should be structured and interpreted,
+as well as how you would like it to be exported.
+
+{&bull; Input Controls}: Your document can be divided using either row-based
+or table-based methods. Detailed explanations are available through the info
+bubble buttons next to the relevant fields below.
+
+{&bull; Output Controls}: Specify the desired file format and encoding,
+along with any transformations you want applied to your export data.
+
+After setup, you can also send your successfully parsed files to a specified
+email address or URL. Once complete, click {Save}, then proceed to the {Map}
+tab to determine the specific data you want to extract.
+"></i><span>1</span><u>Info<span>rmation</span></u> &#10095;
+      </div>
+      <div data-x="map">
+<i class="g_tooltip_onscreen" data-x="top:30px;left:0px|Click here to upload your document and begin|mapping the data you wish to extract."></i>
+       <span>2</span><u>Map<span> Data</span></u> &#10095;
+      </div>
+      <div data-x="parse">
+<i class="g_tooltip_onscreen" data-x="top:30px;left:0px|It looks like you're ready to go! Click here to|start dropping files to be parsed. Check out the code|{Snippets} menu to begin automating your workflow."></i>
+       <span>3</span><u>Parse<span> Files</span></u> &#10095;
+      </div>
+     </div>
+     <div id="g_parser_scrollbar">
+      <div id="g_parser_scrollbar_line"></div>
+      <div id="g_parser_scrollbar_button">
+       <svg viewBox="0 0 48 48"><g><path d="M15.5839749,15.7226499 L15.5434343,15.7953753 C15.3973068,16.1162383 15.6291771,16.5 16,16.5 L21.5,16.5 L21.5,32.5 L16,32.5 C15.6006523,32.5 15.3624566,32.9450727 15.5839749,33.2773501 L23.5839749,45.2773501 C23.7818859,45.5742166 24.2181141,45.5742166 24.4160251,45.2773501 L32.4160251,33.2773501 L32.4565657,33.2046247 C32.6026932,32.8837617 32.3708229,32.5 32,32.5 L26.5,32.5 L26.5,16.5 L32,16.5 C32.3993477,16.5 32.6375434,16.0549273 32.4160251,15.7226499 L24.4160251,3.7226499 C24.2181141,3.42578337 23.7818859,3.42578337 23.5839749,3.7226499 L15.5839749,15.7226499 Z" fill="#000000" fill-rule="nonzero" id="Path" transform="translate(24.000000, 24.500000) scale(1, -1) rotate(90.000000) translate(-24.000000, -24.500000)" /></g></svg>
+       <i class="g_tooltip_onscreen" data-x="top:0;left:-30px|Use this to scroll|the toolbar overflow."></i>
+      </div>
+     </div>
+     <div id="g_parser_content">
+      <div id="g_parser_info">
+       <div id="g_parser_info_form">
+        <div>
+         <b>Name:<span id="g_parser_readonly_display">&nbsp;shared parser&nbsp;[read-only]</span>
+          <label for="g_parser_readonly" id="g_parser_readonly_label"><input type="checkbox" value="1" id="g_parser_readonly" /> Lock</label><br />
+         </b>
+         <input id="g_parser_name" type="text" value="" maxlength="32">
+        </div>
+        <div><b>Input Type:</b><select id="g_parser_format"></select></div>
+        <div><b>Input Profile:
+         <i class="g_tooltip_button" data-x="top:15px;left:-7px|This defines how the source document is broken down, line by line, into|row-based groups. It specifies how the mapping process organizes|similar rows, which is critical for fine-tuning format-based documents.||{&bull; Basic types} (e.g., integers, strings, etc.) result in more similar|rows and fewer groups. This can lead to false positives if your|document is more complex than your profile.||{&bull; Extended types} cover a wider range of data types (e.g., dates, currency,|etc.), resulting in more unique lines and potentially requiring more|explicit manual grouping. However, this approach might miss variations|in your document if it is too narrowly focused.||For documents that can be reliably tabularized, it generally makes sense|to use basic profile types. For format-based documents, it is best to use|the profile with the most broadly relatable data types."></i>
+        </b><select id="g_parser_profile"></select></div>
+        <div><b>Input Structure:
+         <i class="g_tooltip_button" data-x="top:15px;left:-7px|This defines how your source document will be presented in text for mapping.||Ideally, your source document should be tabularized, as this is the simplest|way to map your data and is the least prone to false positives.||However, depending on the structure of your document, tabularizing the data|may not be feasible. In such cases, it is best to preserve the document|structure for manual mapping.||In some scenarios, you may want to map data using both the tabularized|format and the preserved document structure.||NOTE: Tabularizing documents can be resource-intensive and may lead to|hitting resource limits associated with your account. Contact support if you|believe your use case warrants a limit increase."></i>
+        </b><select id="g_parser_structure">
+         <option value="PAGES">Preserve original page layout</option>
+         <option value="TLATTICEONLY">Tabularize data using the fast lattice method</option>
+         <option value="TSTREAMONLY">Tabularize data using the slow broad stream method</option>
+         <option value="TLATTICE">Original layout + Tabularize using fast lattice</option>
+         <option value="TSTREAM">Original layout + Tabularize using slow broad stream</option>
+         <option value="FLATTEN">Flatten and remove page context</option>
+        </select></div>
+        <div><b>Output Type:</b><select id="g_parser_output"></select></div>
+        <div><b>Output Encoding:</b><select id="g_parser_output_encoding">
+         <option value="">Preserve original encoding</option>
+         <option value="ASCII">Translate to ASCII</option>
+         <option value="8BIT">Translate to 8Bit</option>
+         <option value="ASCIIF">Filter Non-ASCII</option>
+         <option value="8BITF">Filter Non-8Bit</option>
+        </select></div>
+        <div><b>Output Structure:
+         <i class="g_tooltip_button" data-x="top:15px;left:-7px|This allows you to control behaviors related to empty cell values.|Common use cases include cascading values up or down to populate|cells that were assumed to be the same as the cells in the previous|or next row, cells that are assumed to be the same as the cells in|the previous row, condensing multiple rows into one, along with|filtering incomplete rows."></i>
+        </b><select id="g_parser_output_structure">
+         <option value="0">Default</option>
+         <option value="32">Flatten columns vertically</option>
+         <option value="64">Truncate partial rows</option>
+         <option value="8">Fill empty column cells forward</option>
+         <option value="16">Fill empty column cells backward</option>
+         <option value="26">Coalesce rows (strict) :: Fill forward</option>
+         <option value="27">Coalesce rows (strict) :: Fill backward</option>
+         <option value="2">Coalesce rows (strict)</option>
+         <option value="28">Coalesce rows (loose) :: Fill forward</option>
+         <option value="29">Coalesce rows (loose) :: Fill backward</option>
+         <option value="4">Coalesce rows (loose)</option>
+        </select></div>
+        <div><b>Description (optional):</b><textarea id="g_parser_description" type="text" value=""></textarea></div>
+        <div><b>Filename matching:
+          <i class="g_tooltip_button" data-x="top:15px;left:-7px|This allows you to require filenames to match a particular format, while|also enabling the ability to implicitly push files to be parsed without|explicitly referencing the parser itself. These options are accessible|on your account page. Traditional asterisk ({*}) wildcards are allowed."></i>
+        </b><input id="g_parser_filename_match" type="text" value="" maxlength="255" placeholder="*PartialMatch*.pdf"></div>
+        <div><b>Send Outputs to E-mail (optional):</b><input id="g_parser_email" type="text" value="" maxlength="255" placeholder="user@domain.com"></div>
+        <div><b>Send Outputs to URL (optional; protocols = ftp, ftps, sftp, http, https):</b><input id="g_parser_url" type="text" value="" maxlength="4096" placeholder="protocol://user:pass@domain.com/path/"></div>
+       </div>
+       <hr />
+       <div id="g_parser_info_input_container">
+        <button type="button" id="g_parser_info_save">Save</button>
+        <button type="button" id="g_parser_info_delete">Delete</button>
+        <button type="button" id="g_parser_info_issue"><span>Contact </span>Support</button>
+        <button type="button" id="g_parser_info_parser_id"><span>Parser </span>ID</button>
+       </div>
+      </div>
+      <div id="g_parser_map">
+       <div id="g_parser_map_upload"><input type="file" id="g_map_file" class="g_file" /></div>
+       <div id="g_gtf_editor">
+        <div id="g_gtf_editor_controls_container">
+         <div id="g_gtf_editor_controls">
+          <div class="g_gtf_icon" id="g_parser_map_save" title="Save map rules"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g><path d="M0 0h24v24H0z" fill="none"/><path d="M4 3h14l2.707 2.707a1 1 0 0 1 .293.707V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3 1v5h9V4H7zm-1 8v7h12v-7H6zm7-7h2v3h-2V5z"/></g></svg></div>
+          <div class="g_gtf_icon" id="g_parser_map_revert" title="Revert map"><svg viewBox="0 0 512 512"><g><path d="M447.9,368.2c0-16.8,3.6-83.1-48.7-135.7c-35.2-35.4-80.3-53.4-143.3-56.2V96L64,224l192,128v-79.8   c40,1.1,62.4,9.1,86.7,20c30.9,13.8,55.3,44,75.8,76.6l19.2,31.2H448C448,389.9,447.9,377.1,447.9,368.2z"/></g></svg></div>
+          <div class="g_gtf_icon" id="g_parser_map_delete" title="Wipe mappings and rules"><svg viewBox="-2 -2 36 36"><path d="M6,12v15c0,1.654,1.346,3,3,3h14c1.654,0,3-1.346,3-3V12H6z M12,25c0,0.552-0.448,1-1,1s-1-0.448-1-1v-9  c0-0.552,0.448-1,1-1s1,0.448,1,1V25z M17,25c0,0.552-0.448,1-1,1s-1-0.448-1-1v-9c0-0.552,0.448-1,1-1s1,0.448,1,1V25z M22,25  c0,0.552-0.448,1-1,1s-1-0.448-1-1v-9c0-0.552,0.448-1,1-1s1,0.448,1,1V25z" /><path d="M27,6h-6V5c0-1.654-1.346-3-3-3h-4c-1.654,0-3,1.346-3,3v1H5C3.897,6,3,6.897,3,8v1c0,0.552,0.448,1,1,1h24  c0.552,0,1-0.448,1-1V8C29,6.897,28.103,6,27,6z M13,5c0-0.551,0.449-1,1-1h4c0.551,0,1,0.449,1,1v1h-6V5z" /></svg></div>
+          <div class="g_gtf_icon_separator g_gtf_icon_multi_map"></div>
+          <div class="g_gtf_icon g_gtf_icon_multi_map" id="g_gtf_map_delete" title="Delete current map entry"><svg fill="none" height="24" viewBox="0 0 24 25" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2V8C12 9.10457 12.8954 10 14 10H20V20C20 21.1046 19.1046 22 18 22H13.0004C13.6281 21.1643 14 20.1256 14 19C14 16.2386 11.7614 14 9 14H4V4C4 2.89543 4.89543 2 6 2H12ZM13.5 2.5V8C13.5 8.27614 13.7239 8.5 14 8.5H19.5L13.5 2.5ZM5.75 15.75C5.75 15.3358 5.41421 15 5 15L4.80036 15.0049C2.68397 15.1089 1 16.8578 1 19C1 21.2091 2.79086 23 5 23L5.10177 22.9932C5.46785 22.9435 5.75 22.6297 5.75 22.25C5.75 21.8358 5.41421 21.5 5 21.5L4.83562 21.4947C3.53154 21.41 2.5 20.3255 2.5 19C2.5 17.6193 3.61929 16.5 5 16.5L5.10177 16.4932C5.46785 16.4435 5.75 16.1297 5.75 15.75ZM13 19C13 16.7909 11.2091 15 9 15L8.89823 15.0068C8.53215 15.0565 8.25 15.3703 8.25 15.75C8.25 16.1642 8.58579 16.5 9 16.5L9.16438 16.5053C10.4685 16.59 11.5 17.6745 11.5 19C11.5 20.3807 10.3807 21.5 9 21.5L8.89823 21.5068C8.53215 21.5565 8.25 21.8703 8.25 22.25C8.25 22.6642 8.58579 23 9 23L9.19964 22.9951C11.316 22.8911 13 21.1422 13 19ZM8.75 18.25H5.25L5.14823 18.2568C4.78215 18.3065 4.5 18.6203 4.5 19C4.5 19.4142 4.83579 19.75 5.25 19.75H8.75L8.85177 19.7432C9.21785 19.6935 9.5 19.3797 9.5 19C9.5 18.5858 9.16421 18.25 8.75 18.25Z" fill="#212121"/></svg></div>
+          <div class="g_gtf_icon" id="g_parser_map_add" title="Upload additional map">
+<i class="g_tooltip_onscreen" data-x="top:max(2.3vw,50px);left:0px|Click the plus button or drop files into this window to upload
+additional documents of the same type. It is {strongly encouraged} to
+upload multiple versions of your document for mapping to maximize
+coverage. Once multiple versions are available for mapping, use the
+left/right arrow buttons or keys to cycle through them as you work."></i>
+<svg fill="none" height="24" viewBox="0 0 24 25" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2V8C12 9.10457 12.8954 10 14 10H20V20C20 21.1046 19.1046 22 18 22H11.1904C12.3112 20.8321 13 19.2465 13 17.5C13 13.9101 10.0899 11 6.5 11C5.6141 11 4.76959 11.1772 4 11.4982V4C4 2.89543 4.89543 2 6 2H12Z" fill="#212121"/><path d="M13.5 2.5V8C13.5 8.27614 13.7239 8.5 14 8.5H19.5L13.5 2.5Z" fill="#212121"/><path d="M12 17.5C12 14.4624 9.53757 12 6.5 12C3.46243 12 1 14.4624 1 17.5C1 20.5376 3.46243 23 6.5 23C9.53757 23 12 20.5376 12 17.5ZM7.00065 18L7.00111 20.5035C7.00111 20.7797 6.77725 21.0035 6.50111 21.0035C6.22497 21.0035 6.00111 20.7797 6.00111 20.5035L6.00065 18H3.4956C3.21973 18 2.99609 17.7762 2.99609 17.5C2.99609 17.2239 3.21973 17 3.4956 17H6.00046L6 14.4993C6 14.2231 6.22386 13.9993 6.5 13.9993C6.77614 13.9993 7 14.2231 7 14.4993L7.00046 17H9.49659C9.77246 17 9.99609 17.2239 9.99609 17.5C9.99609 17.7762 9.77246 18 9.49659 18H7.00065Z" fill="#212121"/></svg>
+          </div>
+          <div class="g_gtf_icon g_gtf_icon_multi_map" id="g_gtf_map_prev" title="Previous map:  &#10096; &#8592; &#10097; &#9000;" data-x="-1"><svg fill="none" height="24" viewBox="0 0 24 25" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2V8C12 9.10457 12.8954 10 14 10H20V20C20 21.1046 19.1046 22 18 22H11.1904C12.3112 20.8321 13 19.2465 13 17.5C13 13.9101 10.0899 11 6.5 11C5.6141 11 4.76959 11.1772 4 11.4982V4C4 2.89543 4.89543 2 6 2H12Z" fill="#212121"/><path d="M13.5 2.5V8C13.5 8.27614 13.7239 8.5 14 8.5H19.5L13.5 2.5Z" fill="#212121"/><path d="M12 17.5C12 20.5376 9.53757 23 6.5 23C3.46243 23 1 20.5376 1 17.5C1 14.4624 3.46243 12 6.5 12C9.53757 12 12 14.4624 12 17.5ZM9.5 18C9.77614 18 10 17.7761 10 17.5C10 17.2239 9.77614 17 9.5 17H4.70711L6.35355 15.3536C6.54882 15.1583 6.54882 14.8417 6.35355 14.6464C6.15829 14.4512 5.84171 14.4512 5.64645 14.6464L3.14645 17.1464C2.95118 17.3417 2.95118 17.6583 3.14645 17.8536L5.64645 20.3536C5.84171 20.5488 6.15829 20.5488 6.35355 20.3536C6.54882 20.1583 6.54882 19.8417 6.35355 19.6464L4.70711 18H9.5Z" fill="#212121"/></svg></div>
+          <div class="g_gtf_icon g_gtf_icon_multi_map" id="g_gtf_map_next" title="Next map:  &#10096; &#8594; &#10097; &#9000;" data-x="1"><svg fill="none" height="24" viewBox="0 0 24 25" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2V8C12 9.10457 12.8954 10 14 10H20V20C20 21.1046 19.1046 22 18 22H11.1904C12.3112 20.8321 13 19.2465 13 17.5C13 13.9101 10.0899 11 6.5 11C5.6141 11 4.76959 11.1772 4 11.4982V4C4 2.89543 4.89543 2 6 2H12ZM13.5 2.5V8C13.5 8.27614 13.7239 8.5 14 8.5H19.5L13.5 2.5ZM12 17.5C12 20.5376 9.53757 23 6.5 23C3.46243 23 1 20.5376 1 17.5C1 14.4624 3.46243 12 6.5 12C9.53757 12 12 14.4624 12 17.5ZM3.5 17C3.22386 17 3 17.2239 3 17.5C3 17.7761 3.22386 18 3.5 18H8.29289L6.64645 19.6464C6.45118 19.8417 6.45118 20.1583 6.64645 20.3536C6.84171 20.5488 7.15829 20.5488 7.35355 20.3536L9.85355 17.8536C10.0488 17.6583 10.0488 17.3417 9.85355 17.1464L7.35355 14.6464C7.15829 14.4512 6.84171 14.4512 6.64645 14.6464C6.45118 14.8417 6.45119 15.1583 6.64645 15.3536L8.29289 17H3.5Z" fill="#212121"/></svg></div>
+          <div class="g_gtf_icon_separator"></div>
+          <div class="g_gtf_icon" id="g_gtf_zoom_out_button" title="Zoom out:  &#10096; - &#10097; &#9000;" data-x="-2"><svg viewBox="-256.5 398 48 48"><path d="M-215,433.3l-6-6c1.1-2,1.7-4.2,1.7-6.6c0-7.6-6.2-13.8-13.8-13.8c-7.6,0-13.9,6.2-13.9,13.8s6.2,13.8,13.8,13.8  c2.4,0,4.6-0.6,6.6-1.7l6,6L-215,433.3z M-238.7,423.1v-4h11.9v4H-238.7z"/></svg></div>
+          <div class="g_gtf_icon" id="g_gtf_zoom_in_button" title="Zoom in:  &#10096; + &#10097; &#9000;" data-x="2"><svg viewBox="-256.5 399 48 48"><path d="M-215,434.3l-6-6c1.1-2,1.7-4.2,1.7-6.6c0-7.6-6.2-13.8-13.8-13.8c-7.6,0-13.9,6.2-13.9,13.8s6.2,13.8,13.8,13.8  c2.4,0,4.6-0.6,6.6-1.7l6,6L-215,434.3z M-231.2,428h-4v-4h-4v-4h4v-4h4v4h4v4h-4V428z"/></svg></div>
+          <div class="g_gtf_icon_separator"></div>
+          <div id="g_gtf_mode_group">
+<i class="g_tooltip_onscreen" data-x="top:max(2.3vw,50px);left:0px|These four buttons determine the editor's mode. The first button disables edit mode and
+displays an overall view of mapped entries for all columns. The remaining three buttons
+enable edit mode for an individual column, which defaults to the first column.
+
+{&bull; [O]verall View Mode}: Disables edit mode, allowing you to quickly view all columns.
+
+{&bull; [G]roup Edit Mode}: This is the most commonly used mode. It automatically identifies
+similar values based on the value and position you clicked in the editor. Supplemental
+values should highlight as you click, making it possible to select all intended values for
+a given column with a click or two. However, this often requires fine-tuning:
+
+    {&bull;} If incorrect values are being associated, consider changing the parser profile
+    or exploring the filtering options, which is explained in another tooltip.
+    {&bull;} If too few values are being associated, you may want a more basic profile to
+    avoid losing data with edge cases of your documents.
+
+{&bull; [S]ingle Edit Mode}: This mode allows you to add individual values in documents
+with positionally static data.
+
+{&bull; [E]xclude Edit Mode}: This mode is used to exclude individual values in documents
+with positionally static data.
+"></i>
+           <div class="g_gtf_icon" id="g_gtf_view_overall_button" data-x="view" title="Overall view:  &#10096; O &#10097; &#9000;"><svg viewBox="0 0 32 32"><g><line fill="none" stroke="#000000" stroke-miterlimit="10" stroke-width="2" x1="5" x2="27" y1="8.57" y2="8.57"/><line fill="none" stroke="#000000" stroke-miterlimit="10" stroke-width="2" x1="5" x2="27" y1="16" y2="16"/><line fill="none" stroke="#000000" stroke-miterlimit="10" stroke-width="2" x1="5" x2="27" y1="23.47" y2="23.47"/></g></svg></div>
+           <div class="g_gtf_icon" id="g_gtf_view_group_button" data-x="group" title="Group selection mode:  &#10096; G &#10097; &#9000;"><svg viewBox="0 0 32 32"><g><line fill="none" stroke="#000000" stroke-miterlimit="10" stroke-width="2" x1="15" x2="27" y1="8.57" y2="8.57"/><line fill="none" stroke="#000000" stroke-miterlimit="10" stroke-width="2" x1="15" x2="27" y1="16" y2="16"/><line fill="none" stroke="#000000" stroke-miterlimit="10" stroke-width="2" x1="15" x2="27" y1="23.47" y2="23.47"/><path d="m9.53,13.08l-2.17,3.19l-0.64,-0.64c-0.51,-0.51 -1.27,-0.51 -1.78,0s-0.51,1.27 0,1.78l1.66,1.78c0.25,0.25 0.51,0.38 0.89,0.38c0,0 0.13,0 0.13,0c0.38,0 0.76,-0.25 0.89,-0.51l3.06,-4.59c0.38,-0.64 0.25,-1.4 -0.38,-1.78c-0.51,-0.38 -1.27,-0.25 -1.66,0.38z" /><path d="m9.53,20.09l-2.17,3.19l-0.64,-0.64c-0.51,-0.51 -1.27,-0.51 -1.78,0s-0.51,1.27 0,1.78l1.66,1.78c0.25,0.25 0.51,0.38 0.89,0.38c0,0 0.13,0 0.13,0c0.38,0 0.76,-0.25 0.89,-0.51l3.06,-4.59c0.38,-0.64 0.25,-1.4 -0.38,-1.78c-0.51,-0.38 -1.27,-0.25 -1.66,0.38z" /><path d="m9.53,6.05l-2.17,3.19l-0.64,-0.64c-0.51,-0.51 -1.27,-0.51 -1.78,0s-0.51,1.27 0,1.78l1.66,1.78c0.25,0.25 0.51,0.38 0.89,0.38c0,0 0.13,0 0.13,0c0.38,0 0.76,-0.25 0.89,-0.51l3.06,-4.59c0.38,-0.64 0.25,-1.4 -0.38,-1.78c-0.51,-0.38 -1.27,-0.25 -1.66,0.38z" /></g></svg></div>
+           <div class="g_gtf_icon" id="g_gtf_view_single_button" data-x="single" title="Single selection mode:  &#10096; S &#10097; &#9000;"><svg viewBox="0 0 32 32"><g><line fill="none" stroke="#000000" stroke-miterlimit="10" stroke-width="2" x1="5" x2="27" y1="8.57" y2="8.57"/><line fill="none" stroke="#000000" stroke-miterlimit="10" stroke-width="2" x1="15" x2="27" y1="16" y2="16"/><line fill="none" stroke="#000000" stroke-miterlimit="10" stroke-width="2" x1="5" x2="27" y1="23.47" y2="23.47"/><path d="m10.71,12.3l-2.53,3.72l-0.75,-0.75c-0.59,-0.59 -1.48,-0.59 -2.08,0s-0.59,1.48 0,2.08l1.94,2.08c0.29,0.29 0.59,0.44 1.04,0.44c0,0 0.15,0 0.15,0c0.44,0 0.89,-0.29 1.04,-0.59l3.57,-5.35c0.44,-0.75 0.29,-1.63 -0.44,-2.08c-0.59,-0.44 -1.48,-0.29 -1.94,0.44l0,0.01z" /></g></svg></div>
+           <div class="g_gtf_icon" id="g_gtf_view_exclude_button" data-x="exclude" title="Exclusion mode:  &#10096; E &#10097; &#9000;"><svg viewBox="0 0 32 32"><g><line fill="none" stroke="#000000" stroke-miterlimit="10" stroke-width="2" x1="5" x2="27" y1="8.57" y2="8.57"/><line fill="none" stroke="#000000" stroke-miterlimit="10" stroke-width="2" x1="15" x2="27" y1="16" y2="16"/><line fill="none" stroke="#000000" stroke-miterlimit="10" stroke-width="2" x1="5" x2="27" y1="23.47" y2="23.47"/><path d="m12.92,12.28c-0.71,-0.71 -1.77,-0.71 -2.48,0l-1.24,1.24l-1.24,-1.24c-0.71,-0.71 -1.77,-0.71 -2.48,0s-0.71,1.77 0,2.48l1.24,1.24l-1.24,1.24c-0.71,0.71 -0.71,1.77 0,2.48c0.36,0.36 0.89,0.53 1.24,0.53s0.89,-0.17 1.24,-0.53l1.24,-1.24l1.24,1.24c0.36,0.36 0.89,0.53 1.24,0.53s0.89,-0.17 1.24,-0.53c0.71,-0.71 0.71,-1.77 0,-2.48l-1.24,-1.24l1.24,-1.24c0.71,-0.71 0.71,-1.77 0,-2.48l0.02,0z" /></g></svg></div>
+           <div id="g_gtf_view_display">&nbsp;&nbsp;&#8592;&nbsp;&nbsp;select <span data-x="group">group</span>, <span data-x="single">single</span>, or <span data-x="exclude">exclusion</span> selection mode to add or modify columns</div>
+          </div>
+          <div class="g_gtf_icon_separator"></div>
+          <div id="g_gtf_edit_display">
+           <div id="g_gtf_column_group">
+            <div class="g_gtf_icon" id="g_gtf_column_fg_color_container" title="Column foreground color"><svg viewBox="-25 -25 300 300"><rect fill="none" height="256" width="256"/><path d="M230.6,25.4a31.9,31.9,0,0,0-45.2,0l-.3.3L130.2,86.9,121,77.7a23.9,23.9,0,0,0-34,0L10.3,154.3a8.1,8.1,0,0,0,0,11.4l80,80a8.2,8.2,0,0,0,11.4,0L178.3,169a23.9,23.9,0,0,0,0-34l-9.2-9.2,61.2-54.9.3-.3A31.9,31.9,0,0,0,230.6,25.4ZM96,228.7,81.9,214.6,107.4,189a8,8,0,0,0-11.3-11.3L70.6,203.3,53.9,186.6,79.4,161a8,8,0,0,0-11.3-11.3L42.6,175.3,27.3,160,72,115.3,140.7,184Z"/></svg><input id="g_gtf_column_fg_color" type="color" /></div>
+            <div class="g_gtf_icon" id="g_gtf_column_bg_color_container" title="Column background color"><svg viewBox="-25 -25 300 300"><rect fill="none" height="256" width="256"/><path d="M230.6,25.4a31.9,31.9,0,0,0-45.2,0l-.3.3L130.2,86.9,121,77.7a23.9,23.9,0,0,0-34,0L10.3,154.3a8.1,8.1,0,0,0,0,11.4l80,80a8.2,8.2,0,0,0,11.4,0L178.3,169a23.9,23.9,0,0,0,0-34l-9.2-9.2,61.2-54.9.3-.3A31.9,31.9,0,0,0,230.6,25.4ZM96,228.7,81.9,214.6,107.4,189a8,8,0,0,0-11.3-11.3L70.6,203.3,53.9,186.6,79.4,161a8,8,0,0,0-11.3-11.3L42.6,175.3,27.3,160,72,115.3,140.7,184Z"/></svg><input id="g_gtf_column_bg_color" type="color" /></div>
+            <div id="g_gtf_column_color_container" title="Column Name:  &#10096; 1..9 &#10097; &#9000;">
+             <div id="g_gtf_column_color_selected">
+              <i class="g_tooltip_onscreen" data-x="top:200px;left:-200px|This is the work area for your document map. Notice that while you hover
+over the text, your mouse matches the background color of the current
+column. If you click, you will see that it adds to (or excludes from) your
+current column. If in grouping mode, a solid-colored bar will appear next to
+each grouped item, indicating that it is part of the same group. Hovering
+over a grouped item expands a pencil icon which allows you to control each
+sub-grouping at a more granular level."></i>
+              <i class="g_tooltip_onscreen" data-x="top:max(2.3vw,50px);left:-7px|This controls the current column index, name, and color
+representation. It defines which column you add values to
+when you click within the work area. Click the {column name}
+field above to set a name for the first column or add additional
+columns, and then click on some values to add in the work area."></i>
+              <span id="g_gtf_column_name_text_num">#?</span>
+              <input id="g_gtf_column_name_text" type="text" size="10" maxlength="64" placeholder="[COLUMN NAME]" />
+             </div>
+             <div id="g_gtf_column_color_choices"></div>
+            </div>
+            <div class="g_gtf_icon" id="g_gtf_column_down_button" title="Move column up" data-x="-1"><svg viewBox="0 0 32 32"><g><rect fill="none" height="32" width="32"/></g><g><path d="M24,12H8v2h15h1V12z M28,15.518V4H4v24h11.518c1.614,2.411,4.361,3.999,7.482,4c4.971-0.002,8.998-4.029,9-9   C31.999,19.879,30.411,17.132,28,15.518z M15.517,18c-0.412,0.616-0.743,1.289-0.994,2H8v2h6.058C14.022,22.329,14,22.661,14,23   c0,1.054,0.19,2.061,0.523,3H6V6h20v8.523C25.061,14.19,24.054,14,23,14c-2.143,0-4.107,0.751-5.652,2H8v2H15.517z M23,29.883 c-3.801-0.009-6.876-3.084-6.885-6.883c0.009-3.801,3.084-6.876,6.885-6.884c3.799,0.008,6.874,3.083,6.883,6.884 C29.874,26.799,26.799,29.874,23,29.883z"/><polygon points="19,24 27,24 23,20"/></g></svg></div>
+            <div class="g_gtf_icon" id="g_gtf_column_up_button" title="Move column down" data-x="1"><svg viewBox="0 0 32 32"><g><rect fill="none" height="32" width="32"/></g><g><path d="M24,12H8v2h15h1V12z M28,15.518V4H4v24h11.518c1.614,2.411,4.361,3.999,7.482,4c4.971-0.002,8.998-4.029,9-9   C31.999,19.879,30.411,17.132,28,15.518z M15.517,18c-0.412,0.616-0.743,1.289-0.994,2H8v2h6.058C14.022,22.329,14,22.661,14,23   c0,1.054,0.19,2.061,0.523,3H6V6h20v8.523C25.061,14.19,24.054,14,23,14c-2.143,0-4.107,0.751-5.652,2H8v2H15.517z M23,29.883 c-3.801-0.009-6.876-3.084-6.885-6.883c0.009-3.801,3.084-6.876,6.885-6.884c3.799,0.008,6.874,3.083,6.883,6.884 C29.874,26.799,26.799,29.874,23,29.883z"/><polygon points="27,22 19,22 23,26"/></g></svg></div>
+            <div class="g_gtf_icon" id="g_gtf_column_delete" title="Delete column"><svg viewBox="0 0 32 32"><g><rect fill="none" height="32" width="32"/></g><g><path d="M24,12H8v2h15h1V12z M28,15.518V4H4v24h11.518c1.614,2.411,4.361,3.999,7.482,4c4.971-0.002,8.998-4.029,9-9   C31.999,19.879,30.411,17.132,28,15.518z M15.517,18c-0.412,0.616-0.743,1.289-0.994,2H8v2h6.058C14.022,22.329,14,22.661,14,23   c0,1.054,0.19,2.061,0.523,3H6V6h20v8.523C25.061,14.19,24.054,14,23,14c-2.143,0-4.107,0.751-5.652,2H8v2H15.517z M23,29.883 c-3.801-0.009-6.876-3.084-6.885-6.883c0.009-3.801,3.084-6.876,6.885-6.884c3.799,0.008,6.874,3.083,6.883,6.884 C29.874,26.799,26.799,29.874,23,29.883z"/><polygon points="19,25 21,27 23,25 25,27 27,25 25,23 27,21 25,19 23,21 21,19 19,21 21,23"/></g></svg></div>
+            <div class="g_gtf_icon" id="g_gtf_column_join_line_enabled_container" title="Join matches that occur on the same line">
+             <svg viewBox="0 -0.25 24 24"><g><path d="M0 0H24V24H0z" fill="none"/><path d="M20 3c.552 0 1 .448 1 1v16c0 .552-.448 1-1 1H4c-.552 0-1-.448-1-1V4c0-.552.448-1 1-1h16zm-9 2H5v5.999h2V9l3 3-3 3v-2H5v6h6v-2h2v2h6v-6h-2v2l-3-3 3-3v1.999h2V5h-6v2h-2V5zm2 8v2h-2v-2h2zm0-4v2h-2V9h2z"/></g></svg>
+             <input id="g_gtf_column_join_line_enabled" type="checkbox" value="1" />
+            </div>
+            <div class="g_gtf_icon_long">
+             <select id="g_gtf_column_join_column">
+              <option value="0" selected="selected">[None]</option>
+              <optgroup id="g_gtf_column_join_column_append" label="Append to row:"></optgroup>
+              <optgroup id="g_gtf_column_join_column_prepend" label="Prepend to next row:"></optgroup>
+             </select>
+             <span id="g_gtf_column_join_column_detail">&nbsp;SEP:&nbsp;<input id="g_gtf_column_join_delimiter" type="text" value="" placeholder="[SEP]" /></span>
+            </div>
+           </div>
+           <div class="g_gtf_icon_separator"></div>
+           <div id="g_gtf_filter_group">
+<i class="g_tooltip_onscreen" data-x="top:max(2.3vw,50px);right:-30px|This button enables two filtering methods for the current column:
+
+&bull; A {ruler tool} that allows you to exclude values based on their position.
+&bull; A {text match} option to exclude values based on the type of data.
+
+These methods help to exclude potential false positives in your groupings."></i>
+            <div class="g_gtf_icon" id="g_gtf_filter_enabled_container" title="Column filter controls:  &#10096; F &#10097; &#9000;">
+             <svg viewBox="0 0 48 48"><path d="M47,12a2,2,0,0,0-2-2H24a2,2,0,0,0,0,4H45A2,2,0,0,0,47,12Z"/><path d="M3,14H8.35a6,6,0,1,0,0-4H3a2,2,0,0,0,0,4Zm11-4a2,2,0,1,1-2,2A2,2,0,0,1,14,10Z"/><path d="M45,22H37.65a6,6,0,1,0,0,4H45a2,2,0,0,0,0-4ZM32,26a2,2,0,1,1,2-2A2,2,0,0,1,32,26Z"/><path d="M22,22H3a2,2,0,0,0,0,4H22a2,2,0,0,0,0-4Z"/><path d="M45,34H28a2,2,0,0,0,0,4H45a2,2,0,0,0,0-4Z"/><path d="M18,30a6,6,0,0,0-5.65,4H3a2,2,0,0,0,0,4h9.35A6,6,0,1,0,18,30Zm0,8a2,2,0,1,1,2-2A2,2,0,0,1,18,38Z"/></svg>
+             <input id="g_gtf_filter_enabled" type="checkbox" value="1" />
+            </div>
+            <div id="g_gtf_filter_view_display">&nbsp;&nbsp;&#8592;&nbsp;&nbsp;<span id="g_gtf_filter_activate" data-x="g_gtf_filter_enabled">activate</span> positional ruler and text filtering</div>
+            <div id="g_gtf_filter_edit_display">
+<i class="g_tooltip_onscreen" data-x="top:max(2.3vw,50px);right:5px|This is the positional ruler, which consists of a vertical and horizontal bar made
+up of plus ({+}) signs.
+
+On either bar, clicking a plus sign for the {first} time will include everything
+going forward and exclude what comes before it.  Clicking it a {second} time will
+indicate where you want to stop, and clicking it a {third} time will reset the bar.
+
+Everything within the range will be included, while everything outside it will
+be excluded. You can also click on the page numbers, allowing you to exclude
+entire page ranges using the same behavior.
+"></i>
+<i class="g_tooltip_onscreen" data-x="top:max(2.3vw,50px);right:-50px|This feature allows you to exclude text that doesn't match a designated format,
+with the added ability to modify and replace the resulting content in your output
+file.
+
+Click the {match value} field to see a dropdown of generic data types to match
+against. Once clicked, you will notice the {replace with} field populates a
+placeholder containing the relevant replacement variable structure you can use.
+
+Custom match values can also be added and supported via regular expressions upon
+request.
+"></i>
+             <input id="g_gtf_filter_pre_text" type="text" size="10" maxlength="255" placeholder="[ pre-match value ]" />
+             <div id="g_gtf_filter_value_container" title="Filter text matches">
+              <input id="g_gtf_filter_value_text" type="text" size="10" maxlength="255" placeholder="[ match value ]" />
+              <div id="g_gtf_filter_value_choices">
+               <div data-x="number">Number</div>
+               <div data-x="decimal">Decimal</div>
+               <div data-x="alphabet">Alphabet</div>
+               <div data-x="alpha-numerical">Alpha-Numerical</div>
+               <div data-x="money">Money</div>
+               <div data-x="date">Date</div>
+               <div data-x="time">Time</div>
+               <div data-x="url">URL</div>
+               <div data-x="email-address">E-Mail address</div>
+              </div>
+             </div>
+             <input id="g_gtf_filter_value_replace_text" type="text" size="10" maxlength="255" placeholder="[ replace with ]" />
+             <div id="g_gtf_filter_group_hidden">
+              <input id="g_gtf_filter_len_min" type="text" size="4" maxlength="4" placeholder="len min" />
+              <input id="g_gtf_filter_len_max" type="text" size="4" maxlength="4" placeholder="len max" />
+              <input id="g_gtf_filter_hpos_min" type="text" size="4" maxlength="4" placeholder="hpos min" />
+              <input id="g_gtf_filter_hpos_max" type="text" size="4" maxlength="4" placeholder="hpos max" />
+              <input id="g_gtf_filter_vpos_min" type="text" size="4" maxlength="4" placeholder="vpos min" />
+              <input id="g_gtf_filter_vpos_max" type="text" size="4" maxlength="4" placeholder="vpos max" />
+              <input id="g_gtf_filter_page_min" type="text" size="4" maxlength="4" placeholder="page min" />
+              <input id="g_gtf_filter_page_max" type="text" size="4" maxlength="4" placeholder="page max" />
+             </div>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+        <pre id="g_gtf_editor_data">[ Awaiting data... ]</pre>
+       </div>
+      </div>
+      <div id="g_parser_parse">
+       <div id="g_parser_parse_upload"><input type="file" id="g_parse_file" class="g_file" /></div>
+       <div id="g_parses_list"></div>
+      </div>
+     </div>
+    </form>
+   </div>
+   <div id="g_content_snippets">
+    <div id="g_snippets_info">All snippets require the appropriate <i>USER</i>, <i>PASS</i> and <i>PARSER_ID</i> fields populated.</div>
+    <div id="g_snippets_container">
+     <div id="g_snippets_menu">
+      <div data-x="sh">Bash (Shell)</div>
+      <div data-x="cs">C#</div>
+      <div data-x="go">Go</div>
+      <div data-x="java">Java</div>
+      <div data-x="js">Javascript (Node)</div>
+      <div data-x="lua">Lua</div>
+      <div data-x="php">PHP</div>
+      <div data-x="ps">PowerShell</div>
+      <div data-x="py">Python</div>
+      <div data-x="rb">Ruby</div>
+      <code id="g_snippet_copy_button" title="Copy to clipboard">&#128203;</code>
+     </div>
+     <div id="g_snippets_code">
+      <pre data-x="sh"><code class="language-bash">#!/bin/bash
+
+# Push a file to Gristle for parsing, with the option of waiting to download the parsed output.
+#
+# USAGE:
+#   ./this.sh &lt;input_file.ext&gt; [output_file.ext]
+
+G_USER=&quot;~G_USER~&quot;
+G_PASS=&quot;~G_PASS~&quot;
+G_PARSER_ID=&quot;~G_PARSER_ID~&quot; # ~G_PARSER_NAME~ (leave blank to infer)
+
+# --- EDIT ABOVE AS NEEDED ---
+G_IN_FILE=&quot;$1&quot;
+G_OUT_FILE=&quot;$2&quot;
+G_ATTEMPTS=10
+G_AUTH=&quot;$G_USER:$G_PASS&quot;
+[ -z &quot;$G_IN_FILE&quot; ] &amp;&amp; echo &quot;$0 &lt;input_file.ext&gt; [output_file.ext]&quot; &amp;&amp; exit
+[ ! -r &quot;$G_IN_FILE&quot; ] &amp;&amp; echo &quot;! Local file inaccessible or not found: $G_IN_FILE&quot; &amp;&amp; exit
+[ ! -z &quot;$G_OUT_FILE&quot; ] &amp;&amp; [ -e &quot;$G_OUT_FILE&quot; ] &amp;&amp; echo &quot;! Output file already exists: $G_OUT_FILE&quot; &amp;&amp; exit
+G_TMP=$(mktemp /tmp/gristle.XXXXXX);
+echo &quot;* Attempting to send file: $G_IN_FILE&quot;
+curl --basic -u &quot;$G_AUTH&quot; -F &quot;file=@$G_IN_FILE&quot; -sD- &quot;https://api.gristle.com/parse/$G_PARSER_ID&quot; 1&gt;&quot;$G_TMP&quot; 2&gt;&amp;1
+G_ERROR=$(grep -i &quot;^Gristle-Error:&quot; &quot;$G_TMP&quot; 2&gt;/dev/null | cut -d&quot; &quot; -f2-)
+[ ! -z &quot;$G_ERROR&quot; ] &amp;&amp; echo &quot;! Error: $G_ERROR&quot; &amp;&amp; rm -f &quot;$G_TMP&quot; &amp;&amp; exit
+G_PARSE_ID=$(grep -i &quot;^Gristle-Parse-Id:&quot; &quot;$G_TMP&quot; 2&gt;/dev/null | awk &#039;{print $2}&#039; | tr -d &quot;[:space:]&quot;)
+[ -z &quot;$G_PARSE_ID&quot; ] &amp;&amp; echo &quot;! UNEXPECTED RESPONSE, PLEASE REPORT:&quot; &amp;&amp; cat &quot;$G_TMP&quot; &amp;&amp; rm -f &quot;$G_TMP&quot; &amp;&amp; exit
+G_PARSER_ID=$(grep -i &quot;^Gristle-Parser-Id:&quot; &quot;$G_TMP&quot; 2&gt;/dev/null | awk &#039;{print $2}&#039; | tr -d &quot;[:space:]&quot;)
+[ -z &quot;$G_PARSER_ID&quot; ] &amp;&amp; echo &quot;! UNEXPECTED RESPONSE, PLEASE REPORT:&quot; &amp;&amp; cat &quot;$G_TMP&quot; &amp;&amp; rm -f &quot;$G_TMP&quot; &amp;&amp; exit
+G_AUTH=$(grep -i &quot;^Gristle-Token:&quot; &quot;$G_TMP&quot; 2&gt;/dev/null | awk &#039;{print $2}&#039; | tr -d &quot;[:space:]&quot;)
+[ -z &quot;$G_AUTH&quot; ] &amp;&amp; echo &quot;! Error: No authorization token returned.&quot; &amp;&amp; rm -f &quot;$G_TMP&quot; &amp;&amp; exit
+rm -f &quot;$G_TMP&quot;
+
+echo &quot;* File successfully sent and awaiting the output file for ID: $G_PARSE_ID&quot;
+[ -z &quot;$G_OUT_FILE&quot; ] &amp;&amp; echo -e &quot;* No output file was specified, manual URL:\n\t$ curl https://api.gristle.com/parse/$G_PARSER_ID/$G_PARSE_ID?$G_AUTH&quot; &amp;&amp; exit
+sleep 10
+G_ERROR=&quot;&quot;
+while true; do
+  G_STATUS=$(curl -o/dev/null -sIw%{http_code} &quot;https://$G_AUTH@api.gristle.com/parse/$G_PARSER_ID/$G_PARSE_ID&quot;)
+  case $G_STATUS in
+    304)
+      echo &quot;* Waiting ... ($G_ATTEMPTS)&quot;
+      if [ $G_ATTEMPTS -lt 1 ]; then
+        G_ERROR=&quot;Unexpectedly long wait time processing file: $G_PARSE_ID&quot;
+      else
+        G_ATTEMPTS=$((G_ATTEMPTS - 1))
+        sleep 15 &amp;&amp; continue
+      fi
+      ;;
+    422) G_ERROR=&quot;No data could be extracted from file&quot; ;;
+    2*) G_ERROR=&quot;&quot; ;;
+    *) G_ERROR=&quot;HTTP Status: $G_STATUS (not a downloadable response)&quot; ;;
+  esac
+  [ ! -z &quot;$G_ERROR&quot; ] &amp;&amp; echo &quot;! ERROR: $G_ERROR&quot; &amp;&amp; exit
+  break
+done
+
+echo &quot;* Attempting to download...&quot;
+curl -o &quot;$G_OUT_FILE&quot; &quot;https://$G_AUTH@api.gristle.com/parse/$G_PARSER_ID/$G_PARSE_ID&quot;
+     </code></pre>
+     <pre data-x="ps"><code class="language-php"># GristlePush.ps1
+#
+# Push a file to Gristle for parsing via the &quot;-PushFile&quot; argument, a download url is shown upon success.
+#
+# USAGE:
+#   powershell -ExecutionPolicy Bypass -File &quot;GristlePush.ps1&quot; -PushFile &quot;C:\Path\To\UploadFile.ext&quot;
+
+param ( [string]$PushFile = &quot;&quot; )
+
+$G_USER = &quot;~G_USER~&quot;
+$G_PASS = &quot;~G_PASS~&quot;
+$G_PARSER_ID = &quot;~G_PARSER_ID~&quot; # ~G_PARSER_NAME~
+
+If ([string]::IsNullOrEmpty($PushFile)) {
+  Write-Output &quot;Please include -PushFile path-to-file&quot;
+  Break
+}
+If (![System.IO.File]::Exists($PushFile)) {
+  Write-Output &quot;Could not find file: $PushFile&quot;
+  Break
+}
+
+$url = &quot;https://api.gristle.com/parse/$G_PARSER_ID&quot;
+$boundary = [System.Guid]::NewGuid().ToString();
+$auth = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(&quot;$G_USER`:$G_PASS&quot;))
+$filename = (Get-Item $PushFile).Name
+$content = Get-Content -Raw -Path $PushFile
+$body = (
+  &quot;--$boundary&quot;,
+  &quot;Content-Disposition: form-data; name=file; filename=`&quot;$filename`&quot;&quot;,
+  &quot;Content-Type: application/octet-stream; charset=windows-1252&quot;,
+  &quot;Content-Transfer-Encoding: binary`r`n&quot;,
+  $content,
+  &quot;--$boundary--`r`n&quot;
+) -join &quot;`r`n&quot;
+
+$response = Invoke-RestMethod -Headers @{Authorization=&quot;Basic $auth&quot;} -Uri $url -Method Post `
+  -ContentType &quot;multipart/form-data; charset=windows-1252; boundary=`&quot;$boundary`&quot;&quot; -Body $body
+
+If ([string]::IsNullOrEmpty($response)) { Write-Output &quot;No response returned&quot; }
+ElseIf (![string]::IsNullOrEmpty($response.error)) { Write-Output &quot;Gristle returned error: $response.error&quot; }
+ElseIf ([string]::IsNullOrEmpty($response.auth)) { Write-Output &quot;No authorization token returned&quot; }
+ElseIf ([string]::IsNullOrEmpty($response.id)) { Write-Output &quot;No parse id returned&quot; }
+Else { Write-Output &quot;https://api.gristle.com/parse/$G_PARSER_ID/$($response.id)?$($response.auth)&quot; }
+</code></pre><pre data-x="py"><code class="language-python">#!/usr/bin/env python3
+
+# USAGE:
+#   try: downloadUrl = gristlePush(&#039;uploadFile.ext&#039;)
+#   except Exception as e: print(&#039;ERROR:&#039;, e)
+
+import requests
+import time
+
+G_USER = &#039;~G_USER~&#039;
+G_PASS = &#039;~G_PASS~&#039;
+G_PARSER_ID = &#039;~G_PARSER_ID~&#039; # ~G_PARSER_NAME~
+G_ATTEMPTS = 10
+
+# Returns download url, if 'outFile' is specified it will poll until it can download the file.
+def gristlePush(inFile, outFile=None):
+
+  # Push file to gristle for parsing.
+  url = &#039;https://api.gristle.com/parse/{parser_id}&#039;.format(parser_id=G_PARSER_ID);
+  response = requests.post(url, files={&#039;file&#039;:open(inFile,&#039;rb&#039;)}, auth=(G_USER,G_PASS)).json()
+  if not response: raise Exception(&#039;No JSON returned from API&#039;)
+  if response[&#039;error&#039;]: raise Exception(response[&#039;error&#039;])
+  authToken = response[&#039;auth&#039;]
+  parseId = response[&#039;id&#039;]
+  url = &#039;https://api.gristle.com/parse/{parser_id}/{parse_id}?{auth_id}&#039;.format(parser_id=G_PARSER_ID, parse_id=parseId, auth_id=authToken)
+
+  # No output file specified, so return a url to download at a later time.
+  if not outFile:
+    return url
+
+  # Poll API to see if file is ready. (within a reasonable amount of time)
+  time.sleep(10)
+  attempts = G_ATTEMPTS
+  while attempts &gt; 0:
+    attempts -= 1
+    response = requests.head(url)
+    status = response.status_code
+    if 304 == status:
+      if attempts &lt;= 0:
+        raise Exception(&#039;Unexpectedly long wait time processing file: {parse_id}&#039;.format(parse_id=parseId))
+      time.sleep(15)
+    elif 422 == status:
+      raise Exception(&#039;No data could be extracted from file&#039;)
+    elif 200 &lt;= status &lt;= 299:
+      break
+    else:
+      raise Exception(&#039;HTTP Status: {status} (not a downloadable response)&#039;.format(status=status))
+
+  # Download file.
+  response = requests.get(url)
+  with open(outFile, &#039;wb&#039;) as file:
+    file.write(response.content)
+  return url
+</code></pre><pre data-x="php"><code class="language-php">&lt;?php
+
+// USAGE:
+//   try { $downloadUrl = gristlePush(&quot;uploadFile.ext&quot;); }
+//   catch(Exception $e) { print &quot;Error: {$e-&gt;getMessage()}\n&quot;; }
+
+define(&#039;G_USER&#039;, &#039;~G_USER~&#039;);
+define(&#039;G_PASS&#039;, &#039;~G_PASS~&#039;);
+define(&#039;G_PARSER_ID&#039;, &#039;~G_PARSER_ID~&#039;); // ~G_PARSER_NAME~
+define(&#039;G_ATTEMPTS&#039;, 10);
+
+// Returns download url, if $outFile is specified it will poll until it can download the file.
+function gristlePush($inFile, $outFile=null) {
+  if(!is_readable($inFile))
+    throw new Exception(&quot;Local file inaccessible or not found: $inFile&quot;);
+  if(!empty($outFile) &amp;&amp; file_exists($outFile))
+    throw new Exception(&quot;Output file already exists: $outFile&quot;);
+  if(!($ch=curl_init()))
+    throw new Exception(&quot;curl_init() failed&quot;);
+  curl_setopt_array($ch, [
+    CURLOPT_URL =&gt; &#039;https://api.gristle.com/parse/&#039;.G_PARSER_ID,
+    CURLOPT_HTTPHEADER =&gt; [&#039;Authorization: Basic &#039;.base64_encode(G_USER.&#039;:&#039;.G_PASS)],
+    CURLOPT_RETURNTRANSFER =&gt; true,
+    CURLOPT_POST =&gt; true,
+    CURLOPT_POSTFIELDS =&gt; [&#039;file&#039; =&gt; @curl_file_create($inFile)]
+  ]);
+
+  $result = @json_decode(@curl_exec($ch),true);
+  curl_close($ch);
+
+  if(curl_errno($ch)) $error = curl_error($ch);
+  else if(empty($result)) $error = &quot;No result returned from&quot;;
+  else if(!empty($result[&#039;error&#039;])) $error = $result[&#039;error&#039;];
+  else if(!($authToken=@$result[&#039;auth&#039;])) $error = &quot;No authorization token returned&quot;;
+  else if(!($parseId=@$result[&#039;id&#039;])) $error = &quot;No parse id returned&quot;;
+  else $error = null;
+  if($error)
+    throw new Exception($error);
+
+  $downloadUrl = &quot;https://api.gristle.com/parse/&quot;.G_PARSER_ID.&quot;/$parseId?$authToken&quot;;
+
+  // No output file specified, so return a url to download at a later time.
+  if(empty($outFile))
+    return($downloadUrl);
+
+  // --------------------- OUTPUT/DOWNLOAD MODE ONLY FROM HERE ON ---------------------
+  sleep(10);
+
+  // Poll API to see if file is ready. (within a reasonable amount of time)
+  $opts = [
+    CURLOPT_CUSTOMREQUEST =&gt; &#039;HEAD&#039;,
+    CURLOPT_URL =&gt; &quot;https://api.gristle.com/parse/&quot;.G_PARSER_ID.&quot;/$parseId&quot;,
+    CURLOPT_HTTPHEADER =&gt; [&quot;Authorization: Bearer $authToken&quot;],
+  ];
+  for($i=G_ATTEMPTS; $i &gt;= 0; $i--) {
+    if(!($ch=curl_init()))
+      throw new Exception(&quot;curl_init() failed checking status&quot;);
+    curl_setopt_array($ch, $opts);
+    if(!@curl_exec($ch))
+      throw new Exception(&quot;curl_exec() failed checking status&quot;);
+    $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+
+    if(304 == $status) {
+      if($i &lt;= 1)
+        throw new Exception(&quot;Unexpectedly long wait time processing file: $parseId&quot;);
+      sleep(15);
+    }
+    else if(422 == $status)
+      throw new Exception(&quot;No data could be extracted from file&quot;);
+    else if(200 &lt;= $status &amp;&amp; 299 &gt;= $status)
+      break;
+    else
+      throw new Exception(&quot;HTTP Status: $status (not a downloadable response)&quot;);
+  }
+
+  // Download file.
+  if(!($fp=fopen($outFile, &#039;w+&#039;)))
+    throw new Exception(&quot;Could not open file to write to: $outFile&quot;);
+  $opts[CURLOPT_CUSTOMREQUEST] = &#039;GET&#039;;
+  $opts[CURLOPT_FILE] = $fp;
+  if(!($ch=curl_init()))
+    throw new Exception(&quot;curl_init() download failed&quot;);
+  curl_setopt_array($ch, $opts);
+  if(!@curl_exec($ch) || !($status=curl_getinfo($ch, CURLINFO_HTTP_CODE)))
+    throw new Exception(&quot;Download failed&quot;);
+  curl_close($ch);
+  fclose($fp);
+  if(200 &gt; $status || 299 &lt; $status)
+    throw new Exception(&quot;Failed to download to output file: $outFile&quot;);
+  return($downloadUrl);
+}
+
+?&gt;
+</code></pre><pre data-x="rb"><code class="language-ruby">#!/usr/bin/env ruby
+
+# USAGE:
+#   downloadUrl = gristlePush &quot;uploadFile.ext&quot;
+
+require &#039;json&#039;
+require &#039;net/http&#039;
+
+$G_USER = &#039;~G_USER~&#039;
+$G_PASS = &#039;~G_PASS~&#039;
+$G_PARSER_ID = &#039;~G_PARSER_ID~&#039; # ~G_PARSER_NAME~
+$G_ATTEMPTS = 10
+
+# Returns download url, if &#039;outFile&#039; is specified it will poll until it can download the file.
+def gristlePush(inFile, outFile=nil)
+  begin
+    downloadUrl = authToken = parseId = nil
+
+    # Push file to gristle for parsing.
+    File.open(inFile, &#039;rb&#039;) do |file|
+      Net::HTTP.start(&#039;api.gristle.com&#039;, 443, use_ssl:true) do |https|
+        request = Net::HTTP::Post.new &quot;/parse/#{$G_PARSER_ID}&quot;
+        request.set_form [[&#039;file&#039;, file]], &#039;multipart/form-data&#039;
+        request.basic_auth $G_USER, $G_PASS
+        response = JSON.parse https.request(request).body
+        authToken = response[&#039;auth&#039;]
+        parseId = response[&#039;id&#039;]
+      end
+    end
+    downloadUrl = &quot;https://api.gristle.com/parse/#{$G_PARSER_ID}/#{parseId}?#{authToken}&quot;
+
+    # No output file specified, so return a url to download at a later time.
+    return downloadUrl if outFile.nil?
+
+    # Poll API to see if file is ready. (within a reasonable amount of time)
+    sleep 5
+    attempts = $G_ATTEMPTS
+    Net::HTTP.start(&#039;api.gristle.com&#039;, 443, use_ssl:true) do |https|
+      request = Net::HTTP::Head.new &quot;/parse/#{$G_PARSER_ID}/#{parseId}&quot;
+      request.basic_auth authToken, &#039;&#039;
+      while attempts &gt; 0
+        attempts -= 1
+        response = https.request request
+        status =  response.code.to_i
+        if 304 == status
+          raise Exception.new &quot;Unexpectedly long wait time processing file: #{parseId}&quot; if attempts &lt;= 0
+          sleep 15
+        elsif 422 == status
+          raise Exception.new &#039;No data could be extracted from file&#039;
+        elsif status.between?(200,299)
+          break
+        else
+          raise Exception.new &quot;HTTP Status: #{status} (not a downloadable response)&quot;
+        end
+      end
+    end
+
+    # Download file.
+    File.open(outFile, &#039;wb&#039;) do |file|
+      Net::HTTP.start(&#039;api.gristle.com&#039;, 443, use_ssl:true) do |https|
+        request = Net::HTTP::Get.new &quot;/parse/#{$G_PARSER_ID}/#{parseId}&quot;
+        request.basic_auth authToken, &#039;&#039;
+        file.write https.request(request).body
+      end
+    end
+
+  rescue Exception =&gt; e
+    puts &quot;ERROR: #{e.message}&quot;
+  ensure
+    return downloadUrl
+  end
+end
+</code></pre><pre data-x="java"><code class="language-java">// Gristle.java
+
+// USAGE:
+//   try { String downloadUrl = Gristle.Push(&quot;uploadFile.ext&quot;); }
+//   catch (Exception e) { System.out.println(&quot;Error: &quot; + e.getMessage()); }
+
+// No 3rd-party dependencies required.
+import java.io.File;
+import java.io.PrintWriter;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.InputStreamReader;
+import java.io.FileInputStream;
+import java.nio.charset.StandardCharsets;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.HttpURLConnection;
+import java.util.Base64;
+
+// Static class container that is not intended to be instanced.
+public class Gristle {
+
+  public static final String USER = &quot;~G_USER~&quot;;
+  public static final String PASS = &quot;~G_PASS~&quot;;
+  public static final String PARSER_ID = &quot;~G_PARSER_ID~&quot;; // ~G_PARSER_NAME~
+
+  // Pushes a file to Gristle for parsing and returns a download url, to be used after the file has been processed.
+  public static String Push(String inFile) throws Exception {
+    String downloadUrl = null;
+    try {
+      String boundary = Long.toHexString(System.currentTimeMillis()), error, authToken, parseId;
+      String authHeader = &quot;Basic &quot; + Base64.getEncoder().encodeToString((Gristle.USER+&quot;:&quot;+Gristle.PASS).getBytes(StandardCharsets.UTF_8));
+      File file = new File(inFile);
+      URLConnection connection = new URL(&quot;https://api.gristle.com/parse/&quot; + Gristle.PARSER_ID).openConnection();
+      connection.setDoOutput(true);
+      connection.setRequestProperty(&quot;Authorization&quot;, authHeader);
+      connection.setRequestProperty(&quot;Content-Type&quot;, &quot;multipart/form-data; boundary=&quot; + boundary);
+      OutputStream output = connection.getOutputStream();
+      PrintWriter writer = new PrintWriter(new OutputStreamWriter(output, &quot;UTF-8&quot;));
+      writer.append(&quot;--&quot; + boundary + &quot;\r\n&quot;);
+      writer.append(&quot;Content-Disposition: form-data; name=file; filename=\&quot;&quot; + file.getName() + &quot;\&quot;\r\n&quot;);
+      writer.append(&quot;Content-Type: &quot; + URLConnection.guessContentTypeFromName(inFile) + &quot;; charset=UTF-8\r\n&quot;);
+      writer.append(&quot;Content-Transfer-Encoding: binary\r\n\r\n&quot;);
+      writer.flush();
+      FileInputStream fileStream = new FileInputStream(file);
+      byte[] buffer = new byte[4096];
+      int bytesRead = -1;
+      while((bytesRead = fileStream.read(buffer)) &gt; 0)
+        output.write(buffer, 0, bytesRead);
+      output.flush();
+      fileStream.close();
+      writer.append(&quot;\r\n--&quot; + boundary + &quot;--\r\n&quot;);
+      writer.flush();
+      writer.close();
+      if((error=connection.getHeaderField(&quot;Gristle-Error&quot;)) != null)
+        throw new Exception(error);
+      else if((authToken=connection.getHeaderField(&quot;Gristle-Token&quot;)) == null)
+        throw new Exception(&quot;No authorization token returned&quot;);
+      else if((parseId=connection.getHeaderField(&quot;Gristle-Parse-Id&quot;)) == null)
+        throw new Exception(&quot;No parse id returned&quot;);
+      downloadUrl = &quot;https://api.gristle.com/parse/&quot; + Gristle.PARSER_ID + &quot;/&quot; + parseId + &quot;?&quot; + authToken;
+    }
+    catch(Exception e) { throw new Exception(e.getMessage()); }
+    return downloadUrl;
+  }
+}
+</code></pre><pre data-x="cs"><code class="language-csharp">// Gristle.cs
+
+// USAGE:
+//   try { string downloadUrl = Gristle.Push(&quot;uploadFile.ext&quot;); }
+//   catch (Exception e) { Debug.WriteLine(&quot;Error: &quot;+ e.Message); }
+
+using System;
+using System.Text;
+using System.IO;
+using System.Net.Http;
+using System.Net.Http.Headers;
+
+namespace Gristle {
+  internal class Gristle {
+
+    public const string USER = &quot;~G_USER~&quot;;
+    public const string PASS = &quot;~G_PASS~&quot;;
+    public const string PARSER_ID = &quot;~G_PARSER_ID~&quot;; // ~G_PARSER_NAME~
+
+    // Pushes a file to Gristle for parsing and returns a download url, to be used after the file has been processed.
+    public static string Push(string inFile) {
+      HttpClient client = new HttpClient();
+      string auth = Convert.ToBase64String(Encoding.UTF8.GetBytes(Gristle.USER + &quot;:&quot; + Gristle.PASS));
+      client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(&quot;Basic&quot;, auth);
+      MultipartFormDataContent form = new MultipartFormDataContent();
+      FileStream fileStream = new FileStream(inFile, FileMode.Open);
+      form.Add(new StreamContent(fileStream), &quot;file&quot;, Path.GetFileName(inFile));
+      HttpResponseMessage response = client.PostAsync(&quot;https://api.gristle.com/parse/&quot; + Gristle.PARSER_ID, form).Result;
+      client.Dispose();
+      fileStream.Close();
+      IEnumerable&lt;string&gt; values;
+      if(response.Headers.TryGetValues(&quot;Gristle-Error&quot;, out values))
+        throw new Exception(values.First());
+      if(!response.Headers.TryGetValues(&quot;Gristle-Token&quot;, out values))
+        throw new Exception(&quot;No authorization token returned&quot;);
+      string authToken = values.First();
+      if(!response.Headers.TryGetValues(&quot;Gristle-Parse-Id&quot;, out values))
+        throw new Exception(&quot;No parse id returned&quot;);
+      string parseId = values.First();
+      return &quot;https://api.gristle.com/parse/&quot; + Gristle.PARSER_ID + &quot;/&quot; + parseId + &quot;?&quot; + authToken;
+    }
+  }
+}
+     </code></pre>
+     <pre data-x="js"><code class="language-javascript">// USAGE:
+//   Gristle.Push(&#039;uploadFile.ext&#039;,
+//     url =&gt; console.log(&#039;Download URL: &#039; + url),
+//     error =&gt; console.log(&#039;ERROR: &#039; + error)
+//   );
+
+const fs = require(&#039;fs&#039;);
+const FormData = require(&#039;form-data&#039;);
+const Gristle = {
+
+  USER: &#039;~G_USER~&#039;,
+  PASS: &#039;~G_PASS~&#039;,
+  PARSER_ID: &#039;~G_PARSER_ID~&#039;, // ~G_PARSER_NAME~
+
+  Request: (formData, options) =&gt; new Promise((resolve, reject) =&gt; {
+    const req = formData.submit(options, (err, res) =&gt; {
+      if(err)
+        return reject(new Error(err.message));
+      if(res.statusCode &lt; 200 || res.statusCode &gt; 299)
+        return reject(new Error(`HTTP status code ${res.statusCode}`));
+      const body = [];
+      res.on(&#039;data&#039;, chunk =&gt; body.push(chunk));
+      res.on(&#039;end&#039;, () =&gt; resolve(Buffer.concat(body).toString()));
+    })
+  }),
+  Push: (file, successCB, errorCB) =&gt; {
+    if(!fs.existsSync(file))
+      return(errorCB(&#039;File not found: &#039; + file));
+    const formData = new FormData(), options = {
+      host: &#039;api.gristle.com&#039;,
+      path: &#039;/parse/&#039; + Gristle.PARSER_ID,
+      method: &#039;POST&#039;,
+      protocol: &#039;https:&#039;,
+      headers: { Authorization: &#039;Basic &#039; + Buffer.from(Gristle.USER + &#039;:&#039; + Gristle.PASS).toString(&#039;base64&#039;) }
+    };
+    formData.append(&#039;file&#039;, fs.createReadStream(file))
+    Gristle.Request(formData, options)
+      .then(json =&gt; {
+        const response = JSON.parse(json);
+        if(response &amp;&amp; response.id &amp;&amp; response.auth)
+          successCB(&#039;https://api.gristle.com/parse/&#039; + Gristle.PARSER_ID + &#039;/&#039; + response.id + &#039;?&#039; + response.auth);
+        else
+          errorCB(&#039;Response from Gristle did not contain a parseId or authentication token&#039;);
+      })
+      .catch(e =&gt; errorCB(e.message));
+  }
+}
+     </code></pre>
+     <pre data-x="go"><code class="language-go">// USAGE:
+//   url, err := gristlePush(&quot;uploadFile.ext&quot;)
+//   if err != nil {
+//     fmt.Println(&quot;ERROR:&quot;, err)
+//   } else {
+//     fmt.Println(&quot;Download URL:&quot;, url)
+//   }
+
+import (
+  &quot;errors&quot;
+  &quot;bytes&quot;
+  &quot;io&quot;
+  &quot;os&quot;
+  &quot;fmt&quot;
+  &quot;net/http&quot;
+  &quot;mime/multipart&quot;
+)
+
+var G_USER string = &quot;~G_USER~&quot;
+var G_PASS string = &quot;~G_PASS~&quot;
+var G_PARSER_ID string = &quot;~G_PARSER_ID~&quot; // ~G_PARSER_NAME~
+
+// Pushes a file to Gristle for parsing and returns a download url, to be used after the file has been processed.
+func gristlePush(inFile string) (string, error) {
+  body := new(bytes.Buffer)
+  mp := multipart.NewWriter(body)
+  file, err := os.Open(inFile)
+  if err != nil { return &quot;&quot;, err }
+  part, err := mp.CreateFormFile(&quot;file&quot;, inFile)
+  if err != nil { return &quot;&quot;, err }
+  io.Copy(part, file)
+  file.Close()
+  mp.Close()
+  url := fmt.Sprintf(&quot;https://%s:%s@api.gristle.com/parse/%s&quot;, G_USER, G_PASS, G_PARSER_ID)
+  response, err := http.Post(url, mp.FormDataContentType(), body)
+  if err != nil { return &quot;&quot;, err }
+  authToken := response.Header.Get(&quot;Gristle-Token&quot;)
+  if authToken == &quot;&quot; { return &quot;&quot;, errors.New(&quot;No authentication token returned: &quot; + response.Status) }
+  parseId := response.Header.Get(&quot;Gristle-Parse-Id&quot;)
+  if parseId == &quot;&quot; { return &quot;&quot;, errors.New(&quot;No parse id returned: &quot; + response.Status) }
+  downloadUrl := fmt.Sprintf(&quot;https://api.gristle.com/parse/%s/%s?%s&quot;, G_PARSER_ID, parseId, authToken)
+  return downloadUrl, nil
+}
+</code></pre><pre data-x="lua"><code class="language-lua">#!/usr/bin/env lua
+
+-- USAGE:
+--   downloadUrl = gristlePush(&quot;uploadFile.ext&quot;)
+
+local https = require(&#039;ssl.https&#039;)
+local mime = require(&#039;mime&#039;)
+
+G_USER = &#039;~G_USER~&#039;
+G_PASS = &#039;~G_PASS~&#039;
+G_PARSER_ID = &#039;~G_PARSER_ID~&#039; -- ~G_PARSER_NAME~
+
+local function gristlePush(inFile)
+  local boundary = tostring(os.time())
+  local file = assert(io.open(inFile, &quot;rb&quot;), &#039;Could not access file for uploading: &#039; .. inFile)
+  local request = &quot;--&quot; .. boundary .. &quot;\r\n&quot;
+    .. &quot;Content-Disposition: form-data; name=file; filename=\&quot;&quot; .. inFile .. &quot;\&quot;\r\n&quot;
+    .. &quot;Content-Type: application/octet-stream\r\n&quot;
+    .. &quot;Content-Transfer-Encoding: binary\r\n\r\n&quot;
+    .. file:read(&quot;*all&quot;)
+    .. &quot;--&quot; .. boundary .. &quot;--\r\n\r\n&quot;
+  file:close()
+  local r, code, headers = https.request{
+    url = &quot;https://api.gristle.com/parse/&quot; .. G_PARSER_ID,
+    method = &quot;POST&quot;,
+    headers = {
+      [&#039;Authorization&#039;] = &quot;Basic &quot; .. mime.b64(G_USER .. &quot;:&quot; .. G_PASS),
+      [&#039;Content-Type&#039;] = &#039;multipart/form-data; boundary=&#039; .. boundary,
+      [&#039;Content-Length&#039;] = #request
+    },
+    source = ltn12.source.string(request)
+  }
+  assert(headers, &#039;No headers returned&#039;)
+  assert(headers[&#039;gristle-error&#039;] == nil, headers[&#039;gristle-error&#039;])
+  assert(200 &lt;= code and 299 &gt;= code, &#039;Unexpected HTTP status: &#039; .. code)
+  assert(headers[&#039;gristle-token&#039;], &#039;No authorization token returned&#039;)
+  assert(headers[&#039;gristle-parse-id&#039;], &#039;No parse id returned&#039;)
+  return &quot;https://api.gristle.com/parse/&quot; .. G_PARSER_ID .. &quot;/&quot; .. headers[&#039;gristle-parse-id&#039;] .. &quot;?&quot; .. headers[&#039;gristle-token&#039;]
+end
+</code></pre>
+     </div>
+    </div>
+   </div>
+   <div id="g_content_api">
+    <div id="g_api_swagger_container"></div>
+   </div>
+  </div> <!-- content -->
+ </div>  <!--body-->
+ <div id="g_fragments">
+  <input type="file" id="g_file" />
+  <div id="g_f_download_icon">
+   <svg class="g_f_download_icon" viewBox="0 0 24 24"><g><path d="M0 0h24v24H0z" fill="none"/><path d="M4 3h14l2.707 2.707a1 1 0 0 1 .293.707V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3 1v5h9V4H7zm-1 8v7h12v-7H6zm7-7h2v3h-2V5z"/></g></svg>
+  </div>
+  <div id="g_f_help_icon">
+   <svg class="g_f_help_icon" viewBox="0 0 1024 1024">
+    <g transform="translate(0.000000,1024.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
+     <path d="M763 9266 c-94 -30 -179 -110 -210 -199 -17 -50 -18 -172 -18 -2667 0 -2503 1 -2617 18 -2667 24 -70 93 -145 165 -180 l57 -28 505 -3 505 -3 400 -398 c457 -455 445 -446 590 -446 78 0 97 4 140 27 35 19 165 141 445 422 l395 396 307 0 307 0 3 -728 3 -727 33 -67 c37 -76 82 -120 162 -157 l55 -26 1145 -3 1145 -2 300 -299 c278 -277 304 -300 355 -316 70 -23 150 -23 220 0 51 16 77 39 355 316 l300 298 505 3 505 3 67 33 c76 37 120 82 157 162 l26 55 0 1775 0 1775 -26 55 c-37 80 -81 125 -157 162 l-67 33 -727 3 -728 3 -2 1582 -3 1582 -26 56 c-33 71 -87 125 -158 158 l-56 26 -3475 2 c-2839 1 -3483 -1 -3517 -11z m6597 -2866 l0 -2240 -1907 -2 -1908 -3 -55 -27 c-44 -22 -122 -95 -385 -358 l-330 -330 -330 330 c-283 282 -339 333 -390 357 l-60 28 -412 3 -413 3 0 2239 0 2240 3095 0 3095 0 0 -2240z m1710 -2560 l0 -1390 -405 0 c-388 0 -407 -1 -462 -21 -52 -20 -81 -44 -291 -253 l-232 -230 -253 252 -252 252 -1083 0 -1082 0 0 535 0 535 1378 2 1377 3 47 22 c60 27 134 101 161 161 22 47 22 52 25 785 l2 737 535 0 535 0 0 -1390z"/>
+     <path d="M2463 6702 c-108 -39 -178 -112 -210 -221 -41 -144 35 -303 176 -370 54 -25 62 -26 241 -26 182 0 186 0 242 28 236 116 236 458 0 574 -55 27 -64 28 -227 31 -144 2 -178 0 -222 -16z"/>
+     <path d="M3963 6706 c-175 -56 -267 -239 -209 -413 23 -69 91 -144 164 -180 56 -28 60 -28 242 -28 173 0 188 1 238 24 69 31 145 114 168 183 38 116 14 234 -67 322 -80 87 -120 100 -324 103 -121 2 -182 -1 -212 -11z"/>
+     <path d="M5460 6707 c-277 -77 -311 -467 -52 -594 56 -28 60 -28 242 -28 179 0 187 1 241 26 117 55 184 160 184 289 0 129 -67 234 -184 289 -53 24 -66 26 -221 28 -109 2 -180 -2 -210 -10z"/>
+    </g>
+   </svg>
+  </div>
+  <div id="g_f_delete_icon">
+   <svg class="g_f_delete_icon" viewBox="-2 -2 36 36"><path d="M6,12v15c0,1.654,1.346,3,3,3h14c1.654,0,3-1.346,3-3V12H6z M12,25c0,0.552-0.448,1-1,1s-1-0.448-1-1v-9  c0-0.552,0.448-1,1-1s1,0.448,1,1V25z M17,25c0,0.552-0.448,1-1,1s-1-0.448-1-1v-9c0-0.552,0.448-1,1-1s1,0.448,1,1V25z M22,25  c0,0.552-0.448,1-1,1s-1-0.448-1-1v-9c0-0.552,0.448-1,1-1s1,0.448,1,1V25z" /><path d="M27,6h-6V5c0-1.654-1.346-3-3-3h-4c-1.654,0-3,1.346-3,3v1H5C3.897,6,3,6.897,3,8v1c0,0.552,0.448,1,1,1h24  c0.552,0,1-0.448,1-1V8C29,6.897,28.103,6,27,6z M13,5c0-0.551,0.449-1,1-1h4c0.551,0,1,0.449,1,1v1h-6V5z" /></svg>
+  </div>
+ </div>
+</body>
+</html>
