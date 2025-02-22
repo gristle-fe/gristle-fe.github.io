@@ -439,6 +439,7 @@ GUI: {
 				e.parentElement.remove();
 		});
 	},
+	tooltipWalk: on => $D.body.classList[on?'add':'remove']('g_tooltip_show'),
 	tooltipShow: el => {
 		if($X(el) && !el.childNodes.length)
 			setTimeout(() => {
@@ -721,7 +722,7 @@ DAT: {
 		$DAT.parserSetStates(['info']);
 		$GUI.parserMenuSelect();
 		$GUI.parserReadOnly(false);
-		$D.body.classList[$DAT.saveState($DAT.PARSER=id)=='/parser/0'?'add':'remove']('g_tooltip_show');
+		$GUI.tooltipWalk($DAT.saveState($DAT.PARSER=id)=='/parser/0');
 		$A('#g_parser_info_delete, #g_parser_info_issue, #g_parser_info_parser_id').forEach(x => x.disabled = $DAT.PARSER=='/parser/0');
 		if($DAT.saveState($DAT.PARSER=id) != '/parser/0')
 			$NET.parser($DAT.PARSER);

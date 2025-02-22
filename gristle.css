@@ -62,7 +62,7 @@
 	}
 	100% {
 		background: transparent;
-		background: linear-gradient(to bottom, #fff 0%, #fff 85%, #ccc 86%, transparent 100%);
+		background: linear-gradient(to bottom, #fff 0%, #fff 85%, #ccc 86%, #eee 100%);
 		height: 105px;
 	}
 }
@@ -401,6 +401,7 @@ hr {
 	padding: max(0.3vw,5px) max(0.6vw,10px) max(0.3vw,5px) max(0.6vw,10px);
 	white-space: nowrap;
 	user-select: none;
+	-webkit-user-select: none;
 }
 #g_support_text {
 	display: block;
@@ -489,6 +490,7 @@ hr {
 	height: calc(100% - 100px);
 	z-index: 6;
 	user-select: none;
+	-webkit-user-select: none;
 	overflow-y: auto;
 	scrollbar-width: thin;
 }
@@ -526,6 +528,7 @@ hr {
 	cursor: pointer;
 	transition: 0.5s;
 	user-select: none;
+	-webkit-user-select: none;
 }
 .g_app_mode #g_content {
 	border: 2px solid;
@@ -634,6 +637,7 @@ hr {
 	position: relative;
 	text-align: center;
 	user-select: none;
+	-webkit-user-select: none;
 	padding: max(0.55vw, 6px) max(0.5vw, 5px) max(0.4vw, 4px) max(0.5vw, 5px);
 }
 .g_issue_icon svg {
@@ -711,6 +715,7 @@ hr {
 	border-radius: 10px;
 	overflow: hidden;
 	user-select: none;
+	-webkit-user-select: none;
 }
 #g_login_container i {
 	font-style: normal !important;
@@ -819,6 +824,7 @@ input:not([type=file]), select, textarea {
 	row-gap: 2vw;
 	width: 94%;
 	user-select: none;
+	-webkit-user-select: none;
 	padding: 10px 0 2vmax 0;
 	font-size: max(0.8vmax, 13px);
 }
@@ -1144,6 +1150,7 @@ input:not([type=file]), select, textarea {
 #g_menu_parser {
 	white-space: nowrap;
 	user-select: none;
+	-webkit-user-select: none;
 }
 #g_menu_parser > div {
 	display: inline-block;
@@ -1221,6 +1228,9 @@ input:not([type=file]), select, textarea {
 	margin-left: 1px;
 	padding: 5px 10px 5px 10px;
 	font-size: max(0.6vw, 14px);
+	display: block;
+	position: relative;
+	z-index: 1;
 }
 #g_parses_list {
 	height: calc(100dvh - 300px);
@@ -1292,6 +1302,7 @@ input:not([type=file]), select, textarea {
 	position: relative;
 	border: 1px solid #888;
 	user-select: none;
+	-webkit-user-select: none;
 	width: max(8vw, 200px);
 	font-size: max(0.6vw, 16px);
 }
@@ -1346,6 +1357,7 @@ input:not([type=file]), select, textarea {
 	border: 1px solid #888;
 	background-color: #EEE;
 	user-select: none;
+	-webkit-user-select: none;
 	text-align: center;
 }
 #g_gtf_filter_value_choices {
@@ -1415,6 +1427,7 @@ input:not([type=file]), select, textarea {
 	border: 1px solid #888;
 	background-color: #eee;
 	user-select: none;
+	-webkit-user-select: none;
 }
 .g_gtf_icon, .g_gtf_icon_long, #g_gtf_filter_value_container, #g_gtf_column_color_container, #g_gtf_view_display, #g_gtf_filter_view_display {
 	padding: 3px;
@@ -1429,12 +1442,14 @@ input:not([type=file]), select, textarea {
 	border: 1px solid #888;
 	background-color: #eee;
 	user-select: none;
+	-webkit-user-select: none;
 }
 .g_gtf_icon_separator {
 	display: flex;
 	height: auto;
 	width: 8px;
 	user-select: none;
+	-webkit-user-select: none;
 }
 .g_gtf_icon svg {
 	cursor: pointer;
@@ -1490,6 +1505,7 @@ input:not([type=file]), select, textarea {
 	width: 100%;
 	height: 20px;
 	user-select: none;
+	-webkit-user-select: none;
 	padding-top: 10px;
 	padding-bottom: 10px;
 }
@@ -1507,6 +1523,7 @@ input:not([type=file]), select, textarea {
 	background-color: #ccc;
 	text-align: center;
 	user-select: none;
+	-webkit-user-select: none;
 	display: none;
 }
 #g_parser_scrollbar_line {
@@ -1529,6 +1546,7 @@ input:not([type=file]), select, textarea {
 	top: 0;
 	left: 0;
 	user-select: none;
+	-webkit-user-select: none;
 }
 #g_gtf_editor_controls {
 	display: flex;
@@ -1546,6 +1564,7 @@ input:not([type=file]), select, textarea {
 	background-color: #ddd;
 	border: 1px solid #888;
 	user-select: none;
+	-webkit-user-select: none;
 	margin-top: 0px;
 	font-size: var(--g-gtf-font-size);
 	cursor: grab;
@@ -1666,6 +1685,7 @@ input:not([type=file]), select, textarea {
 	padding: 10px 20px 10px 20px;
 	font-weight: bold;
 	user-select: none;
+	-webkit-user-select: none;
 }
 .g_snippets_menu_selected {
 	background-color: #aaa !important;
@@ -1712,6 +1732,7 @@ body:not(.g_app_mode) #g_content, .g_app_no_menu #g_content {
 }
 .g_tooltip {
 	position: relative;
+	z-index: 2;
 	opacity: 0;
 	font-weight: normal;
 	line-height: normal;
