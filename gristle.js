@@ -439,7 +439,7 @@ GUI: {
 				e.parentElement.remove();
 		});
 	},
-	tooltipWalk: on => $D.body.classList[on?'add':'remove']('g_tooltip_show'),
+	tooltipWalk: on => $D.body.classList[/*on?'add':*/'remove']('g_tooltip_show'),
 	tooltipShow: el => {
 		if($X(el) && !el.childNodes.length)
 			setTimeout(() => {
