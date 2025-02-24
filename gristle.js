@@ -513,7 +513,7 @@ GUI: {
 		$GUI.parserStateSelectedUpdate();
 		$GTF.scrollChange(0);
 	}),
-	parserReadOnly: readonly => $E('g_parser_info_form').querySelectorAll('input, select, textarea').forEach(x => x.disabled = readonly) || $E('g_content_parsers').classList[readonly?'add':'remove']('g_parser_readonly') || ($E('g_parser_info_save').disabled=$E('g_parser_info_delete').disabled=readonly),
+	parserReadOnly: readonly => $E('g_parser_info_form').querySelectorAll('input, select, textarea').forEach(x => x.disabled = readonly) || $E('g_content_parsers').classList[readonly?'add':'remove']('g_parser_readonly') || ($E('g_parser_info_save').disabled=readonly),
 	issueUpdateSendButton: () => $E('g_issue_send_button').classList[!$E('g_issue_input').value?'add':'remove']('g_disabled'),
 	issueKeyUp: e => {
 		e.target.value = e.target.value.trimLeft();
