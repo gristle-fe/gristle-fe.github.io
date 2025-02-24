@@ -45,8 +45,8 @@ _clickMap: {
 	'g_menu_issues':_				=> $GUI.issueSet(_.x),
 	'g_menu_support':_ 				=> $GUI.supportOpen(false, _.x),
 	'g_about_links':_				=> $GUI.supportOpen(false, _.x),
-	'g_about_play':_				=> $GUI.aboutPlayVideo(),
-	'g_about_play_alt':_			=> $GUI.aboutPlayVideo(),
+	'g_about_play':_				=> $GUI.aboutVideo(true),
+	'g_about_play_alt':_			=> $GUI.aboutVideo(true),
 
 	'g_issue_send_button':_			=> $GUI.issueSend(_.x),
 	'g_issue_close_button':_		=> $GUI.issueDelete(_.x),
@@ -462,9 +462,9 @@ GUI: {
 			break;
 		}
 	},
-	aboutPlayVideo: () => {
-		$E('g_about_demo').className = 'g_about_demo_show';
-		$E('g_about_video').play();
+	aboutVideo: start => {
+		$E('g_about_demo').className = (start?'g_about_demo_show':'');
+		$E('g_about_video')[start?'play':'pause']();
 	},
 	aboutRestart: (scrollToTop, noPaper) => {
 		if(scrollToTop)
@@ -482,6 +482,7 @@ GUI: {
 		$MENU.selectedUpdate();
 		if($MENU[$GUI.MENU])
 			$MENU[$DAT.saveState($GUI.MENU)]();
+		$GUI.aboutVideo(false);
 	}),
 	parserMenuSelect: item => $GUI.saveChangesCheck(() => { 
 		if(!$E('g_parser_'+(item?item:(item='info'))))
