@@ -1854,7 +1854,6 @@ body:not(.g_app_mode) #g_content, .g_app_no_menu #g_content {
 	content: '\24D8';
 	color: #484 !important;
 }
-#g_tooltip_onscreen_map { display :none; }
 .g_tooltip_onscreen {
 	font-style: normal !important;
 	display: none;
@@ -1868,6 +1867,7 @@ body:not(.g_app_mode) #g_content, .g_app_no_menu #g_content {
 #g_menu_parser > div > i { display: none; }
 .g_tooltip_show #g_menu_parser > div.g_menu_parser_capable > i { display: inline; }
 .g_tooltip_show .g_tooltip_onscreen { display: inline-block; }
+body:not(.g_mobile) .g_tooltip_onscreen_mobile, .g_mobile .g_tooltip_onscreen:not(.g_tooltip_onscreen_mobile) { display: none !important; }
 
 @media (hover: hover) and (pointer: fine) {
 	#g_gtf_editor_data i:hover b.g_gtf_rule_edit, #g_gtf_editor_data b.g_gtf_rule_edit:hover {
