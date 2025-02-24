@@ -45,6 +45,8 @@ _clickMap: {
 	'g_menu_issues':_				=> $GUI.issueSet(_.x),
 	'g_menu_support':_ 				=> $GUI.supportOpen(false, _.x),
 	'g_about_links':_				=> $GUI.supportOpen(false, _.x),
+	'g_about_play':_				=> $GUI.aboutPlayVideo(),
+	'g_about_play_alt':_			=> $GUI.aboutPlayVideo(),
 
 	'g_issue_send_button':_			=> $GUI.issueSend(_.x),
 	'g_issue_close_button':_		=> $GUI.issueDelete(_.x),
@@ -439,7 +441,7 @@ GUI: {
 				e.parentElement.remove();
 		});
 	},
-	tooltipWalk: on => $D.body.classList[/*on?'add':*/'remove']('g_tooltip_show'),
+	tooltipWalk: on => $D.body.classList[on?'add':'remove']('g_tooltip_show'),
 	tooltipShow: el => {
 		if($X(el) && !el.childNodes.length)
 			setTimeout(() => {
@@ -459,6 +461,10 @@ GUI: {
 			$GUI.tooltipShow(el);
 			break;
 		}
+	},
+	aboutPlayVideo: () => {
+		$E('g_about_demo').className = 'g_about_demo_show';
+		$E('g_about_video').play();
 	},
 	aboutRestart: (scrollToTop, noPaper) => {
 		if(scrollToTop)
@@ -1436,9 +1442,6 @@ GTF: {
 				continue;
 			Object.keys(column['P']).forEach(r => rules[r] = {'pattern':column['P'][r],'instance':{'ec':0,'es':0},'elements':[]});
 		}
-// might want to try to update no matter what incase somethign was removed in the middle but would still show on the UI?
-//		if($isEmpty(rules))
-//			return;
 		$A('#g_gtf_editor_data > i[data-pattern]').forEach(x => {
 			const pattern=x.dataset.pattern;
 			if(rules[pattern])

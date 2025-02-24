@@ -204,6 +204,11 @@
 	0% { top: 2px; transform: rotate(0); }
 	100% { top: -2px; transform: rotate(2.4deg); }
 }
+@keyframes g_about_play {
+	0% { opacity: 1; }
+	50% { opacity: 0.8; filter: drop-shadow(0px 0px 8px #444);  }
+	100% { opacity: 1; }
+}
 :root {
 	--g-about-color-1: #008800;
 	--g-about-color-2: #008888;
@@ -1006,7 +1011,7 @@ input:not([type=file]), select, textarea {
 	overflow-x: hidden;
 	mask-image: linear-gradient(to bottom, transparent 0%, black 25px, black calc(100% - 25px), transparent 100%);
 }
-#g_start_button_alt, #g_about_links  { cursor: pointer; }
+#g_start_button_alt, #g_about_play_alt, #g_about_links  { cursor: pointer; }
 #g_about_text {
 	text-align: center;
 	width: 50vw;
@@ -1108,6 +1113,49 @@ input:not([type=file]), select, textarea {
 	width: max(100px, 10vw);
 	display: block;
 	margin: auto;
+}
+#g_about_demo {
+	background-image: radial-gradient(ellipse farthest-side at center bottom, #ddd 0%, #fafafa 100%);
+	border-width: 0px;
+	border-style: solid;
+	border-image: linear-gradient(to right, #eee, #aaa, #eee) 1;
+	border-bottom-width: 3px;
+	padding-top: 60px;
+	padding-bottom: 20px;
+	transition: 0.5s;
+}
+#g_about_demo svg {
+	width: 25%;
+	display: block;
+	margin: auto;
+	cursor: pointer;
+	animation: g_about_play 3s ease-in-out infinite;
+}
+#g_about_demo path {
+	transition: 0.25s;
+}
+#g_about_demo video {
+	aspect-ratio: 1 / 1;
+	width: 100%;
+	height: 0;
+	outline: none;
+	transform-origin: top;
+	transform: scaleY(0.25);
+	transition: transform 0.25s ease-in-out;
+}
+#g_about_demo.g_about_demo_show {
+	padding-top: 0px;
+	padding-bottom: 0px;
+	border: 2px solid #ccc;
+	box-shadow: 0px 0px 15px 0px rgba(150, 150, 150, 1);
+}
+#g_about_demo.g_about_demo_show video {
+	display: block;
+	height: auto;
+	transform: scaleY(1);
+}
+#g_about_demo.g_about_demo_show svg {
+	display: none;
 }
 #g_about_left_container > div, #g_about_right_container > div {
 	background-color: #fff;
@@ -1855,8 +1903,10 @@ body:not(.g_app_mode) #g_content, .g_app_no_menu #g_content {
 		box-shadow: 0 0 0 2px #ccc, 0 0 0 4px #ddd;
 		outline: 0;
 	}
-	#g_start_button_alt:hover, #g_about_links b:hover { color: #0074d4; }
+	#g_start_button_alt:hover, #g_about_play_alt:hover, #g_about_links b:hover { color: #0074d4; }
 	#g_support_button_agree:hover { background-color: #cdc !important; }
+	#g_about_demo svg:hover { filter: drop-shadow(0px 0px 2px #aaa); }
+	#g_about_demo svg:hover path { fill: #0982e3; !important; }
 	#g_menu ul li:hover { color: #666; }
 	#g_signup_link:hover, #g_recovery_link:hover { opacity: 0.8; }
 	#g_gtf_column_color_choices > div:hover { filter: saturate(50%); }
