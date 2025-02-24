@@ -1707,33 +1707,47 @@ input:not([type=file]), select, textarea {
 .g_ruler #g_gtf_editor_data { padding: 0 !important; }
 .g_ruler #g_gtf_editor_data u { display: inline !important; }
 .t_k { background-color: #ccc; }
-#g_snippets_container { background-color: #ccc; }
+#g_content_snippets { overflow-x: hidden; }
+#g_snippets_container {
+	position: relative;
+	background-color: #ccc;
+}
 #g_snippets_info {
 	color: #444;
 	font-size: 1.25em;
 	font-weight: bold;
 	padding-bottom: 15px;
+	overflow: hidden;
+	width: max-content;
 	white-space: nowrap;
+	word-wrap: normal;
+	word-break: keep-all;
+	overflow-wrap: normal;
 }
 #g_snippets_container pre {
 	width: 100%;
-	height: calc(100dvh - 230px);
+	height: calc(100dvh - 250px);
 	overflow: auto !important;
 	mask-image: linear-gradient(to bottom, transparent 0%, black 10px, black calc(100% - 10px), transparent 100%);
 }
 #g_snippets_menu {
 	position: relative;
 	padding-right: 25px;
+	overflow-y: hidden;
+	overflow-y: auto;
+	scrollbar-width: thin;
+	white-space: nowrap;
+	user-select: none;
+	-webkit-user-select: none;
+	mask-image: linear-gradient(to right, black 0%, black calc(95% - 100px), transparent 100%);
 }
 #g_snippets_menu > div {
 	cursor: pointer;
-	float: left;
+	display: inline-block;
 	background-color: #ccc;
 	color: #777;
 	padding: 10px 20px 10px 20px;
 	font-weight: bold;
-	user-select: none;
-	-webkit-user-select: none;
 }
 .g_snippets_menu_selected {
 	background-color: #aaa !important;
@@ -1743,7 +1757,10 @@ input:not([type=file]), select, textarea {
 	clear: both;
 	position: relative;
 }
-#g_snippets_code > pre { display: none; }
+#g_snippets_code > pre {
+	background: #e8e8e8;
+	display: none;
+}
 .g_snippets_selected { display: block !important; }
 #g_snippet_copy_button {
 	display: block;

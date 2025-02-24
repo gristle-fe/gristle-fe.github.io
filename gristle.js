@@ -635,6 +635,8 @@ GUI: {
 				.catch(() => $GUI.alert('Could not copy to your clipboard.'));
 	},
 	snippetSelect: item => {
+		if(!item)
+			return;
 		$A('#g_snippets_menu > div').forEach(x => x.classList[$X(x)==item?'add':'remove']('g_snippets_menu_selected'));
 		$A('#g_snippets_code > pre').forEach(x => x.classList[$X(x)==item?'add':'remove']('g_snippets_selected'));
 	},
