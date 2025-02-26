@@ -799,6 +799,8 @@ NET: {
 	},
 	response: (callback, json) => {
 		$GUI.busy(false);
+		if($isVisible($E('g_error')))
+			$GUI.error('', 0.01);
 		if(typeof json == 'object') {
 			if(json.message) $GUI.alert(json.message);
 			if(json.error) return($GUI.error(json.error));
