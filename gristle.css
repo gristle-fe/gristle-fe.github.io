@@ -1968,7 +1968,7 @@ body:not(.g_mobile) .g_tooltip_onscreen_mobile, .g_mobile .g_tooltip_onscreen:no
 }
 
 @media (max-aspect-ratio: 1/1) {
-	#g_splash_logo { width: 95% !important; }
+	#g_splash_logo { width: 90% !important; }
 	#g_account_container { padding-right: 5vw; }
 	#g_menu_parser > div > u > span { display: none; }
 	#g_billing_table {
