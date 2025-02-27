@@ -292,9 +292,7 @@ GUI: {
 	setup: () => {
 		$D.body.classList[$isMobile()?'add':'remove']('g_mobile');
 		$POL.start('loaded', 4);
-		$POL.start('tooltips', 1);
 		$GUI.menuSelect('about');
-
 		if($DB.get('auth'))
 			$D.body.classList.add('g_has_auth_token');
 		setTimeout(() => {
@@ -916,6 +914,8 @@ NET: {
 	parsersResponse: json => {
 		if(!json || !json['parsers'])
 			return;
+		if(json['tutorial'])
+			$POL.start('tooltips', 1);
 		if(json['profiles'] && $E('g_parser_profile') && _E.options.length==0)
 			json['profiles'].forEach(x => _E.add(new Option(x.join(' :: '), `/${x[0]}/${x[1]}`)));
 		if(json['outputs'] && $E('g_parser_output') && _E.options.length==0)
