@@ -372,8 +372,10 @@ GUI: {
 			return;
 		else if(!$E('g_top').classList.contains('g_top_complete'))
 			$GUI.stopSplash();
-		else if($GUI.isNoMenu());
+		else if($GUI.isNoMenu())
 			$MENU.toggle(true);
+		else if(!$GUI.appMode())
+			$GUI.appMode(true);
 	},
 	loggedIn: show => $D.body.classList[show?'add':'remove']('g_logged_in') || $D.body.classList[show?'remove':'add']('g_logged_out') || ($DAT.LOGGED_IN=show),
 	isNoMenu: () => $D.body.classList.contains('g_app_no_menu'),
