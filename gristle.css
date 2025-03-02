@@ -987,7 +987,7 @@ input:not([type=file]), select, textarea {
 #g_content_about input[type=button] { padding: 10px 50px 10px 50px; }
 #g_content > div { padding: 10px 20px 0px 20px; }
 #g_content_about {
-	height: calc(100dvh - 115px);
+	height: calc(100dvh - 125px);
 	overflow: auto;
 	overflow-x: hidden;
 	padding: 10px 0px 0px 0px !important;
