@@ -913,6 +913,14 @@ input:not([type=file]), select, textarea {
 	background: linear-gradient(0deg, #333 0%, #666 100%) !important;
 	color: #ddd;
 }
+#g_billing_portal_info {
+	font-size: max(0.8vmax, 13px);
+	text-align:center;
+	color: #444;
+	display: none;
+}
+
+.g_billing_free #g_billing_portal_info { display: block; }
 .g_billing_loading #g_billing_table button:nth-child(3n) { display: block; }
 #g_billing_table > div > u, #g_billing_popular {
 	display: none;
@@ -992,11 +1000,6 @@ input:not([type=file]), select, textarea {
 	overflow-x: hidden;
 	padding: 10px 0px 0px 0px !important;
 	mask-image: linear-gradient(to bottom, transparent 0%, black 25px, black calc(100% - 25px), transparent 100%);
-
-/*
-	background: radial-gradient(#e8e8e8 15%, transparent 16%) 0 0, radial-gradient(#e8e8e8 15%, transparent 16%) 80px 80px;
-	background-size: 16px 16px;
-*/
 	background-image: repeating-linear-gradient(135deg, rgb(232,232,232) 0px, rgb(232,232,232) 2px,transparent 2px, transparent 4px),linear-gradient(90deg, rgb(238,238,238),rgb(238,238,238));
 }
 #g_content.g_content_menu_about { padding-top: 0 !important; }
