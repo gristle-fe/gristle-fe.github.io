@@ -1275,6 +1275,7 @@ input:not([type=file]), select, textarea {
 	margin-bottom: 5px;
 	font-weight: normal !important;
 }
+#g_parser_info_form > div > b > label > input { display: inline-block !important; }
 #g_parser_info_form select, #g_parser_info_form input, #g_parser_info_form textarea {
 	margin-left: 1px;
 	padding: 5px 10px 5px 10px;
