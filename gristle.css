@@ -426,6 +426,7 @@ hr {
 }
 #g_support_text dt { font-weight: bold !important; }
 #g_support_text h3 { padding-top: 10px !important; }
+#g_support_audio { display: none; }
 #g_modal {
 	visibility: hidden;
 	position: fixed;

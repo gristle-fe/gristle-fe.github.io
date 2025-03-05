@@ -344,6 +344,13 @@ GUI: {
 		return($E('g_top').classList.contains('g_top_locked'));
 	},
 	busy: active => ($GUI.BUSY!=active) && $GUI.reset('g_busy', `g_fade_${active?'in':'out'} 0.5s ease forwards`) && ($GUI.BUSY=active),
+	beep: callbackError => {
+		if(typeof callbackError == 'boolean' || !$E('g_support_audio') || !_E.play)
+			return;
+		_E.currentTime = 0;
+		_E.play().then(() => $GUI.beep(false)).catch(err => $GUI.beep(true));
+	},
+	notify: message => $W['Notification'] && Notification.requestPermission ? Notification.requestPermission().then(permission => permission === 'granted' ? new Notification(message, {icon: $A('link') && Array.from(_A).find(l => l.rel=='icon').href}) : null) : null,
 	loadState: () => $DAT.LOGGED_IN && $DAT.LOAD_STATE && $A('#g_menu *').forEach(x => $DAT.LOAD_STATE&&$X(x)==$DAT.LOAD_STATE&&x.click ? ($DAT.LOAD_STATE=x.click()) : null),
 	stopSplash: () => $E('g_top').classList.add('g_top_complete') || $GUI.aboutRestart(true),
 	reset: (idOrElement, animation) => {
@@ -551,6 +558,7 @@ GUI: {
 		_E.insertAdjacentHTML('beforeend', html);
 		_E.scrollTop = _E.scrollHeight;
 	},
+	issueNotify: message => $D.hidden ? $GUI.notify(message) && $GUI.beep() : null,
 	parserSet: id => $GUI.saveChangesCheck(() => $DAT.parserSet(id)),
 	parseFromAttachment: e => {
 		const parts=e.value.split('/'), uploadId=parts.pop(), path=parts.join('/');
@@ -1002,8 +1010,11 @@ NET: {
 			$POL.start('issue', 15);
 		if(json['data']?.[0]?.ts)
 			$DAT.ISSUE_LAST = json['data'][0].ts;
-		if(json['data'])
+		if(json['data']) {
 			json['data'].reverse().forEach((data, i) => $GUI.issueDisplayMessage(data, !i && !json['ts']));
+			if(json['ts'] && json['data'].length)
+				$GUI.issueNotify((json['admin']&&json['user']?json['user']:'Gristle support') + ' has sent a new message!');
+		}
 		if($E('g_issue_input'))
 			_E.focus();
 	},
