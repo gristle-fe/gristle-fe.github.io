@@ -56,8 +56,9 @@ _clickMap: {
 	'g_contact_issue':_				=> $GUI.supportClose(false) || $DAT.parserIssue($V('g_contact_issue_type')),
 
 	'g_parser_info_issue':_			=> $DAT.parserIssue(_.x),
-	'g_parser_info_save':_			=> $DAT.parserSave(_.x),
+	'g_parser_info_save':_			=> $DAT.parserSave(_.x, false),
 	'g_parser_info_delete':_		=> $GUI.parserDelete(_.x),
+	'g_parser_info_clone':_			=> $DAT.parserSave(_.x, true),
 	'g_parser_info_parser_id':_		=> $GUI.parserIdCopy(_.x),
 
 	'g_parser_map_save':_			=> $GUI.mapSave(_.x),
@@ -583,7 +584,7 @@ GUI: {
 	parserDelete: id => $GUI.confirm('Are you sure you want to permanently delete this parser?', () => { $DAT.parserDelete(id); }),
 	parseDelete: id => $GUI.confirm('Are you sure you want to permanently delete this upload/output?', () => { $DAT.parseDelete(id); }),
 	mapSave: id => {
-		$DAT.parserSave(id),
+		$DAT.parserSave(id, false),
 		$GTF.RULES_INIT = $objectClone($GTF.RULES);
 	},
 	mapDelete: id => $GUI.confirm('Are you sure you want to permanently delete this map and all rules?', $DAT.mapDelete),
@@ -740,17 +741,17 @@ DAT: {
 		$GUI.parserMenuSelect();
 		$GUI.parserReadOnly(false);
 		$GUI.tooltipWalk($DAT.saveState($DAT.PARSER=id)=='/parser/0');
-		$A('#g_parser_info_delete, #g_parser_info_issue, #g_parser_info_parser_id').forEach(x => x.disabled = $DAT.PARSER=='/parser/0');
+		$A('#g_parser_info_delete, #g_parser_info_clone, #g_parser_info_issue, #g_parser_info_parser_id').forEach(x => x.disabled = $DAT.PARSER=='/parser/0');
 		if($DAT.saveState($DAT.PARSER=id) != '/parser/0')
 			$NET.parser($DAT.PARSER);
 		$GUI.parserSetup();
 	},
 	parserFind: id => id ? $DAT.PARSERS.find(x => x.id==id) : null,
-	parserSave: id => {
+	parserSave: (id, clone) => {
 		$V('g_parser_name', $parserName($V('g_parser_name')));
 		if(!$V('g_parser_profile'))
 			_V.selectedIndex=0;
-		const json = { ...$GUI.parserInputs(true), 'rules': $GTF.hasRules($GTF.RULES) ? JSON.stringify($GTF.RULES) : null }
+		const json = { ...$GUI.parserInputs(true), 'rules': $GTF.hasRules($GTF.RULES)?JSON.stringify($GTF.RULES):null, 'clone': clone }
 		$NET.parserSave(id?id:$DAT.PARSER, json);
 	},
 	parserDelete: id => $NET.parserDelete(id?id:$DAT.PARSER),
