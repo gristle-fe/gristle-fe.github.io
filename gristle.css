@@ -1202,6 +1202,7 @@ input:not([type=file]), select, textarea {
 	min-height: 50px;
 }
 #g_menu_parser {
+	overflow: auto;
 	white-space: nowrap;
 	user-select: none;
 	-webkit-user-select: none;
