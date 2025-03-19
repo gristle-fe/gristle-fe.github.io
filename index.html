@@ -550,6 +550,18 @@
          <option value="TSTREAM">Original layout + Tabularize using slow broad stream</option>
          <option value="FLATTEN">Flatten and remove page context</option>
         </select></div>
+        <div><b>Input Mask:
+         <i class="g_tooltip_button" data-x="top:15px;left:-7px|With some profiles, mapping can become tedious when accounting for all|possible variations, especially when empty entries exist. This helps|maintain a consistently populated grid structure by creating more|normalized tables. It is also useful if you want to avoid empty values|in your output files.||NOTE: This modifies the original input data, which may introduce the|risk of corruption or unexpected results."></i>
+        </b><select id="g_parser_mask">
+         <option value="">Preserve original data layout</option>
+         <option value="*">Infer and replace ALL empty tabular entries with zeros</option>
+         <option value="N">Infer and replace empty numeric entries with zeros</option>
+         <option value="P">Infer and replace empty percent entries with zeros</option>
+         <option value="M">Infer and replace empty currency entries with zeros</option>
+         <option value="D">Infer and replace empty date entries with zeros</option>
+         <option value="T">Infer and replace empty time entries with zeros</option>
+         <option value="*+10-10">Infer and replace ALL empty entries with zeros using less discretion</option>
+        </select></div>
         <div><b>Output Type:</b><select id="g_parser_output"></select></div>
         <div><b>Output Encoding:</b><select id="g_parser_output_encoding">
          <option value="">Preserve original encoding</option>
