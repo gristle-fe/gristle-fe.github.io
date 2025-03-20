@@ -47,12 +47,12 @@ _clickMap: {
 	'g_about_links':_				=> $GUI.supportOpen(false, _.x),
 	'g_about_play':_				=> $GUI.aboutVideo(true),
 	'g_about_play_alt':_			=> $GUI.aboutVideo(true),
+	'g_tooltip_walk':_				=> $GUI.tooltipWalk(),
 
 	'g_issue_send_button':_			=> $GUI.issueSend(_.x),
 	'g_issue_close_button':_		=> $GUI.issueDelete(_.x),
 	'g_issue_attach_button':_		=> $GUI.issueAttach(),
 	'g_issue_attachment_download':_	=> $GUI.download('/upload/'+_.x),
-
 	'g_contact_issue':_				=> $GUI.supportClose(false) || $DAT.parserIssue($V('g_contact_issue_type')),
 
 	'g_parser_info_issue':_			=> $DAT.parserIssue(_.x),
@@ -449,7 +449,20 @@ GUI: {
 				e.parentElement.remove();
 		});
 	},
-	tooltipWalk: on => $D.body.classList[on?'add':'remove']('g_tooltip_show'),
+	tooltipWalk: on => {
+		if(!$E('g_tooltip_walk'))
+			return;
+		else if(!_E.classList.contains('g_tooltip_walk_hide')) {
+			_E.classList.add('g_tooltip_walk_hide');
+			$D.body.classList.add('g_tooltip_show')
+			$POL.start('tooltips', 1);
+		}
+		else if(!on) {
+			_E.remove();
+			$D.body.classList.remove('g_tooltip_show')
+			$POL.stop('tooltips');
+		}
+	},
 	tooltipShow: el => {
 		if($X(el) && !el.childNodes.length)
 			setTimeout(() => {
@@ -740,7 +753,8 @@ DAT: {
 		$DAT.parserSetStates(['info']);
 		$GUI.parserMenuSelect();
 		$GUI.parserReadOnly(false);
-		$GUI.tooltipWalk($DAT.saveState($DAT.PARSER=id)=='/parser/0');
+		if($DAT.saveState($DAT.PARSER=id)=='/parser/0')
+			$GUI.tooltipWalk(true);
 		$A('#g_parser_info_delete, #g_parser_info_clone, #g_parser_info_issue, #g_parser_info_parser_id').forEach(x => x.disabled = $DAT.PARSER=='/parser/0');
 		if($DAT.saveState($DAT.PARSER=id) != '/parser/0')
 			$NET.parser($DAT.PARSER);
@@ -926,7 +940,7 @@ NET: {
 		if(!json || !json['parsers'])
 			return;
 		if(json['tutorial'])
-			$POL.start('tooltips', 1);
+			$GUI.tooltipWalk(true);
 		if(json['profiles'] && $E('g_parser_profile') && _E.options.length==0)
 			json['profiles'].forEach(x => _E.add(new Option(x.join(' :: '), `/${x[0]}/${x[1]}`)));
 		if(json['outputs'] && $E('g_parser_output') && _E.options.length==0)

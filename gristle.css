@@ -1803,6 +1803,38 @@ body:not(.g_app_mode) #g_content, .g_app_no_menu #g_content {
 	height: 20px;
 	width: 20px;
 }
+#g_tooltip_walk {
+	position: absolute;
+	z-index: 1;
+	top: 110px;
+	right: 0px;
+	white-space: nowrap;
+	height: 65px;
+	width: 120px;
+	cursor: pointer;
+}
+#g_tooltip_walk div {
+	text-align: center;
+	height: 30%;
+}
+#g_tooltip_walk span {
+	font-size: 16px;
+	font-variant: small-caps;
+	text-decoration: underline;
+}
+#g_tooltip_walk > div > span:last-child {
+	color: #a00;
+	display: none;
+}
+#g_tooltip_walk.g_tooltip_walk_hide > div > span:first-child { display: none !important; }
+#g_tooltip_walk.g_tooltip_walk_hide > div > span:last-child { display: inline !important; }
+#g_tooltip_walk svg {
+	display: block;
+	height: 70%;
+	fill: #444;
+	width: auto;
+	margin: auto;
+}
 .g_tooltip {
 	position: relative;
 	z-index: 2;
@@ -1890,6 +1922,7 @@ body:not(.g_app_mode) #g_content, .g_app_no_menu #g_content {
 	z-index: 7;
 }
 #g_menu_parser > div > i { display: none; }
+.g_tooltip_show #g_menu_parser { overflow: visible; }
 .g_tooltip_show #g_menu_parser > div.g_menu_parser_capable > i { display: inline; }
 .g_tooltip_show .g_tooltip_onscreen { display: inline-block; }
 body:not(.g_mobile) .g_tooltip_onscreen_mobile, .g_mobile .g_tooltip_onscreen:not(.g_tooltip_onscreen_mobile) { display: none !important; }
@@ -1914,6 +1947,7 @@ body:not(.g_mobile) .g_tooltip_onscreen_mobile, .g_mobile .g_tooltip_onscreen:no
 		text-decoration: underline;
 		text-decoration-thickness: 2px;
 	}
+	#g_tooltip_walk:hover { opacity: 0.8; }
 	.g_tooltip_close:hover {
 		background: linear-gradient(to bottom, #454 5%, #232 100%);
 		background-color: #77a809;
@@ -2034,6 +2068,7 @@ body:not(.g_mobile) .g_tooltip_onscreen_mobile, .g_mobile .g_tooltip_onscreen:no
 		width: 100%;
 		height: 100%;
 	}
+	#g_tooltip_walk { display: none; }
 	#g_support_text { height: 80dvh !important; }
 	#g_gtf_view_display, #g_gtf_filter_view_display { font-size: max(0.4vw, 14px); }
 	#g_billing_table {
