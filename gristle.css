@@ -355,7 +355,7 @@ hr {
 	height: 100%;
 	color: #fff;
 	background-color: rgba(0,0,0,0.5);
-	z-index: 9;
+	z-index: 10;
 	transition: 0.5s;
 }
 #g_busy > div {
@@ -1805,7 +1805,7 @@ body:not(.g_app_mode) #g_content, .g_app_no_menu #g_content {
 }
 #g_tooltip_walk {
 	position: absolute;
-	z-index: 1;
+	z-index: 9;
 	top: 110px;
 	right: 0px;
 	white-space: nowrap;
@@ -1818,6 +1818,7 @@ body:not(.g_app_mode) #g_content, .g_app_no_menu #g_content {
 	height: 30%;
 }
 #g_tooltip_walk span {
+	color: #666;
 	font-size: 16px;
 	font-variant: small-caps;
 	text-decoration: underline;
@@ -1831,7 +1832,7 @@ body:not(.g_app_mode) #g_content, .g_app_no_menu #g_content {
 #g_tooltip_walk svg {
 	display: block;
 	height: 70%;
-	fill: #444;
+	fill: #666;
 	width: auto;
 	margin: auto;
 }
@@ -2068,7 +2069,11 @@ body:not(.g_mobile) .g_tooltip_onscreen_mobile, .g_mobile .g_tooltip_onscreen:no
 		width: 100%;
 		height: 100%;
 	}
-	#g_tooltip_walk { display: none; }
+	#g_tooltip_walk {
+		top: 15px;
+		width: auto;
+		margin-right: 10px;
+	}
 	#g_support_text { height: 80dvh !important; }
 	#g_gtf_view_display, #g_gtf_filter_view_display { font-size: max(0.4vw, 14px); }
 	#g_billing_table {
