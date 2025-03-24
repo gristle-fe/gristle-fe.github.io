@@ -728,7 +728,7 @@ MENU: {
 /*************************************************************************************************\
 \*******  DATA / STATE LOGIC  ***********************************************  [ $DAT.* ]  *******/
 DAT: {
-	PARSER_INPUTS: {'last':null, 'set':null, 'names':['name','description','email','url','filename_match','format','structure','mask','output','output_encoding','output_structure','profile','readonly']},
+	PARSER_INPUTS: {'last':null, 'set':null, 'names':['name','description','email','url','filename_match','format','structure','mask','parameters','output','output_encoding','output_structure','profile','readonly']},
 	PARSERS:[], PARSER_STATES:[], PARSER_STATES_LOADED:[], PARSER:'', LOAD_STATE:null, TEMP_STATES:{}, REGEXES:{},
 	ISSUES:[], ISSUE:'', ISSUE_LAST:0, LOGGED_IN:false, ADMIN:false, FRAGMENTS:{},
 

@@ -1175,10 +1175,17 @@ input:not([type=file]), select, textarea {
 #g_about_left_container { float: left; }
 #g_about_right_container { float: right; }
 #g_content_issues { padding: 10px 0px 0px 20px; }
-#g_parser_name, #g_parser_description, #g_parser_email, #g_parser_url, #g_parser_filename_match {
+#g_parser_info_form input[type=text], #g_parser_info_form textarea {
 	display: block;
 	width: 45vmax;
 	transition: 0.2s;
+}
+#g_parser_info_form select {
+	width: 30vmax;
+}
+#g_parser_description {
+	height: 15vh;
+	min-height: 50px;
 }
 #g_parser_readonly_display {
 	color: #f44;
@@ -1190,16 +1197,15 @@ input:not([type=file]), select, textarea {
 .g_app_admin #g_parser_readonly_label { display: initial !important; }
 .g_parser_readonly #g_parser_readonly_display { display: inline; }
 .g_parser_readonly .g_f_help_icon { display: none; }
-.g_app_no_menu #g_parser_name, .g_app_no_menu #g_parser_description, .g_app_no_menu #g_parser_email, .g_app_no_menu #g_parser_url {
-	width: 95% !important;
+.g_app_no_menu #g_parser_info_form input[type=text], .g_app_no_menu #g_parser_info_form textarea {
+	width: 90% !important;
+}
+.g_app_no_menu #g_parser_info_form select {
+	width: 50%;
 }
 .g_app_no_menu #g_parser_map_upload, .g_app_no_menu #g_parser_parse_upload {
 	margin-left: auto;
 	margin-right: auto;
-}
-#g_parser_description {
-	height: 15vh;
-	min-height: 50px;
 }
 #g_menu_parser {
 	overflow: auto;
