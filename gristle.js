@@ -914,7 +914,7 @@ NET: {
 		$V('g_parses_list', '');
 		if(!json || !json['parses'])
 			return;
-		let hasFiles=json['parses'].length, html='<hr /><table><tr><th>Action</th><th>Filename (in/out)</th><th>Size</th><th>Status</th><th>Details</th><th>Created</th><th>Completed</th></tr>';
+		let hasFiles=json['parses'].length, html='<table><tr><th>Action</th><th>Filename (in/out)</th><th>Size</th><th>Status</th><th>Details</th><th>Created</th><th>Completed</th></tr>';
 		$E('g_parser_content').classList[hasFiles?'add':'remove']('g_has_files');
 		if(hasFiles) {
 			for(let parse of json['parses']) {

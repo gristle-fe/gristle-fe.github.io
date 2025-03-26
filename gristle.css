@@ -1261,6 +1261,7 @@ input:not([type=file]), select, textarea {
 	background-color: #bdb;
 	overflow: hidden;
 }
+#g_parser_parse_upload { margin-bottom: 20px; }
 #g_parser_map_upload input, #g_parser_parse_upload input {
 	padding: 0.2vw 0.4vw 0.2vw 0.4vw;
 	font-size: max(1vw, 16px);
@@ -1273,7 +1274,7 @@ input:not([type=file]), select, textarea {
 .g_drop_hover #g_parser_map_add { background-color: #afa !important; }
 .g_drop_hover #g_parser_map_upload, .g_drop_hover #g_parser_parse_upload { background-color: #ded !important; }
 #g_parser_info_form {
-	height: calc(100dvh - 303px);
+	height: calc(100dvh - 300px - 0.6vw);
 	padding: 5px 0px 15px 0px;
 	overflow-y: auto;
 	mask-image: linear-gradient(to bottom, transparent 0%, black 20px, black calc(100% - 20px), transparent 100%);
@@ -1295,10 +1296,14 @@ input:not([type=file]), select, textarea {
 	z-index: 1;
 }
 #g_parses_list {
-	height: calc(100dvh - 300px);
+	height: calc(100dvh - 320px - 1.5vw);
 	overflow: auto;
 	mask-image: linear-gradient(to bottom, transparent 0%, black 15px, black calc(100% - 15px), transparent 100%);
+	display: none;
 }
+.g_has_files #g_parses_list { display: block !important; }
+#g_parser_parse hr { display: none; }
+.g_has_files #g_parser_parse hr { display: block !important; }
 #g_parses_list table {
 	width: 80%;
 	font-size: max(0.7vw, 16px);
@@ -1620,7 +1625,7 @@ input:not([type=file]), select, textarea {
 	display: block;
 	position: relative;
 	padding: 10px 20px 10px 20px;
-	height: calc(100dvh - 270px);
+	height: calc(100dvh - 260px - 1.2vw);
 	overflow: scroll;
 	scrollbar-width: thin;
 	background-color: #ddd;
