@@ -85,6 +85,7 @@ _clickMap: {
 
 	'g_gtf_zoom_in_button':_		=> $GTF.zoom(parseInt(_.x)),
 	'g_gtf_zoom_out_button':_		=> $GTF.zoom(parseInt(_.x)),
+	'g_gtf_widescreen_button':_		=> $MENU.toggle(),
 
 	'g_gtf_column_up_button':_		=> $GTF.columnShift(parseInt(_.x)) && $GTF.columnUpdate(),
 	'g_gtf_column_down_button':_	=> $GTF.columnShift(parseInt(_.x)) && $GTF.columnUpdate(),
@@ -110,7 +111,7 @@ _keyMap: {
 	'+':			'g_gtf_zoom_in_button',
 	'_':			'g_gtf_zoom_out_button',
 	'-':			'g_gtf_zoom_out_button',
-	'0':			'g_gtf_view_overall_button',
+	'0':			'g_gtf_widescreen_button',
 	'O':			'g_gtf_view_overall_button',
 	'G':			'g_gtf_view_group_button',
 	'S':			'g_gtf_view_single_button',
