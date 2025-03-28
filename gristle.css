@@ -1525,9 +1525,9 @@ input:not([type=file]), select, textarea {
 	margin: auto;
 	padding-top: 2px;
 }
-.g_gtf_icon_active { background-color: #ded !important; }
-.g_gtf_icon_active svg { fill: #383 !important; }
-.g_gtf_icon_active line { stroke: #383 !important; }
+.g_gtf_icon_active, .g_app_no_menu #g_gtf_widescreen_button { background-color: #ded !important; }
+.g_gtf_icon_active svg, .g_app_no_menu #g_gtf_widescreen_button svg { fill: #383 !important; }
+.g_gtf_icon_active line, .g_app_no_menu #g_gtf_widescreen_button line { stroke: #383 !important; }
 .g_gtf_icon_multi_map { display: none; }
 #g_gtf_column_fg_color, #g_gtf_column_bg_color { cursor: pointer; }
 #g_gtf_column_fg_color_container {
