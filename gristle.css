@@ -1203,10 +1203,6 @@ input:not([type=file]), select, textarea {
 .g_app_no_menu #g_parser_info_form select {
 	width: 50%;
 }
-.g_app_no_menu #g_parser_map_upload, .g_app_no_menu #g_parser_parse_upload {
-	margin-left: auto;
-	margin-right: auto;
-}
 #g_menu_parser {
 	overflow: auto;
 	white-space: nowrap;
@@ -1267,8 +1263,10 @@ input:not([type=file]), select, textarea {
 	font-size: max(1vw, 16px);
 }
 .g_has_files #g_parser_parse_upload {
-	width: 80%;
+	width: auto;
 	height: auto;
+	margin-left: auto;
+	margin-right: auto;
 	padding: 20px 10px 20px 10px !important;
 }
 .g_drop_hover #g_parser_map_add { background-color: #afa !important; }
@@ -1296,7 +1294,7 @@ input:not([type=file]), select, textarea {
 	z-index: 1;
 }
 #g_parses_list {
-	height: calc(100dvh - 320px - 1.5vw);
+	height: calc(100dvh - 340px - 1.6vw);
 	overflow: auto;
 	mask-image: linear-gradient(to bottom, transparent 0%, black 15px, black calc(100% - 15px), transparent 100%);
 	display: none;
@@ -1304,8 +1302,12 @@ input:not([type=file]), select, textarea {
 .g_has_files #g_parses_list { display: block !important; }
 #g_parser_parse hr { display: none; }
 .g_has_files #g_parser_parse hr { display: block !important; }
-#g_parses_list table {
-	width: 80%;
+#g_parses_page_list {
+	white-space: nowrap;
+	text-align: center;
+}
+#g_parses_list table, #g_parses_page_list {
+	width: 100%;
 	font-size: max(0.7vw, 16px);
 }
 #g_parses_list th {

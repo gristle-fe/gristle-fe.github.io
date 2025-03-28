@@ -70,7 +70,7 @@ _clickMap: {
 	'g_parse_has_download':_		=> $GUI.download(_.x), 
 	'g_parse_issue':_				=> $DAT.parserIssue(_.x),
 	'g_parse_delete':_				=> $GUI.parseDelete(_.x),
-	'g_parse_page_change':_			=> $GUI.parsePage(_.x),
+	'g_parses_page_list':_			=> $GUI.parsePage(_.y?_.y:_.x, !!_.y),
 
 	'g_support_select':_			=> $GUI.supportSelect('g_support_select_'+_.x+'_header'),
 	'g_support_checkbox_container':_=> $GUI.supportOpen(true, 'terms'),
@@ -598,10 +598,12 @@ GUI: {
 	},
 	parserDelete: id => $GUI.confirm('Are you sure you want to permanently delete this parser?', () => { $DAT.parserDelete(id); }),
 	parseDelete: id => $GUI.confirm('Are you sure you want to permanently delete this upload/output?', () => { $DAT.parseDelete(id); }),
-	parsePage: page => {
+	parsePage: (page, explicit) => {
 		if(!$DAT.PARSER || !page)
 			return;
-		$DAT.PARSE_PAGE += parseInt(page);
+		else if(page=='wipe')
+			return($GUI.confirm('Are you sure you want to permanently delete ALL outputs for this parser?', () => { $DAT.parseDelete($basename($DAT.PARSER))}));
+		$DAT.PARSE_PAGE = (explicit ? 0 : $DAT.PARSE_PAGE) + parseInt(page);
 		$NET.parses($DAT.PARSER, false);
 	},
 	mapSave: id => {
@@ -921,6 +923,7 @@ NET: {
 	parseFromAttachment: (parserId, uploadId) => $NET.post('/parse/'+$basename(parserId)+'/'+$basename(uploadId), {}, $NET.parseResponse, true),
 	parsesResponse: json => {
 		$V('g_parses_list', '');
+		$V('g_parses_page_list', '');
 		if(!json || !json['parses'])
 			return;
 		let hasFiles=json['parses'].length, html='<table><tr><th>Action</th><th>Filename (in/out)</th><th>Size</th><th>Status</th><th>Details</th><th>Created</th><th>Completed</th></tr>';
@@ -933,8 +936,14 @@ NET: {
 				html += `<tr class="g_parse_list_${$H(parse['status'])}" data-x="/parse/${$basename($DAT.PARSER)}/${parse['id']}/${parse['filename']}"><td>  <span class="g_parse_issue" title="Contact support" data-x="${parse['id']}">${$F('g_f_help_icon')}</span><span class="g_parse_delete" title="Delete" data-x="${$basename($DAT.PARSER)}/${parse['id']}">${$F('g_f_delete_icon')}</span><span class="g_parse_${downloadClass}" title="Download">${$F('g_f_download_icon')}</span></td><td class="g_parse_link_${downloadClass}">${$H(parse['filename'])}</td><td>${$sizeDisplay(parse['filesize'],1024,['B','K','M','G','T'])}</td><td><i>&nbsp;</i>${$GUI.parseStatusDisplay(parse['status'])}</td><td>${$H(parse['details'])}</td><td>${$dateDisplay(parse['created'])}</td><td>${$dateDisplay(parse['completed'])}</td></tr>`;
 			}
 			html += '</table>';
-			html += '<div id="g_parse_page_change">#' + ($DAT.PARSE_PAGE+1) + ': <button type="button" data-x="-1">&lt;-</button> <button type="button" data-x="1">-&gt;</button></div>'
 			$V('g_parses_list', html);
+			if(json['pages'] > 1) {
+				html = '<button type="button" data-x="-1">&lt;</button>';
+				for (s=Math.max(1,Math.min($DAT.PARSE_PAGE-5, json['pages']-10)), e=Math.min(s+9,json['pages']), i=s-1; i < e; i++)
+					html += '<button type="button" data-y="'+i+'"'+(i==$DAT.PARSE_PAGE?' disabled="disabled"':'')+'>'+(i+1)+'</button>';
+				html += '<button type="button" data-x="1">&gt;</button>&nbsp;-&nbsp;<button type="button" data-y="wipe">wipe</button>';
+				$V('g_parses_page_list', html);
+			}
 		}
 		if($DAT.PARSER && json['parses'].some(x => x && ['queued','processing','push_queued','push_processing'].indexOf(x['status']) >= 0))
 			$POL.start('parses', 5);
@@ -944,10 +953,10 @@ NET: {
 	parseResponse: json => {
 		if(json && json['id'] && json['inferred_parser_id'])
 			$DAT.parserSet('/parser/'+json['inferred_parser_id'], json['id'], true);
-		else {
-			$DAT.PARSE_PAGE = 0;
-			$NET.parses($DAT.PARSER)
-		}
+		else if(json['parses'])
+			$NET.parsesResponse(json);
+		else
+			$NET.parses($DAT.PARSER);
 	},
 	parsers: busy => $NET.get('/parser' + (Object.keys($DAT.REGEXES).length==0?'':'/0'), null, $NET.parsersResponse, busy),
 	parsersResponse: json => {
