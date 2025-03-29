@@ -931,9 +931,10 @@ NET: {
 		if(typeof json['page'] == 'number')
 			$DAT.PARSE_PAGE = json['page'];
 		if(hasFiles) {
+			const max=Math.max(20, Math.min(100, Math.floor($W.innerWidth/30)));
 			for(let parse of json['parses']) {
 				const downloadClass=(parse['status']&&parse['status'].match(/complete|push_(?!error)/)?'has_download':'no_download');
-				html += `<tr class="g_parse_list_${$H(parse['status'])}" data-x="/parse/${$basename($DAT.PARSER)}/${parse['id']}/${parse['filename']}"><td>  <span class="g_parse_issue" title="Contact support" data-x="${parse['id']}">${$F('g_f_help_icon')}</span><span class="g_parse_delete" title="Delete" data-x="${$basename($DAT.PARSER)}/${parse['id']}">${$F('g_f_delete_icon')}</span><span class="g_parse_${downloadClass}" title="Download">${$F('g_f_download_icon')}</span></td><td class="g_parse_link_${downloadClass}">${$H(parse['filename'])}</td><td>${$sizeDisplay(parse['filesize'],1024,['B','K','M','G','T'])}</td><td><i>&nbsp;</i>${$GUI.parseStatusDisplay(parse['status'])}</td><td>${$H(parse['details'])}</td><td>${$dateDisplay(parse['created'])}</td><td>${$dateDisplay(parse['completed'])}</td></tr>`;
+				html += `<tr class="g_parse_list_${$H(parse['status'])}" data-x="/parse/${$basename($DAT.PARSER)}/${parse['id']}/${parse['filename']}"><td>  <span class="g_parse_issue" title="Contact support" data-x="${parse['id']}">${$F('g_f_help_icon')}</span><span class="g_parse_delete" title="Delete" data-x="${$basename($DAT.PARSER)}/${parse['id']}">${$F('g_f_delete_icon')}</span><span class="g_parse_${downloadClass}" title="Download">${$F('g_f_download_icon')}</span></td><td class="g_parse_link_${downloadClass}">${$H($truncate(parse['filename'],max))}</td><td>${$sizeDisplay(parse['filesize'],1024,['B','K','M','G','T'])}</td><td><i>&nbsp;</i>${$GUI.parseStatusDisplay(parse['status'])}</td><td>${$H(parse['details'])}</td><td>${$dateDisplay(parse['created'])}</td><td>${$dateDisplay(parse['completed'])}</td></tr>`;
 			}
 			html += '</table>';
 			$V('g_parses_list', html);
@@ -2029,6 +2030,7 @@ isEmpty: x => {
 },
 objectClone: obj => typeof structuredClone=='function' ? structuredClone(obj) : JSON.parse(JSON.stringify(obj)),
 nth: n => n + (['st','nd','rd'][(((n<0?-n:n)+90)%100-10)%10-1]||'th'),
+truncate: (str, len) => str.length <= len ? str : (str.slice(0,Math.floor(len/2)) + "\u2026" + str.slice(-Math.floor(len/2))),
 range: (count, start) => Array(count).fill(start?start:0).map((x, y) => x + y),
 basename: path => path.replace(/^.*\//,''),
 minMax: (num, min, max) => Math.min(Math.max(parseInt(num?num:0), min), max),
