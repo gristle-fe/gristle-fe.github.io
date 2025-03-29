@@ -1257,7 +1257,6 @@ input:not([type=file]), select, textarea {
 	background-color: #bdb;
 	overflow: hidden;
 }
-#g_parser_parse_upload { margin-bottom: 20px; }
 #g_parser_map_upload input, #g_parser_parse_upload input {
 	padding: 0.2vw 0.4vw 0.2vw 0.4vw;
 	font-size: max(1vw, 16px);
@@ -1267,6 +1266,7 @@ input:not([type=file]), select, textarea {
 	height: auto;
 	margin-left: auto;
 	margin-right: auto;
+	margin-top: 5px;
 	padding: 20px 10px 20px 10px !important;
 }
 .g_drop_hover #g_parser_map_add { background-color: #afa !important; }
@@ -1305,10 +1305,38 @@ input:not([type=file]), select, textarea {
 #g_parses_page_list {
 	white-space: nowrap;
 	text-align: center;
+	padding-top: 5px;
+	padding-bottom: 3px;
 }
 #g_parses_list table, #g_parses_page_list {
 	width: 100%;
 	font-size: max(0.7vw, 16px);
+}
+#g_parses_page_list button {
+	padding: 5px 10px 5px 10px;
+	border-radius: 0px 0px 0px 0px;
+	border-width: 2px 0px 0px 2px;
+	line-height: 20px;
+	font-weight: bold;
+	cursor: pointer;
+	border: 0px !important;
+	background-color: #eee;
+	color: #444;
+}
+#g_parses_page_list button:disabled {
+	text-decoration: underline;
+	text-decoration-thickness: 2px !important;
+	background-color: #ddd !important;
+	color: #000 !important;
+}
+#g_parses_page_list button:first-child {
+	border-radius: 10px 0px 0px 10px !important;
+}
+#g_parses_page_list button:nth-last-child(2) {
+	border-radius: 0px 10px 10px 0px !important;
+}
+#g_parses_page_list button:last-child {
+	border-radius: 10px 10px 10px 10px !important;
 }
 #g_parses_list th {
 	text-align: left;
@@ -1975,6 +2003,10 @@ body:not(.g_mobile) .g_tooltip_onscreen_mobile, .g_mobile .g_tooltip_onscreen:no
 		background: linear-gradient(0deg, var(--g-button-secondary) 0%, var(--g-billing-dark) 100%);
 		box-shadow: 0 0 0 2px #ccc, 0 0 0 4px #ddd;
 		outline: 0;
+	}
+	#g_parses_page_list button:disabled, #g_parses_page_list button:hover {
+		background-color: #ddd !important;
+		color: #000 !important;
 	}
 	#g_start_button_alt:hover, #g_about_play_alt:hover, #g_about_links b:hover { color: #0074d4; }
 	#g_support_button_agree:hover { background-color: #cdc !important; }

@@ -938,10 +938,10 @@ NET: {
 			html += '</table>';
 			$V('g_parses_list', html);
 			if(json['pages'] > 1) {
-				html = '<button type="button" data-x="-1">&lt;</button>';
+				html = '<button type="button" data-x="-1">&#11164;</button>';
 				for (s=Math.max(1,Math.min($DAT.PARSE_PAGE-5, json['pages']-10)), e=Math.min(s+9,json['pages']), i=s-1; i < e; i++)
 					html += '<button type="button" data-y="'+i+'"'+(i==$DAT.PARSE_PAGE?' disabled="disabled"':'')+'>'+(i+1)+'</button>';
-				html += '<button type="button" data-x="1">&gt;</button>&nbsp;-&nbsp;<button type="button" data-y="wipe">wipe</button>';
+				html += '<button type="button" data-x="1">&#11166;</button>&nbsp;-&nbsp;<button type="button" data-y="wipe">wipe</button>';
 				$V('g_parses_page_list', html);
 			}
 		}
