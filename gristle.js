@@ -1217,7 +1217,7 @@ GTF: {
 			$GTF.MAP = 0;
 		else if($GTF.MAP < 0)
 			$GTF.MAP = $GTF.MAPS.length > 0 ? $GTF.MAPS.length-1 : 0;
-		html = $GTF.MAPS[$GTF.MAP];
+		html = `<div id="g_gtf_editor_data_map_num">MAP&nbsp;${$GTF.MAP+1} of ${$GTF.MAPS.length}</div>${$GTF.MAPS[$GTF.MAP]}`;
 		$V('g_gtf_editor_data', html);
 		$GTF.updateElements();
 		$GUI.reset('g_gtf_editor_data', 'g_gtf_editor_data_fade_in 1s normal forwards');
