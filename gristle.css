@@ -1517,6 +1517,7 @@ input:not([type=file]), select, textarea {
 .g_gtf_icon {
 	cursor: pointer;
 	display: flex;
+	flex-shrink: 0;
 	height: max(1vw, 24px);
 	width: max(1vw, 24px);
 	position: relative;
