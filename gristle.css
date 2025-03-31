@@ -1499,8 +1499,8 @@ input:not([type=file]), select, textarea {
 	flex-grow: 1;
 }
 #g_gtf_filter_value_text {
-	display: inline-block;
 	margin: auto;
+	height: 95%;
 	width: 90%;
 	font-size: max(0.4vw, 14px);
 	outline: none;
@@ -1784,7 +1784,7 @@ input:not([type=file]), select, textarea {
 }
 #g_gtf_editor_data_ruler.g_has_column_pulldown, #g_gtf_editor_data_ruler.g_has_filter_pulldown { z-index: 0 !important; }
 #g_gtf_editor_data_ruler u:first-child, #g_gtf_editor_data p u:first-child { background-color: #888; }
-.g_ruler #g_gtf_editor_data { padding: 0 !important; }
+.g_ruler #g_gtf_editor_data { padding: 0 0 calc(var(--g-gtf-font-size) + 2px) 0 !important; }
 .g_ruler #g_gtf_editor_data u { display: inline !important; }
 .t_k { background-color: #ccc; }
 #g_content_snippets { overflow-x: hidden; }
