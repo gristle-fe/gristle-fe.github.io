@@ -227,10 +227,13 @@ EVT: {
 	},
 	mousedown: e => {
 		for(let el=(e&&e.target?e.target:e),next=el; !!next.parentElement; next=next.parentElement) {
-			if(next.id!='g_parser_scrollbar')
+			if(next.id == 'g_parser_scrollbar')
+				$GTF.SCROLLING = true;
+			else if(next.id == 'g_gtf_editor_controls_container')
+				$GTF.SCROLLING = 100;
+			else
 				continue;
 			$GUI.tooltipClear(true);
-			$GTF.SCROLLING = true; 
 			$GTF.scrollChange(e);
 			break;
 		}
@@ -1203,8 +1206,15 @@ GTF: {
 		else if(pos > maxPos)
 			pos = maxPos;
 		pct = pos / maxPos;
-		$E('g_gtf_editor_controls').style.left = '-' + (scrollSpan * pct) + 'px';
-		$E('g_parser_scrollbar_button').style.left = (pos-10) + 'px';
+		if(typeof($GTF.SCROLLING) == 'number')
+			$GTF.SCROLLING = [pos - $GTF.SCROLLING, pos + $GTF.SCROLLING];
+		if(typeof($GTF.SCROLLING) == 'object' && (pos < $GTF.SCROLLING[0] || $GTF.SCROLLING[1] < pos))
+			$GTF.SCROLLING = true;
+		if(typeof($GTF.SCROLLING) == 'boolean') {
+			$E('g_gtf_editor_controls').style.left = '-' + (scrollSpan * pct) + 'px';
+			$E('g_parser_scrollbar_button').style.left = (pos-10) + 'px';
+		}
+
 	},
 	scrollFix: () => {
 		$E('g_parser_content').style.overflowX = 'auto';
