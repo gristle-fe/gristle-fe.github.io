@@ -1295,6 +1295,7 @@ input:not([type=file]), select, textarea {
 }
 #g_parses_list {
 	height: calc(100dvh - 340px - 1.6vw);
+	padding-top: 5px;
 	overflow: auto;
 	mask-image: linear-gradient(to bottom, transparent 0%, black 15px, black calc(100% - 15px), transparent 100%);
 	display: none;
@@ -1302,6 +1303,10 @@ input:not([type=file]), select, textarea {
 .g_has_files #g_parses_list { display: block !important; }
 #g_parser_parse hr { display: none; }
 .g_has_files #g_parser_parse hr { display: block !important; }
+#g_parses_list span svg {
+	display: inline-block;
+	vertical-align: bottom;
+}
 #g_parses_page_list {
 	white-space: nowrap;
 	text-align: center;

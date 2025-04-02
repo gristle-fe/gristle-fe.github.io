@@ -70,6 +70,8 @@ _clickMap: {
 	'g_parse_has_download':_		=> $GUI.download(_.x), 
 	'g_parse_issue':_				=> $DAT.parserIssue(_.x),
 	'g_parse_delete':_				=> $GUI.parseDelete(_.x),
+	'g_parse_checkbox':_			=> $GUI.parseCheckbox(_.el),
+	'g_parse_checkbox_all':_		=> $A('.g_parse_checkbox').forEach(el => $GUI.parseCheckbox(el, _.el.checked)),
 	'g_parses_page_list':_			=> $GUI.parsePage(_.y?_.y:_.x, !!_.y),
 
 	'g_support_select':_			=> $GUI.supportSelect('g_support_select_'+_.x+'_header'),
@@ -600,14 +602,36 @@ GUI: {
 				.catch(() => $GUI.alert("Parser ID:\n\n" + text));
 	},
 	parserDelete: id => $GUI.confirm('Are you sure you want to permanently delete this parser?', () => { $DAT.parserDelete(id); }),
-	parseDelete: id => $GUI.confirm('Are you sure you want to permanently delete this upload/output?', () => { $DAT.parseDelete(id); }),
+	parseDelete: id => $GUI.confirm('Are you sure you want to permanently delete this upload/output?', () => { $DAT.PARSE_SELECTED = []; $DAT.parseDelete(id); }),
+	parseCheckbox: (idOrElement, checked) => {
+		const el = (typeof(idOrElement)=='string'?$E(idOrElement):idOrElement);
+		if(typeof(checked) == 'boolean')
+			el.checked = checked;
+		if(el.checked)
+			$DAT.PARSE_SELECTED.push(el.value);
+		else
+			$DAT.PARSE_SELECTED = $DAT.PARSE_SELECTED.filter(id => id !== el.value);
+	},
 	parsePage: (page, explicit) => {
 		if(!$DAT.PARSER || !page)
 			return;
-		else if(page=='wipe')
-			return($GUI.confirm('Are you sure you want to permanently delete ALL outputs for this parser?', () => { $DAT.parseDelete($basename($DAT.PARSER))}));
+		else if(page=='delete')
+			return($GUI.parseBulk('delete'));
 		$DAT.PARSE_PAGE = (explicit ? 0 : $DAT.PARSE_PAGE) + parseInt(page);
 		$NET.parses($DAT.PARSER, false);
+	},
+	parseBulk: (bulk, all) => {
+		const task=bulk + (all||!$DAT.PARSE_SELECTED.length?'-all':'-some');
+		if(task=='delete-some')
+			$GUI.confirm(`Are you sure you want to permanently delete ${$DAT.PARSE_SELECTED.length} output(s) for this parser?`, () => {
+				$NET.post('/parse/'+$basename($DAT.PARSER)+'/'+$DAT.PARSE_PAGE, {'bulk':'delete','ids':$DAT.PARSE_SELECTED}, $NET.parseResponse, true);
+			});
+		else if(task=='delete-all')
+			$GUI.confirm('Are you sure you want to permanently delete *ALL* outputs for this parser?', () => {
+				$DAT.parseDelete($basename($DAT.PARSER));
+			});
+		else
+			$GUI.alert('Unknown bulk task: ' + task);
 	},
 	mapSave: id => {
 		$DAT.parserSave(id, false),
@@ -742,7 +766,7 @@ MENU: {
 \*******  DATA / STATE LOGIC  ***********************************************  [ $DAT.* ]  *******/
 DAT: {
 	PARSER_INPUTS: {'last':null, 'set':null, 'names':['name','description','email','url','filename_match','format','structure','mask','parameters','output','output_encoding','output_structure','profile','readonly']},
-	PARSERS:[], PARSER_STATES:[], PARSER_STATES_LOADED:[], PARSER:'', PARSE_PAGE:0, LOAD_STATE:null, TEMP_STATES:{}, REGEXES:{},
+	PARSERS:[], PARSER_STATES:[], PARSER_STATES_LOADED:[], PARSER:'', PARSE_PAGE:0, PARSE_SELECTED:[], LOAD_STATE:null, TEMP_STATES:{}, REGEXES:{},
 	ISSUES:[], ISSUE:'', ISSUE_LAST:0, LOGGED_IN:false, ADMIN:false, FRAGMENTS:{},
 
 	setup: () => $DAT.LOAD_STATE = $DB.get('state'),
@@ -757,6 +781,7 @@ DAT: {
 	},
 	parserSet: (id, pushUploadId, followOnly) => {
 		$DAT.PARSER_INPUTS['set'] = $DAT.PARSER_INPUTS['last'] = $DAT.TEMP_STATES['push_attachment'] = $DAT.TEMP_STATES['follow_only'] = null;
+		$DAT.PARSE_SELECTED = [];
 		$DAT.PARSE_PAGE = 0;
 		if(!id || id[0] != '/')
 			return;
@@ -783,8 +808,8 @@ DAT: {
 		$NET.parserSave(id?id:$DAT.PARSER, json);
 	},
 	parserDelete: id => $NET.parserDelete(id?id:$DAT.PARSER),
-	parseDelete: id => $NET.parseDelete(id),
 	parserIssue: id => $NET.issue(id?id:$DAT.PARSER),
+	parseDelete: id => $NET.parseDelete(id),
 	issueSet: (id, noNet) => {
 		if($DAT.saveState($DAT.ISSUE=id) != '/issue/0' && !noNet)
 			$NET.issue($DAT.ISSUE, $DAT.ISSUE_LAST);
@@ -929,7 +954,9 @@ NET: {
 		$V('g_parses_page_list', '');
 		if(!json || !json['parses'])
 			return;
-		let hasFiles=json['parses'].length, html='<table><tr><th>Action</th><th>Filename (in/out)</th><th>Size</th><th>Status</th><th>Details</th><th>Created</th><th>Completed</th></tr>';
+		if(json['bulk'])
+			$DAT.PARSE_SELECTED = [];
+		let hasFiles=json['parses'].length, html='<table><tr><th><input id="g_parse_checkbox_all" type="checkbox" />&nbsp;Action</th><th>Filename (in/out)</th><th>Size</th><th>Status</th><th>Details</th><th>Created</th><th>Completed</th></tr>';
 		$E('g_parser_content').classList[hasFiles?'add':'remove']('g_has_files');
 		if(typeof json['page'] == 'number')
 			$DAT.PARSE_PAGE = json['page'];
@@ -937,17 +964,17 @@ NET: {
 			const max=Math.max(20, Math.min(100, Math.floor($W.innerWidth/30)));
 			for(let parse of json['parses']) {
 				const downloadClass=(parse['status']&&parse['status'].match(/complete|push_(?!error)/)?'has_download':'no_download');
-				html += `<tr class="g_parse_list_${$H(parse['status'])}" data-x="/parse/${$basename($DAT.PARSER)}/${parse['id']}/${parse['filename']}"><td>  <span class="g_parse_issue" title="Contact support" data-x="${parse['id']}">${$F('g_f_help_icon')}</span><span class="g_parse_delete" title="Delete" data-x="${$basename($DAT.PARSER)}/${parse['id']}">${$F('g_f_delete_icon')}</span><span class="g_parse_${downloadClass}" title="Download">${$F('g_f_download_icon')}</span></td><td class="g_parse_link_${downloadClass}">${$H($truncate(parse['filename'],max))}</td><td>${$sizeDisplay(parse['filesize'],1024,['B','K','M','G','T'])}</td><td><i>&nbsp;</i>${$GUI.parseStatusDisplay(parse['status'])}</td><td>${$H(parse['details'])}</td><td>${$dateDisplay(parse['created'])}</td><td>${$dateDisplay(parse['completed'])}</td></tr>`;
+				html += `<tr class="g_parse_list_${$H(parse['status'])}" data-x="/parse/${$basename($DAT.PARSER)}/${parse['id']}/${parse['filename']}"><td><input type="checkbox" class="g_parse_checkbox" value="${parse['id']}"${$DAT.PARSE_SELECTED.includes(parse['id'])?' checked="checked"':''}" /><span class="g_parse_issue" title="Contact support" data-x="${parse['id']}">${$F('g_f_help_icon')}</span><span class="g_parse_delete" title="Delete" data-x="${$basename($DAT.PARSER)}/${parse['id']}">${$F('g_f_delete_icon')}</span><span class="g_parse_${downloadClass}" title="Download">${$F('g_f_download_icon')}</span></td><td class="g_parse_link_${downloadClass}">${$H($truncate(parse['filename'],max))}</td><td>${$sizeDisplay(parse['filesize'],1024,['B','K','M','G','T'])}</td><td><i>&nbsp;</i>${$GUI.parseStatusDisplay(parse['status'])}</td><td>${$H(parse['details'])}</td><td>${$dateDisplay(parse['created'])}</td><td>${$dateDisplay(parse['completed'])}</td></tr>`;
 			}
 			html += '</table>';
 			$V('g_parses_list', html);
-			if(json['pages'] > 1) {
+//			if(json['pages'] > 1) {
 				html = '<button type="button" data-x="-1">&#9668;</button>';
 				for(let p=Math.max(5,Math.min(30,Math.floor($W.innerWidth/80))), s=Math.max(1,Math.min($DAT.PARSE_PAGE-Math.floor(p/2),json['pages']-p)), e=Math.min(s+p,json['pages']), i=s-1; i < e; i++)
 					html += '<button type="button" data-y="'+i+'"'+(i==$DAT.PARSE_PAGE?' disabled="disabled"':'')+'>'+(i+1)+'</button>';
-				html += '<button type="button" data-x="1">&#9658;</button>&nbsp;-&nbsp;<button type="button" data-y="wipe">wipe</button>';
+				html += '<button type="button" data-x="1">&#9658;</button>&nbsp;-&nbsp;<button type="button" data-y="delete">Delete</button>';
 				$V('g_parses_page_list', html);
-			}
+//			}
 		}
 		if($DAT.PARSER && json['parses'].some(x => x && ['queued','processing','push_queued','push_processing'].indexOf(x['status']) >= 0))
 			$POL.start('parses', 5);
