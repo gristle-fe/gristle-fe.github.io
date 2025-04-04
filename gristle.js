@@ -344,7 +344,8 @@ GUI: {
 		$GUI.reset('g_modal', 'g_fade_out 0.25s ease forwards');
 		if($GUI.MODAL && answer=='yes')
 			$GUI.MODAL();
-		$GUI.MODAL = null;
+		else
+			$GUI.MODAL = null;
 	},
 	locked: explicit => {
 		if(typeof(explicit)=='boolean')
