@@ -968,13 +968,11 @@ NET: {
 			}
 			html += '</table>';
 			$V('g_parses_list', html);
-//			if(json['pages'] > 1) {
-				html = '<button type="button" data-x="-1">&#9668;</button>';
-				for(let p=Math.max(5,Math.min(30,Math.floor($W.innerWidth/80))), s=Math.max(1,Math.min($DAT.PARSE_PAGE-Math.floor(p/2),json['pages']-p)), e=Math.min(s+p,json['pages']), i=s-1; i < e; i++)
-					html += '<button type="button" data-y="'+i+'"'+(i==$DAT.PARSE_PAGE?' disabled="disabled"':'')+'>'+(i+1)+'</button>';
-				html += '<button type="button" data-x="1">&#9658;</button>&nbsp;&nbsp;&bull;&nbsp;&nbsp;<button type="button" data-y="archive">Archive<b> (zip)</b></button>&nbsp;&nbsp;&bull;&nbsp;&nbsp;<button type="button" data-y="delete">Delete</button>';
-				$V('g_parses_page_list', html);
-//			}
+			html = '<hr /><div><button type="button" data-x="-1">&#9668;</button>';
+			for(let p=Math.max(5,Math.min(30,Math.floor($W.innerWidth/80))), s=Math.max(1,Math.min($DAT.PARSE_PAGE-Math.floor(p/2),json['pages']-p)), e=Math.min(s+p,json['pages']), i=s-1; i < e; i++)
+				html += '<button type="button" data-y="'+i+'"'+(i==$DAT.PARSE_PAGE?' disabled="disabled"':'')+'>'+(i+1)+'</button>';
+			html += '<button type="button" data-x="1">&#9658;</button>&nbsp;&nbsp;&bull;&nbsp;&nbsp;<button type="button" data-y="archive">Archive<b> (zip)</b></button>&nbsp;&nbsp;&bull;&nbsp;&nbsp;<button type="button" data-y="delete">Delete</button></div>';
+			$V('g_parses_page_list', html);
 		}
 		if($DAT.PARSER && json['parses'].some(x => x && ['queued','processing','push_queued','push_processing'].indexOf(x['status']) >= 0))
 			$POL.start('parses', 5);

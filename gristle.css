@@ -1294,7 +1294,7 @@ input:not([type=file]), select, textarea {
 	z-index: 1;
 }
 #g_parses_list {
-	height: calc(100dvh - 340px - 1.6vw);
+	height: calc(100dvh - 360px - 1.4vw);
 	padding-top: 5px;
 	overflow: auto;
 	mask-image: linear-gradient(to bottom, transparent 0%, black 15px, black calc(100% - 15px), transparent 100%);
@@ -1310,18 +1310,18 @@ input:not([type=file]), select, textarea {
 #g_parses_page_list {
 	white-space: nowrap;
 	text-align: center;
-	padding-top: 5px;
-	padding-bottom: 3px;
 }
-#g_parses_list table, #g_parses_page_list {
+#g_parses_list table, #g_parses_page_list div {
+	overflow-y: auto;
+	padding-top: 7px;
 	width: 100%;
-	font-size: max(0.7vw, 16px);
 }
 #g_parses_page_list button {
 	padding: 5px 10px 5px 10px;
 	border-radius: 0px 0px 0px 0px;
 	border-width: 2px 0px 0px 2px;
-	line-height: 20px;
+	line-height: max(0.4vw, 20px);
+	font-size: max(0.4vw, 14px);
 	font-weight: bold;
 	cursor: pointer;
 	border: 0px !important;
