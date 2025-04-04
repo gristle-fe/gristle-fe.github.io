@@ -1674,7 +1674,7 @@ input:not([type=file]), select, textarea {
 	display: block;
 	position: relative;
 	padding: calc(var(--g-gtf-font-size) + 2px) 20px 10px 20px;
-	height: calc(100dvh - 260px - 1.2vw);
+	height: calc(100dvh - 260px - 1.3vw);
 	overflow: scroll;
 	scrollbar-width: thin;
 	background-color: #ddd;
@@ -1682,6 +1682,7 @@ input:not([type=file]), select, textarea {
 	user-select: none;
 	-webkit-user-select: none;
 	margin-top: 0px;
+	margin-bottom: 0px;
 	font-size: var(--g-gtf-font-size);
 	cursor: grab;
 }

@@ -165,12 +165,12 @@ LOAD: e => {
 \*******  GLOBAL EVENTS (automatically hooked)  *****************************  [ $EVT.* ]  *******/
 EVT: {
 	DOCUMENT: [ 'click', 'keydown', 'mousedown', 'mouseup', 'mousemove', 'touchstart', 'touchmove', 'touchend', 'touchcancel', 'touchdistance', 'dragover', 'dragleave', 'drop' ],
-	WINDOW: [ 'focus', 'resize', 'hashchange', 'popstate', 'pageshow' ],
+	WINDOW: [ 'focus', 'resize', 'hashchange', 'popstate', 'pageshow', 'wheel' ],
 	TOUCH: { points:0, startDistance:0, startZoom:0 },
 
 	setup: () => {
-		$EVT.DOCUMENT.forEach(k => $D.addEventListener(k, $EVT[k]));
-		$EVT.WINDOW.forEach(k => $W.addEventListener(k, $EVT[k]));
+		$EVT.DOCUMENT.forEach(k => $D.addEventListener(k, $EVT[k], { passive:false }));
+		$EVT.WINDOW.forEach(k => $W.addEventListener(k, $EVT[k], { passive:false }));
 		for(let query of Object.keys(_eventMap)) {
 			if(!$A(query)) continue;
 			for(let a=0; a < _A.length; a++) {
@@ -212,6 +212,8 @@ EVT: {
 		}
 	},
 	keydown: e => {
+		if ((e.ctrlKey || e.metaKey) && '+-='.indexOf(e.key) >= 0)
+			e.preventDefault();
 		if(e && e.target && ($GUI.MENU!='parsers' || $GUI.PARSER_MENU!='map' || $I(['INPUT','TEXTAREA'],e.target.tagName) >= 0 || e.target.isContentEditable))
 			return;
 		let el='', keyNum=parseInt(e.key);
@@ -268,6 +270,12 @@ EVT: {
 	},
 	touchcancel: e => $EVT.touchend(e),
 	touchdistance: e => Math.hypot(e.touches[0].pageX-e.touches[1].pageX, e.touches[0].pageY-e.touches[1].pageY),
+	wheel: e => {
+		if(!e.ctrlKey)
+			return;
+		$GTF.zoom(e.deltaY > 0 ? -1: 1);
+		e.preventDefault();
+	},
 	focus: e => $GUI.aboutRestart(false),
 	resize: e => $GUI.stopSplash() || $MENU.hideIfSmallView(true) || $GTF.scrollChange(null) || $GTF.zoomAuto(true),
 	hashchange: e => $M(/#?([^=]+)=(.+)/, location.hash) ? $DAT.hashTask(_M[1], _M[2]) : null,
