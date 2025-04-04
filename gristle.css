@@ -1200,9 +1200,7 @@ input:not([type=file]), select, textarea {
 .g_app_no_menu #g_parser_info_form input[type=text], .g_app_no_menu #g_parser_info_form textarea {
 	width: 90% !important;
 }
-.g_app_no_menu #g_parser_info_form select {
-	width: 50%;
-}
+.g_app_no_menu #g_parser_info_form select { width: 50%; }
 #g_menu_parser {
 	overflow: auto;
 	white-space: nowrap;
@@ -1264,9 +1262,7 @@ input:not([type=file]), select, textarea {
 .g_has_files #g_parser_parse_upload {
 	width: auto;
 	height: auto;
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: 5px;
+	margin: 0 auto 20px auto;
 	padding: 20px 10px 20px 10px !important;
 }
 .g_drop_hover #g_parser_map_add { background-color: #afa !important; }
@@ -1294,7 +1290,7 @@ input:not([type=file]), select, textarea {
 	z-index: 1;
 }
 #g_parses_list {
-	height: calc(100dvh - 360px - 1.4vw);
+	height: calc(100dvh - 375px - 1.4vw);
 	padding-top: 5px;
 	overflow: auto;
 	mask-image: linear-gradient(to bottom, transparent 0%, black 15px, black calc(100% - 15px), transparent 100%);
@@ -1313,9 +1309,10 @@ input:not([type=file]), select, textarea {
 }
 #g_parses_list table, #g_parses_page_list div {
 	overflow-y: auto;
-	padding-top: 7px;
 	width: 100%;
+	padding-top: 3px;
 }
+#g_parses_page_list hr { padding-bottom: 10px; }
 #g_parses_page_list button {
 	padding: 5px 10px 5px 10px;
 	border-radius: 0px 0px 0px 0px;
@@ -2152,6 +2149,7 @@ body:not(.g_mobile) .g_tooltip_onscreen_mobile, .g_mobile .g_tooltip_onscreen:no
 		width: 40vw;
 		font-size: 4vw;
 	}
+	#g_parser_info_form select { width: 90% !important; }
 	#g_parses_page_list button > b { display: none; }
 	#g_menu_parser { text-align: center; }
 	#g_menu_parser > div > u > span { display: none; }
