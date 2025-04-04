@@ -1337,10 +1337,10 @@ input:not([type=file]), select, textarea {
 #g_parses_page_list button:first-child {
 	border-radius: 10px 0px 0px 10px !important;
 }
-#g_parses_page_list button:nth-last-child(2) {
+#g_parses_page_list button:nth-last-child(3) {
 	border-radius: 0px 10px 10px 0px !important;
 }
-#g_parses_page_list button:last-child {
+#g_parses_page_list button:nth-last-child(1), #g_parses_page_list button:nth-last-child(2) {
 	border-radius: 10px 10px 10px 10px !important;
 }
 #g_parses_list th {
@@ -2151,6 +2151,7 @@ body:not(.g_mobile) .g_tooltip_onscreen_mobile, .g_mobile .g_tooltip_onscreen:no
 		width: 40vw;
 		font-size: 4vw;
 	}
+	#g_parses_page_list button > b { display: none; }
 	#g_menu_parser { text-align: center; }
 	#g_menu_parser > div > u > span { display: none; }
 	#g_support > div {

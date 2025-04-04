@@ -615,23 +615,23 @@ GUI: {
 	parsePage: (page, explicit) => {
 		if(!$DAT.PARSER || !page)
 			return;
-		else if(page=='delete')
-			return($GUI.parseBulk('delete'));
+		else if(page=='delete' || page=='archive')
+			return($GUI.parseBulk(page));
 		$DAT.PARSE_PAGE = (explicit ? 0 : $DAT.PARSE_PAGE) + parseInt(page);
 		$NET.parses($DAT.PARSER, false);
 	},
 	parseBulk: (bulk, all) => {
 		const task=bulk + (all||!$DAT.PARSE_SELECTED.length?'-all':'-some');
-		if(task=='delete-some')
-			$GUI.confirm(`Are you sure you want to permanently delete ${$DAT.PARSE_SELECTED.length} output(s) for this parser?`, () => {
-				$NET.post('/parse/'+$basename($DAT.PARSER)+'/'+$DAT.PARSE_PAGE, {'bulk':'delete','ids':$DAT.PARSE_SELECTED}, $NET.parseResponse, true);
-			});
+		if(task=='archive-all')
+			$GUI.confirm(`Are you sure you want to archive *ALL* filess for this parser?`, () => $GUI.confirm(`Just to double-check, you want to archive *ALL* files for this parser, correct?`, () => $NET.post('/parse/'+$basename($DAT.PARSER)+'/'+$DAT.PARSE_PAGE, {'bulk':'archive'}, $NET.parseResponse, true)));
+		else if(task=='archive-some')
+			$GUI.confirm(`Are you sure you want to archive ${$DAT.PARSE_SELECTED.length} file(s) for this parser?`, () => $NET.post('/parse/'+$basename($DAT.PARSER)+'/'+$DAT.PARSE_PAGE, {'bulk':'archive','ids':$DAT.PARSE_SELECTED}, $NET.parseResponse, true));
 		else if(task=='delete-all')
-			$GUI.confirm('Are you sure you want to permanently delete *ALL* outputs for this parser?', () => {
-				$DAT.parseDelete($basename($DAT.PARSER));
-			});
+			$GUI.confirm(`Are you sure you want to permanently delete *ALL* files for this parser?`, () => $GUI.confirm(`Just to double-check, you want to permanently delete *ALL* files for this parser, correct?`, () => $DAT.parseDelete($basename($DAT.PARSER))));
+		else if(task=='delete-some')
+			$GUI.confirm(`Are you sure you want to permanently delete ${$DAT.PARSE_SELECTED.length} files(s) for this parser?`, () => $NET.post('/parse/'+$basename($DAT.PARSER)+'/'+$DAT.PARSE_PAGE, {'bulk':'delete','ids':$DAT.PARSE_SELECTED}, $NET.parseResponse, true));
 		else
-			$GUI.alert('Unknown bulk task: ' + task);
+			$GUI.alert(`Unknown bulk task: ${task}`);
 	},
 	mapSave: id => {
 		$DAT.parserSave(id, false),
@@ -963,8 +963,8 @@ NET: {
 		if(hasFiles) {
 			const max=Math.max(20, Math.min(100, Math.floor($W.innerWidth/30)));
 			for(let parse of json['parses']) {
-				const downloadClass=(parse['status']&&parse['status'].match(/complete|push_(?!error)/)?'has_download':'no_download');
-				html += `<tr class="g_parse_list_${$H(parse['status'])}" data-x="/parse/${$basename($DAT.PARSER)}/${parse['id']}/${parse['filename']}"><td><input type="checkbox" class="g_parse_checkbox" value="${parse['id']}"${$DAT.PARSE_SELECTED.includes(parse['id'])?' checked="checked"':''}" /><span class="g_parse_issue" title="Contact support" data-x="${parse['id']}">${$F('g_f_help_icon')}</span><span class="g_parse_delete" title="Delete" data-x="${$basename($DAT.PARSER)}/${parse['id']}">${$F('g_f_delete_icon')}</span><span class="g_parse_${downloadClass}" title="Download">${$F('g_f_download_icon')}</span></td><td class="g_parse_link_${downloadClass}">${$H($truncate(parse['filename'],max))}</td><td>${$sizeDisplay(parse['filesize'],1024,['B','K','M','G','T'])}</td><td><i>&nbsp;</i>${$GUI.parseStatusDisplay(parse['status'])}</td><td>${$H(parse['details'])}</td><td>${$dateDisplay(parse['created'])}</td><td>${$dateDisplay(parse['completed'])}</td></tr>`;
+				const downloadClass=(parse['status']&&parse['status'].match(/complete|push_(?!error)/)?'has_download':'no_download'), controls=(!parse['status'].match(/queue|process|archiv/)?`<input type="checkbox" class="g_parse_checkbox" value="${parse['id']}"${$DAT.PARSE_SELECTED.includes(parse['id'])?' checked="checked"':''}" /><span class="g_parse_issue" title="Contact support" data-x="${parse['id']}">${$F('g_f_help_icon')}</span><span class="g_parse_delete" title="Delete" data-x="${$basename($DAT.PARSER)}/${parse['id']}">${$F('g_f_delete_icon')}</span><span class="g_parse_${downloadClass}" title="Download">${$F('g_f_download_icon')}</span>`:'');
+				html += `<tr class="g_parse_list_${$H(parse['status'])}" data-x="/parse/${$basename($DAT.PARSER)}/${parse['id']}/${parse['filename']}"><td>${controls}</td><td class="g_parse_link_${downloadClass}">${$H($truncate(parse['filename'],max))}</td><td>${$sizeDisplay(parse['filesize'],1024,['B','K','M','G','T'])}</td><td><i>&nbsp;</i>${$GUI.parseStatusDisplay(parse['status'])}</td><td>${$H(parse['details'])}</td><td>${$dateDisplay(parse['created'])}</td><td>${$dateDisplay(parse['completed'])}</td></tr>`;
 			}
 			html += '</table>';
 			$V('g_parses_list', html);
@@ -972,7 +972,7 @@ NET: {
 				html = '<button type="button" data-x="-1">&#9668;</button>';
 				for(let p=Math.max(5,Math.min(30,Math.floor($W.innerWidth/80))), s=Math.max(1,Math.min($DAT.PARSE_PAGE-Math.floor(p/2),json['pages']-p)), e=Math.min(s+p,json['pages']), i=s-1; i < e; i++)
 					html += '<button type="button" data-y="'+i+'"'+(i==$DAT.PARSE_PAGE?' disabled="disabled"':'')+'>'+(i+1)+'</button>';
-				html += '<button type="button" data-x="1">&#9658;</button>&nbsp;-&nbsp;<button type="button" data-y="delete">Delete</button>';
+				html += '<button type="button" data-x="1">&#9658;</button>&nbsp;&nbsp;&bull;&nbsp;&nbsp;<button type="button" data-y="archive">Archive<b> (zip)</b></button>&nbsp;&nbsp;&bull;&nbsp;&nbsp;<button type="button" data-y="delete">Delete</button>';
 				$V('g_parses_page_list', html);
 //			}
 		}
