@@ -242,7 +242,16 @@ EVT: {
 			break;
 		}
 	},
-	mouseup: e => $GTF.SCROLLING = false,
+	mouseup: e => {
+		$GTF.SCROLLING = false;
+		if([3,4].indexOf(e.button) < 0)
+			return;
+		if($GUI.MENU=='parsers' && $GUI.PARSER_MENU=='map')
+			$GTF.zoom(e.button == 3 ? -1 : 1);
+		else
+			$MENU.toggle();
+		e.preventDefault();
+	},
 	mousemove: e => $GTF.SCROLLING ? $GTF.scrollChange(e) : null,
 	touchstart: e => {
 		if(($EVT.TOUCH.points=e.touches.length) >= 2) {
@@ -270,12 +279,7 @@ EVT: {
 	},
 	touchcancel: e => $EVT.touchend(e),
 	touchdistance: e => Math.hypot(e.touches[0].pageX-e.touches[1].pageX, e.touches[0].pageY-e.touches[1].pageY),
-	wheel: e => {
-		if(!e.ctrlKey)
-			return;
-		$GTF.zoom(e.deltaY > 0 ? -1: 1);
-		e.preventDefault();
-	},
+	wheel: e => e.ctrlKey ? ($GTF.zoom(e.deltaY>0?-1:1) || e.preventDefault()) : null,
 	focus: e => $GUI.aboutRestart(false),
 	resize: e => $GUI.stopSplash() || $MENU.hideIfSmallView(true) || $GTF.scrollChange(null) || $GTF.zoomAuto(true),
 	hashchange: e => $M(/#?([^=]+)=(.+)/, location.hash) ? $DAT.hashTask(_M[1], _M[2]) : null,
