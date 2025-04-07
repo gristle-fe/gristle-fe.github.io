@@ -1175,7 +1175,10 @@ GTF: {
 		FILTER: ['enabled','len_min','len_max','hpos_min','hpos_max','vpos_min','vpos_max','page_min','page_max','pre_text','value_text','value_replace_text'],
 		PATTERN: ['skip_rows', 'trim_rows', 'every_count', 'every_skip', 'join_modulo', 'join_modulo_delimiter']
 	},
-	setup: () => Object.keys($GTF.NAMES).forEach(n => $GTF.NAMES[n].forEach((x,i) => $GTF[x]=i)),
+	setup: () => {
+		Object.keys($GTF.NAMES).forEach(n => $GTF.NAMES[n].forEach((x,i) => $GTF[x]=i));
+		$E('g_gtf_editor').addEventListener('contextmenu', e => e.preventDefault());
+	},
 
 	init: (gtf, rules) => {
 		let html='', gtfData=(typeof gtf=='string'?$GTF.parse(gtf):gtf), width=0, maxWidth=0, height=0, page=1;
@@ -1916,14 +1919,6 @@ GTF: {
 	strToWildcard: str => (str?str:'').replace(/\.[0-9]+$/,'.*'),
 	strToObj: str => ($M(/^(.+)([0-9])+@([0-9A-Z]+)\.([0-9]+)$/, str) ? {'id':_M[0],'type':_M[1],'col':_M[2],'row':_M[3],'inc':_M[4]} : null),
 	objToStr: obj => (typeof obj=='object' ? `${obj.type}${obj.col}@${obj.row}.${obj.inc}` : {}),
-/*
-[ "PERCENT0@15.0", "PERCENT0@15.2", "PERCENT0@15.*" ]
-
-if group mode:
-	wipe PERCENT0@15.*
-if individual
-	check for '*' and ignore click
-*/
 	iconClick: e => {
 		for(let el=(e&&e.target?e.target:e),m=null; el && !!el.parentElement; el=el.parentElement) {
 			if(!el || !el.classList || !el.classList.contains('g_gtf_icon'))
@@ -1939,7 +1934,7 @@ if individual
 	},
 	click: _ => {
 		const id=_.x, fullId=(id&&$GTF.GROUP?id.replace(/[0-9]+$/,'*'):id), x=_.e.pageX-_.el.offsetLeft, y=_.e.pageY-_.el.offsetTop, dx=x-$GTF.mouse.x, dy=y-$GTF.mouse.y, d=Math.sqrt(dx*dx+dy*dy);
-		if(!id || d > 20)
+		if(!id || (d > 20 && !$GTF.mouse.selected))
 			return;
 		else if($GTF.VIEW) {
 			if(_.y) {
@@ -1954,14 +1949,30 @@ if individual
 			return($GTF.rulerClick(id));
 		$GTF.appendBaseRules($GTF.COLUMN);
 		if($GTF.EXCLUDE) {
-			if($I($GTF.RULES[$GTF.COLUMN]['E'],fullId) >= 0)
+			if($GTF.mouse.selected) {
+				if($GTF.mouse.direction === null)
+					$GTF.mouse.direction = $I($GTF.RULES[$GTF.COLUMN]['E'],fullId) >= 0;
+				if($GTF.mouse.direction && $I($GTF.RULES[$GTF.COLUMN]['E'],fullId) >= 0)
+					$GTF.RULES[$GTF.COLUMN]['E'].splice(_I,1);
+				else if(!$GTF.mouse.direction)
+					$GTF.RULES[$GTF.COLUMN]['E'].push(fullId);
+			}
+			else if($I($GTF.RULES[$GTF.COLUMN]['E'],fullId) >= 0)
 				$GTF.RULES[$GTF.COLUMN]['E'].splice(_I,1);
 			else
 				$GTF.RULES[$GTF.COLUMN]['E'].push(fullId);
 		}
 		else {
 			const test=fullId.replace(/\*$/,''), filtered=$GTF.RULES[$GTF.COLUMN]['R'].filter(x => test != x.substr(0,test.length));
-			if(filtered.length != $GTF.RULES[$GTF.COLUMN]['R'].length)
+			if($GTF.mouse.selected) {
+				if($GTF.mouse.direction === null)
+					$GTF.mouse.direction = filtered.length != $GTF.RULES[$GTF.COLUMN]['R'].length;
+				if($GTF.mouse.direction && filtered.length != $GTF.RULES[$GTF.COLUMN]['R'].length)
+					$GTF.RULES[$GTF.COLUMN]['R'] = filtered;
+				else if(!$GTF.mouse.direction && filtered.length == $GTF.RULES[$GTF.COLUMN]['R'].length)
+					$GTF.RULES[$GTF.COLUMN]['R'].push(fullId);
+			}
+			else if(filtered.length != $GTF.RULES[$GTF.COLUMN]['R'].length)
 				$GTF.RULES[$GTF.COLUMN]['R'] = filtered;
 			else
 				$GTF.RULES[$GTF.COLUMN]['R'].push(fullId);
@@ -1969,18 +1980,36 @@ if individual
 		$GTF.updateElements();
 	},
 	mouse: {
-		x:0, y:0, left:0, top:0, dragging:false,
+		x:0, y:0, left:0, top:0, dragging:false, selected:null, direction:null,
 		down: e => {
 			if(!$E('g_gtf_editor_data'))
 				return;
+			if(e.buttons > 1) {
+				_E.style.cursor = 'cell';
+				$GTF.mouse.selected = [];
+				$GTF.mouse.direction = null;
+				$GTF.mouse.move(e);
+				e.preventDefault();
+				return;
+			}
+			_E.style.cursor = 'grabbing';
 			$GTF.mouse.dragging = true;
 			$GTF.mouse.x = e.pageX - _E.offsetLeft;
 			$GTF.mouse.y = e.pageY - _E.offsetTop;
 			$GTF.mouse.left = _E.scrollLeft;
 			$GTF.mouse.top = _E.scrollTop;
-			_E.style.cursor = 'grabbing';
 		},
 		move: e => {
+			if($GTF.mouse.selected && !$GTF.VIEW) {
+				const el = $D.elementFromPoint(e.clientX, e.clientY);
+				if(!el || el.tagName!='I' || !$X(el))
+					return;
+				if(!$GTF.mouse.selected.includes(_X)) {
+					$GTF.mouse.selected.push(_X);
+					$GTF.click({'e':e,'el':el,'x':_X})
+					return;
+				}
+			}
 			if(!$GTF.mouse.dragging || !$E('g_gtf_editor_data'))
 				return;
 			e.preventDefault();
@@ -1988,11 +2017,10 @@ if individual
 			_E.scrollTop = $GTF.mouse.top - ((e.pageY-_E.offsetTop) - $GTF.mouse.y);
 		},
 		up: e => {
-			if(!$GTF.mouse.dragging)
-				return;
-			$GTF.mouse.dragging = false;
 			if($E('g_gtf_editor_data'))
 				_E.style.cursor = 'grab';
+			$GTF.mouse.selected = null;
+			$GTF.mouse.dragging = false;
 		}
 	}
 },
