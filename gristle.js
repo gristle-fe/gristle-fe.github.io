@@ -1984,7 +1984,7 @@ GTF: {
 		down: e => {
 			if(!$E('g_gtf_editor_data'))
 				return;
-			if(e.buttons > 1) {
+			if(e.buttons > 1 || e.altKey || e.ctrlKey || e.shiftKey) {
 				_E.style.cursor = 'cell';
 				$GTF.mouse.selected = [];
 				$GTF.mouse.direction = null;
