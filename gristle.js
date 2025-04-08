@@ -279,7 +279,7 @@ EVT: {
 	},
 	touchcancel: e => $EVT.touchend(e),
 	touchdistance: e => Math.hypot(e.touches[0].pageX-e.touches[1].pageX, e.touches[0].pageY-e.touches[1].pageY),
-	wheel: e => e.ctrlKey ? ($GTF.zoom(e.deltaY>0?-1:1) || e.preventDefault()) : null,
+	wheel: e => (e.ctrlKey || e.shiftKey || e.altKey || $GTF.mouse.zoom) ? ($GTF.zoom(e.deltaY>0?-1:1) || e.preventDefault()) : null,
 	focus: e => $GUI.aboutRestart(false),
 	resize: e => $GUI.stopSplash() || $MENU.hideIfSmallView(true) || $GTF.scrollChange(null) || $GTF.zoomAuto(true),
 	hashchange: e => $M(/#?([^=]+)=(.+)/, location.hash) ? $DAT.hashTask(_M[1], _M[2]) : null,
@@ -1980,11 +1980,17 @@ GTF: {
 		$GTF.updateElements();
 	},
 	mouse: {
-		x:0, y:0, left:0, top:0, dragging:false, selected:null, direction:null,
+		x:0, y:0, left:0, top:0, dragging:false, selected:null, direction:null, zoom:null,
 		down: e => {
 			if(!$E('g_gtf_editor_data'))
 				return;
-			if(e.buttons > 1 || e.altKey || e.ctrlKey || e.shiftKey) {
+			if(e.buttons == 4) {
+				_E.style.cursor = 'zoom-in';
+				$GTF.mouse.zoom = true;
+				e.preventDefault();
+				return;
+			}
+			else if(e.buttons > 1 || e.altKey || e.ctrlKey || e.shiftKey) {
 				_E.style.cursor = 'cell';
 				$GTF.mouse.selected = [];
 				$GTF.mouse.direction = null;
@@ -2019,7 +2025,7 @@ GTF: {
 		up: e => {
 			if($E('g_gtf_editor_data'))
 				_E.style.cursor = 'grab';
-			$GTF.mouse.selected = null;
+			$GTF.mouse.selected = $GTF.mouse.zoom = null;
 			$GTF.mouse.dragging = false;
 		}
 	}
