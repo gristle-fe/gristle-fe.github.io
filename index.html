@@ -549,10 +549,10 @@
          <i class="g_tooltip_button" data-x="top:15px;left:-7px|This defines how your source document will be presented in text for mapping.||Ideally, your source document should be tabularized, as this is the simplest|way to map your data and is the least prone to false positives.||However, depending on the structure of your document, tabularizing the data|may not be feasible. In such cases, it is best to preserve the document|structure for manual mapping.||In some scenarios, you may want to map data using both the tabularized|format and the preserved document structure.||NOTE: Tabularizing documents can be resource-intensive and may lead to|hitting resource limits associated with your account. Contact support if you|believe your use case warrants a limit increase."></i>
         </b><select id="g_parser_structure">
          <option value="PAGES">Preserve original page layout</option>
-         <option value="TLATTICEONLY">Tabularize data using the fast lattice method</option>
-         <option value="TSTREAMONLY">Tabularize data using the slow broad stream method</option>
-         <option value="TLATTICE">Original layout + Tabularize using fast lattice</option>
-         <option value="TSTREAM">Original layout + Tabularize using slow broad stream</option>
+         <option value="TEXTENTONLY">Tabularize data using the extensible model</option>
+         <option value="TMINIMALONLY">Tabularize data using the minimalistic model</option>
+         <option value="TEXTENT">Tabularize data using the extensible model + Original layout</option>
+         <option value="TMINIMAL">Tabularize data using the minimalistic model + Original layout</option>
          <option value="SPLIT">Split each page into an individual map (good for large files)</option>
          <option value="FLATTEN">Flatten and remove page context</option>
         </select></div>
@@ -592,7 +592,9 @@
          <option value="29">Coalesce rows (loose) :: Fill backward</option>
          <option value="4">Coalesce rows (loose)</option>
         </select></div>
-        <div><b>Additional Parameters (optional):</b><input id="g_parser_parameters" type="text" value="" maxlength="255" placeholder="PAGES=1-100 TABLE_PAGES=1-10 ..."></div>
+        <div><b>Additional Parameters (optional):
+          <i class="g_tooltip_button" data-x="top:15px;left:-7px|Common parameters include the following: {areas} &bull; {background} &bull; {block} &bull; {col_tol} &bull;|{column_min} &bull; {column_strategy} &bull; {columns} &bull; {const} &bull; {edge_min} &bull; {edge_tol} &bull; {flag} &bull;|{intersect_tol} &bull; {intersect_x_tol} &bull; {intersect_y_tol} &bull; {iterations} &bull; {join_tol} &bull; {join_x_tol} &bull;|{join_y_tol} &bull; {joint_tol} &bull; {line_tol} &bull; {margin} &bull; {method} &bull; {parallel} &bull; {password} &bull; {regions} &bull;|{resolution} &bull; {row_min} &bull; {row_strategy} &bull; {row_tol} &bull; {rows} &bull; {scale} &bull; {snap_tol} &bull;|{snap_x_tol} &bull; {snap_y_tol} &bull; {split} &bull; {strategy} &bull; {text_tol} &bull; {text_x_tol} &bull; {text_y_tol}"></i>
+        </b><input id="g_parser_parameters" type="text" value="" maxlength="255" placeholder="PAGES=&quot;1-100&quot; METHOD=&quot;lattice&quot; PASSWORD=&quot;secret&quot; ..."></div>
         <div><b>Filename matching (optional):
           <i class="g_tooltip_button" data-x="top:15px;left:-7px|This allows you to require filenames to match a particular format, while|also enabling the ability to implicitly push files to be parsed without|explicitly referencing the parser itself. These options are accessible|on your account page. Traditional asterisk ({*}) wildcards are allowed."></i>
         </b><input id="g_parser_filename_match" type="text" value="" maxlength="255" placeholder="*PartialMatch*.pdf"></div>
