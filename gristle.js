@@ -1618,7 +1618,7 @@ GTF: {
 	rulerWidthHTML: (width, html) => {
 		let widthRuler='<u data-x="@P1">#1</u>';
 		for(let w=1; w <= width; w++)
-			widthRuler += '<u data-x="@W'+w+'">|</u>';
+			widthRuler += '<u data-x="@W'+w+'" title="'+(w/width*100).toFixed(1)+'%">|</u>';
 		return('<div id="g_gtf_editor_data_ruler">' + widthRuler + '</div>' + (html?html:''));
 	},
 	rulerToggle: enabled => {

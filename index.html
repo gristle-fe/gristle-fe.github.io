@@ -548,13 +548,13 @@
         <div><b>Input Structure:
          <i class="g_tooltip_button" data-x="top:15px;left:-7px|This defines how your source document will be presented in text for mapping.||Ideally, your source document should be tabularized, as this is the simplest|way to map your data and is the least prone to false positives.||However, depending on the structure of your document, tabularizing the data|may not be feasible. In such cases, it is best to preserve the document|structure for manual mapping.||In some scenarios, you may want to map data using both the tabularized|format and the preserved document structure.||NOTE: Tabularizing documents can be resource-intensive and may lead to|hitting resource limits associated with your account. Contact support if you|believe your use case warrants a limit increase."></i>
         </b><select id="g_parser_structure">
-         <option value="PAGES">Preserve original page layout</option>
-         <option value="TACCEONLY">Tabularize data using the accelerate model</option>
-         <option value="TSIMPONLY">Tabularize data using the simplistic model</option>
-         <option value="TEXTEONLY">Tabularize data using the extensible model</option>
-         <option value="TACCE">Tabularize data using the accelerate model + Original layout</option>
-         <option value="TSIMP">Tabularize data using the simplistic model + Original layout</option>
-         <option value="TEXTE">Tabularize data using the extensible model + Original layout</option>
+         <option value="PAGES">Preserve original page layout (map solely based on positions)</option>
+         <option value="TACCEONLY">Tabularize data using the accelerated model (fast; good to set fixed columns)</option>
+         <option value="TACCE">Tabularize data using the accelerated model + Preserve original layout</option>
+         <option value="TEXTEONLY">Tabularize data using the extensible model (slower; has most user controls)</option>
+         <option value="TEXTE">Tabularize data using the extensible model + Preserve original layout</option>
+         <option value="TSIMPONLY">Tabularize data using the simplistic model (inconsistent; works w/niche cases)</option>
+         <option value="TSIMP">Tabularize data using the simplistic model + Preserve original layout</option>
          <option value="SPLIT">Split each page into an individual map (good for large files)</option>
          <option value="FLATTEN">Flatten and remove page context</option>
         </select></div>
