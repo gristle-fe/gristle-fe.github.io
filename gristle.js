@@ -1197,7 +1197,7 @@ GTF: {
 			}
 			if(!width)
 				html += '<u data-x="@H'+(++height)+'">--</u>';
-			if(ins == '*')
+			if(ins == '*' || (ins[0] == 'S' && ins[1] == '_'))
 				html += '<s class="">' + $H(txt) + '</s>';
 			else if(ins != '#')
 				html += '<i class="' + ($M(/(.)([0-9]+)@([0-9A-Z]+)\.([0-9]+)$/,ins) ? `t_${_M[1].match(/[A-Z]/)?'k':'u'}` : '') + '" title="' + ($M(/(^[A-Z][A-Z_]+)/i,ins)?_M[0]:'TEXT') + '" data-x="' + ins + '">' + $H(txt) + '</i>';
