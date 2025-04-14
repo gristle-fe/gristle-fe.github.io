@@ -487,7 +487,7 @@ GUI: {
 		if($X(el) && !el.childNodes.length)
 			setTimeout(() => {
 				const lines=_X.split('|'), style=lines.shift();
-				el.insertAdjacentHTML('beforeend', `<div class="g_tooltip g_tooltip_${style.match('right')?'right':'left'}"><div class="g_tooltip_text" style="${$H(style)}"><div class="g_tooltip_box">${$H(lines.join("\n")).replace(/\{/g,'<b>').replace(/\}/g,'</b>')}</div><div class="g_tooltip_close">CLOSE</div></div></div>`)
+				el.insertAdjacentHTML('beforeend', `<div class="g_tooltip g_tooltip_${style.match('right')?'right':'left'}"><div class="g_tooltip_text" style="${$H(style)}"><div class="g_tooltip_box">${$H(lines.join("\n")).replace(/{([^;}]+);/g, '<b title="$1">').replace(/:\[/g,":\n\n  VALUE = [ ").replace(/\]:([A-Z0-9-]+)/ig," ]   (default: $1)\n\n").replace(/\]\"/g," ]\n\n\"").replace(/\^/g,' | ').replace(/\{/g,'<b>').replace(/\}/g,'</b>')}</div><div class="g_tooltip_close">CLOSE</div></div></div>`)
 				if(el.childNodes.length)
 					$GUI.reset(el.childNodes[0], 'g_fade_in 0.35s ease 0s 1 normal forwards');
 		}, 10);
