@@ -780,7 +780,7 @@ MENU: {
 DAT: {
 	PARSER_INPUTS: {'last':null, 'set':null, 'names':['name','description','email','url','filename_match','format','structure','mask','parameters','output','output_encoding','output_structure','profile','readonly']},
 	PARSERS:[], PARSER_STATES:[], PARSER_STATES_LOADED:[], PARSER:'', PARSE_PAGE:0, PARSE_SELECTED:[], LOAD_STATE:null, TEMP_STATES:{}, REGEXES:{},
-	ISSUES:[], ISSUE:'', ISSUE_LAST:0, LOGGED_IN:false, ADMIN:false, FRAGMENTS:{},
+	ISSUES:[], ISSUE:'', ISSUE_LAST:0, LOGGED_IN:false, ADMIN:false, REF:null, FRAGMENTS:{},
 
 	setup: () => $DAT.LOAD_STATE = $DB.get('state'),
 	logout: () => $DB.clear() && location.reload(),
@@ -833,6 +833,7 @@ DAT: {
 	mapDelete: id => $NET.mapDelete(id?id:$DAT.PARSER),
 	hashTask: (task, value) => {
 		switch(task) {
+			case 'ref': $DAT.REF=value; break;
 			case 'verify': $NET.verify(value); break;
 			case 'support': $GUI.supportOpen(false, value); break;
 			case 'auth':
@@ -851,10 +852,7 @@ DAT: {
 NET: {
 	URL: 'https://api.' + document.domain.replace(/^www\./i,''), SYNC_RESPONSE: null,
 
-	setup: () => {
-		if($DB.get('auth'))
-			$NET.login(true);
-	},
+	setup: () => $DB.get('auth') ? $NET.login(true) : null,
 	credentials: () => $DB.get('auth') ? ('Bearer '+$DB.get('auth')) : ('Basic '+btoa(`${$E('g_username').value}:${$E('g_password').value}`)),
 	get: (action, args, callback, busy) => $NET.fetch('GET', action, args, callback, busy),
 	post: (action, args, callback, busy) => $NET.fetch('POST', action, args, callback, busy),
@@ -863,6 +861,8 @@ NET: {
 		let headers=new Headers({'Authorization':$NET.credentials()}), params='';
 		if(method=='POST' && typeof(args)=='object' && args?.constructor?.name!='FormData')
 			headers.set('Content-Type', 'application/json');
+		if($DAT.REF)
+			headers.set('Gristle-Ref', $DAT.REF);
 		else if(method=='GET' && typeof(args)=='object' && args)
 			params = '?'+new URLSearchParams(args);
 		if(busy)
