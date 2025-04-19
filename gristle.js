@@ -186,8 +186,8 @@ EVT: {
 	click: e => {
 		let dataRef=null, x='', y='', ref='', refList=Object.keys(_clickMap), el=(e&&e.target?e.target:e);
 		if(!el) return;
-		if(!$isVisible($E('g_modal')) && (!el.className || !el.className.match('g_tooltip_detail')))
-			$GUI.tooltipClear(el.className && el.className.match('tooltip'));
+		if(!$isVisible($E('g_modal')) && (!el.className || !el.className.match || !el.className.match('g_tooltip_detail')))
+			$GUI.tooltipClear(el.className && el.className.match && el.className.match('tooltip'));
 		for(let next=el; !!next.parentElement; next=next.parentElement) {
 			if(!ref) {
 				for(let c in refList) {
@@ -495,9 +495,7 @@ GUI: {
 		}, 10);
 	},
 	tooltipButtonClick: e => $GUI.tooltipShow(e.target),
-	tooltipDetailClick: _ => {
-		$GUI.alert(_.el.innerText.toUpperCase() + "=\"VALUE\":\n\n" + _.el.title); 
-	},
+	tooltipDetailClick: _ => _.el.title ? $GUI.alert(_.el.innerText.toUpperCase() + "=\"VALUE\":\n\n" + _.el.title) : null,
 	tooltipOnScreenUpdate: () => {
 		if($C('g_tooltip').length || !$A('.g_tooltip_onscreen'))
 			return;
