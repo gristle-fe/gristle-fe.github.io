@@ -2001,7 +2001,7 @@ body:not(.g_app_mode) #g_content, .g_app_no_menu #g_content {
 .g_tooltip_show #g_menu_parser { overflow: visible; }
 .g_tooltip_show #g_menu_parser > div.g_menu_parser_capable > i { display: inline; }
 .g_tooltip_show .g_tooltip_onscreen { display: inline-block; }
-.g_tooltip_hover_info b { cursor: help; }
+.g_tooltip_detail { cursor: help; }
 ody:not(.g_mobile) .g_tooltip_onscreen_mobile, .g_mobile .g_tooltip_onscreen:not(.g_tooltip_onscreen_mobile) { display: none !important; }
 
 @media (hover: hover) and (pointer: fine) {
@@ -2011,7 +2011,7 @@ ody:not(.g_mobile) .g_tooltip_onscreen_mobile, .g_mobile .g_tooltip_onscreen:not
 		color: inherit !important;
 		font-size: min(24px, var(--g-gtf-font-size));
 	}
-	.g_menu_parser_capable:hover > u, .g_menu_parser_capable:hover > span {
+	.g_menu_parser_capable:hover > u, .g_menu_parser_capable:hover > span, .g_tooltip_detail:hover {
 		text-decoration: underline !important;
 		text-decoration-thickness: 2px !important;
 	}

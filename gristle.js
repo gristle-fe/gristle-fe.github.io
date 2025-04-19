@@ -48,6 +48,7 @@ _clickMap: {
 	'g_about_play':_				=> $GUI.aboutVideo(true),
 	'g_about_play_alt':_			=> $GUI.aboutVideo(true),
 	'g_tooltip_walk':_				=> $GUI.tooltipWalk(),
+	'g_tooltip_detail':_			=> $GUI.tooltipDetailClick(_),
 
 	'g_issue_send_button':_			=> $GUI.issueSend(_.x),
 	'g_issue_close_button':_		=> $GUI.issueDelete(_.x),
@@ -185,7 +186,8 @@ EVT: {
 	click: e => {
 		let dataRef=null, x='', y='', ref='', refList=Object.keys(_clickMap), el=(e&&e.target?e.target:e);
 		if(!el) return;
-		$GUI.tooltipClear(el.className && el.className.match && el.className.match('tooltip'));
+		if(!$isVisible($E('g_modal')) && (!el.className || !el.className.match('g_tooltip_detail')))
+			$GUI.tooltipClear(el.className && el.className.match('tooltip'));
 		for(let next=el; !!next.parentElement; next=next.parentElement) {
 			if(!ref) {
 				for(let c in refList) {
@@ -487,12 +489,15 @@ GUI: {
 		if($X(el) && !el.childNodes.length)
 			setTimeout(() => {
 				const lines=_X.split('|'), style=lines.shift();
-				el.insertAdjacentHTML('beforeend', `<div class="g_tooltip g_tooltip_${style.match('right')?'right':'left'}"><div class="g_tooltip_text" style="${$H(style)}"><div class="g_tooltip_box">${$H(lines.join("\n")).replace(/{([^;}]+);/g, '<b title="$1">').replace(/:\[/g,":\n\n  VALUE = [ ").replace(/\]:([A-Z0-9-]+)/ig," ]   (default: $1)\n\n").replace(/\]\"/g," ]\n\n\"").replace(/\^/g,' | ').replace(/\{/g,'<b>').replace(/\}/g,'</b>')}</div><div class="g_tooltip_close">CLOSE</div></div></div>`)
+				el.insertAdjacentHTML('beforeend', `<div class="g_tooltip g_tooltip_${style.match('right')?'right':'left'}"><div class="g_tooltip_text" style="${$H(style)}"><div class="g_tooltip_box" id="g_tooltip_detail">${$H(lines.join("\n")).replace(/{([^;}]+);/g, '<b title="$1" class="g_tooltip_detail">').replace(/:\[/g,":\n\n  VALUE = [ ").replace(/\]:([A-Z0-9-]+)/ig," ]   (default: $1)\n\n").replace(/\]\"/g," ]\n\n\"").replace(/\^/g,' | ').replace(/\{/g,'<b>').replace(/\}/g,'</b>')}</div><div class="g_tooltip_close">CLOSE</div></div></div>`)
 				if(el.childNodes.length)
 					$GUI.reset(el.childNodes[0], 'g_fade_in 0.35s ease 0s 1 normal forwards');
 		}, 10);
 	},
 	tooltipButtonClick: e => $GUI.tooltipShow(e.target),
+	tooltipDetailClick: _ => {
+		$GUI.alert(_.el.innerText.toUpperCase() + "=\"VALUE\":\n\n" + _.el.title); 
+	},
 	tooltipOnScreenUpdate: () => {
 		if($C('g_tooltip').length || !$A('.g_tooltip_onscreen'))
 			return;
