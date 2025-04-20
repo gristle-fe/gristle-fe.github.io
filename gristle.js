@@ -91,6 +91,8 @@ _clickMap: {
 	'g_gtf_zoom_out_button':_		=> $GTF.zoom(parseInt(_.x)),
 	'g_gtf_widescreen_button':_		=> $MENU.toggle(),
 
+	'g_gtf_column_fg_container':_	=> $GTF.columnColorSelect('fg'),
+	'g_gtf_column_bg_container':_	=> $GTF.columnColorSelect('bg'),
 	'g_gtf_column_up_button':_		=> $GTF.columnShift(parseInt(_.x)) && $GTF.columnUpdate(),
 	'g_gtf_column_down_button':_	=> $GTF.columnShift(parseInt(_.x)) && $GTF.columnUpdate(),
 	'g_gtf_column_delete':_			=> $GTF.columnDelete(),
@@ -1357,6 +1359,7 @@ GTF: {
 		$E('g_gtf_column_name_text').focus();
 		$GTF.scrollChange(null);
 	},
+	columnColorSelect: type => $E('g_gtf_column_'+type+'_color').click() || $GTF.columnToggle(false),
 	columnShift: offset => {
 		let parent=$GTF.RULES[$GTF.COLUMN]['C'][$GTF.join_column], to=0;
 		$GTF.columnToggle(true);

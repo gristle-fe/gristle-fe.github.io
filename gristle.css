@@ -1576,12 +1576,12 @@ input:not([type=file]), select, textarea {
 .g_gtf_icon_active line, .g_app_no_menu #g_gtf_widescreen_button line { stroke: #383 !important; }
 .g_gtf_icon_multi_map { display: none; }
 #g_gtf_column_fg_color, #g_gtf_column_bg_color { cursor: pointer; }
-#g_gtf_column_fg_color_container {
+#g_gtf_column_fg_container {
 	color: var(--g-gtf-selected-bgcolor);
 	background-color: var(--g-gtf-selected-fgcolor);
 	fill: var(--g-gtf-selected-bgcolor);
 }
-#g_gtf_column_bg_color_container {
+#g_gtf_column_bg_container {
 	color: var(--g-gtf-selected-fgcolor);
 	background-color: var(--g-gtf-selected-bgcolor);
 	fill: var(--g-gtf-selected-fgcolor);
@@ -1590,8 +1590,8 @@ input:not([type=file]), select, textarea {
 	position: absolute;
 	top: 0;
 	left: 0;
-	height: 100%;
-	width: 100%;
+	width: 0;
+	height: 0;
 	opacity: 0;
 }
 #g_gtf_column_join_column_detail {
