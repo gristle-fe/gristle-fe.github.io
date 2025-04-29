@@ -765,6 +765,7 @@ hr {
 	margin-bottom: 10px;
 	font-size: 1.25em;
 	color: #555;
+	white-space: nowrap;
 }
 input:-webkit-autofill {
 	background-color: #eee !important;

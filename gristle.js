@@ -465,6 +465,7 @@ GUI: {
 				'password': pass1,
 				'contact': $V('g_account_contact'),
 				'quota': $V('g_account_quota'),
+				'allowed_emails': $V('g_account_allowed_emails'),
 				'options': options
 			});
 		}
@@ -956,6 +957,7 @@ NET: {
 		$V('g_account_password', '');
 		$V('g_account_password_confirm', '');
 		$V('g_account_contact', json['contact']);
+		$V('g_account_allowed_emails', json['allowed_emails']);
 		$V('g_account_quota', json['quota']);
 		_V.readOnly = !$DAT.admin;
 
