@@ -36,6 +36,7 @@ _clickMap: {
 	'g_captcha_image':_				=> $GUI.captchaUpdate(),
 	'g_verify_button':_				=> $NET.verifySend(),
 	'g_account_save':_				=> $GUI.accountSave(),
+	'g_account_user_sendmail':_		=> $GUI.accountEmail(),
 	'g_logout_button':_				=> $GUI.logout(),
 	'g_billing_container':_			=> $GUI.billingClick(_.x),
 	'g_modal':_						=> $GUI.modal(_.x),
@@ -74,6 +75,7 @@ _clickMap: {
 	'g_parse_checkbox':_			=> $GUI.parseCheckbox(_.el),
 	'g_parse_checkbox_all':_		=> $A('.g_parse_checkbox').forEach(el => $GUI.parseCheckbox(el, _.el.checked)),
 	'g_parses_page_list':_			=> $GUI.parsePage(_.y?_.y:_.x, !!_.y),
+	'g_parse_file_email':_			=> $GUI.parseEmail(),
 
 	'g_support_select':_			=> $GUI.supportSelect('g_support_select_'+_.x+'_header'),
 	'g_support_checkbox_container':_=> $GUI.supportOpen(true, 'terms'),
@@ -656,6 +658,12 @@ GUI: {
 		else
 			$GUI.alert(`Unknown bulk task: ${task}`);
 	},
+	parseEmail: () => {
+		let parser=null;
+		if(parser=$DAT.parserFind($basename($DAT.PARSER)))
+			$W.open(`mailto:${$NET.email(parser.id)}?subject=${escape('Files for parser: '+parser.name)}&body=${escape('My email address should be whitelisted and authorized under this account; files are attached for parsing.')}`);
+	},
+	accountEmail: () => $W.open(`mailto:${$E('g_account_user_sendmail').innerText}?subject=${escape('Files to be inferred and parsed')}&body=${escape('My email address should be whitelisted and authorized under this account. The files are attached, and my account is configured to infer which parser should be used.')}`),
 	mapSave: id => {
 		$DAT.parserSave(id, false),
 		$GTF.RULES_INIT = $objectClone($GTF.RULES);
@@ -863,6 +871,7 @@ NET: {
 	URL: 'https://api.' + document.domain.replace(/^www\./i,''), SYNC_RESPONSE: null,
 
 	setup: () => $DB.get('auth') ? $NET.login(true) : null,
+	email: user => (!user?'':user+'@') + $D.domain.replace(/^www\./i,'').replace(/\.com/,'.net'),
 	credentials: () => $DB.get('auth') ? ('Bearer '+$DB.get('auth')) : ('Basic '+btoa(`${$E('g_username').value}:${$E('g_password').value}`)),
 	get: (action, args, callback, busy) => $NET.fetch('GET', action, args, callback, busy),
 	post: (action, args, callback, busy) => $NET.fetch('POST', action, args, callback, busy),
@@ -952,6 +961,7 @@ NET: {
 
 		$V('g_username', json['user']);
 		$V('g_account_user', json['user']);
+		$V('g_account_user_sendmail', $NET.email(json['user']));
 		$V('g_account_email', json['email']);
 		_V.readOnly = (json['verified'] && !$DAT.admin);
 		$V('g_account_password', '');

@@ -386,7 +386,7 @@
      </form>
     </div>
     <div class="g_logged_in_show">
-     <div>Account: <span id="g_account_user">[USER]</span> <span id="g_verify_notification">(email not verified)</span></div>     
+     <div>Account: <span id="g_account_user">[USER]</span> &lt;<span id="g_account_user_sendmail">none</span><span id="g_verify_notification">email not verified</span>&gt;</div>     
      <hr />
      <div id="g_account_container">
       <span>E-Mail<b id="g_account_email_checked">&nbsp;&#10003;</b></span>
@@ -619,7 +619,10 @@
        </div>
       </div>
       <div id="g_parser_map">
-       <div id="g_parser_map_upload"><input type="file" id="g_map_file" class="g_file" /></div>
+       <div id="g_parser_map_upload">
+        <input type="file" id="g_map_file" class="g_file" />
+        <label for="g_map_file" id="g_map_file_upload">Upload File <b>/</b> Drop Here</label>
+       </div>
        <div id="g_gtf_editor">
         <div id="g_gtf_editor_controls_container">
          <div id="g_gtf_editor_controls">
@@ -724,7 +727,12 @@
        </div>
       </div>
       <div id="g_parser_parse">
-       <div id="g_parser_parse_upload"><input type="file" id="g_parse_file" class="g_file" /></div>
+       <div id="g_parser_parse_upload">
+        <input type="file" id="g_parse_file" class="g_file" />
+        <label for="g_parse_file" id="g_parse_file_upload">Upload File</label>
+        <b>- OR -</b>
+        <span id="g_parse_file_email">E-Mail File</span>
+       </div>
        <hr />
        <div id="g_parses_list"></div>
        <div id="g_parses_page_list"></div>

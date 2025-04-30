@@ -517,7 +517,8 @@ hr {
 	background-color: #fff !important;
 }
 #g_verify_notification { color: #F44; }
-.g_app_verified #g_verify_button, .g_app_verified #g_verify_notification { display: none !important; }
+.g_app_verified #g_verify_button, .g_app_verified #g_verify_notification, #g_account_user_sendmail { display: none !important; }
+.g_app_verified #g_account_user_sendmail { display: inline !important; }
 
 #g_home_label b {
 	display: none;
@@ -580,6 +581,9 @@ hr {
 	outline: 0;
 	background: linear-gradient(0deg, var(--g-button-secondary) 0%, var(--g-button-primary) 100%);
 }
+#g_account_user { font-weight: bold; }
+#g_account_user_sendmail { cursor: pointer; }
+#g_account_user_sendmail:hover { text-decoration: underline; }
 #g_parser_info_delete, #g_logout_button { background: linear-gradient(0deg, var(--g-button-alert-secondary) 0%, var(--g-button-alert-primary) 100%) !important; }
 #g_account_input_container button:disabled, #g_parser_info_input_container button:disabled {
 	background: linear-gradient(0deg, #444 0%, #888 100%) !important;
@@ -1268,6 +1272,7 @@ input:not([type=file]), select, textarea {
 }
 .g_drop_hover #g_parser_map_add { background-color: #afa !important; }
 .g_drop_hover #g_parser_map_upload, .g_drop_hover #g_parser_parse_upload { background-color: #ded !important; }
+.g_drop_hover #g_parser_map_upload label, .g_drop_hover #g_parser_parse_upload label, .g_drop_hover #g_parser_parse_upload span { background-color: #fff !important; }
 #g_parser_info_form {
 	height: calc(100dvh - 300px - 0.6vw);
 	padding: 5px 0px 15px 0px;
@@ -1291,7 +1296,7 @@ input:not([type=file]), select, textarea {
 	z-index: 1;
 }
 #g_parses_list {
-	height: calc(100dvh - 375px - 1.4vw);
+	height: calc(100dvh - 385px);
 	padding-top: 5px;
 	overflow: auto;
 	mask-image: linear-gradient(to bottom, transparent 0%, black 15px, black calc(100% - 15px), transparent 100%);
@@ -1314,7 +1319,7 @@ input:not([type=file]), select, textarea {
 	padding-top: 3px;
 }
 #g_parses_page_list hr { padding-bottom: 10px; }
-#g_parses_page_list button {
+#g_parses_page_list button, #g_parser_map_upload label, #g_parser_parse_upload label, #g_parser_parse_upload span {
 	padding: 5px 10px 5px 10px;
 	border-radius: 0px 0px 0px 0px;
 	border-width: 2px 0px 0px 2px;
@@ -1338,7 +1343,7 @@ input:not([type=file]), select, textarea {
 #g_parses_page_list button:nth-last-child(3) {
 	border-radius: 0px 10px 10px 0px !important;
 }
-#g_parses_page_list button:nth-last-child(1), #g_parses_page_list button:nth-last-child(2) {
+#g_parses_page_list button:nth-last-child(1), #g_parses_page_list button:nth-last-child(2), #g_parser_map_upload label, #g_parser_parse_upload label, #g_parser_parse_upload span {
 	border-radius: 10px 10px 10px 10px !important;
 }
 #g_parses_list th {
@@ -1998,7 +2003,18 @@ body:not(.g_app_mode) #g_content, .g_app_no_menu #g_content {
 	max-height: 1px;
 	z-index: 7;
 }
-#g_menu_parser > div > i { display: none; }
+#g_parser_parse_upload {
+	white-space: nowrap;
+	user-select: none;
+	-webkit-user-select: none;
+}
+#g_map_file_upload, #g_parse_file_upload, #g_parse_file_email, #g_parser_parse_upload b {
+	font-size: 18px !important;
+	color: #444;
+	margin: 0 5px 0 5px;
+}
+#g_parser_parse_upload b { padding: 0 2vw 0 2vw; }
+.g_file, #g_menu_parser > div > i { display: none; }
 .g_tooltip_show #g_menu_parser { overflow: visible; }
 .g_tooltip_show #g_menu_parser > div.g_menu_parser_capable > i { display: inline; }
 .g_tooltip_show .g_tooltip_onscreen { display: inline-block; }
@@ -2042,6 +2058,10 @@ ody:not(.g_mobile) .g_tooltip_onscreen_mobile, .g_mobile .g_tooltip_onscreen:not
 	}
 	#g_parses_page_list button:disabled, #g_parses_page_list button:hover {
 		background-color: #ddd !important;
+		color: #000 !important;
+	}
+	#g_parser_map_upload label:hover, #g_parser_parse_upload label:hover, #g_parser_parse_upload span:hover {
+		background-color: #fff !important;
 		color: #000 !important;
 	}
 	#g_start_button_alt:hover, #g_about_play_alt:hover, #g_about_links b:hover { color: #0074d4; }
@@ -2151,6 +2171,7 @@ ody:not(.g_mobile) .g_tooltip_onscreen_mobile, .g_mobile .g_tooltip_onscreen:not
 		width: 40vw;
 		font-size: 4vw;
 	}
+	#g_parser_parse_upload b { padding: 0; }
 	#g_parser_info_form select { width: 90% !important; }
 	#g_parses_page_list button > b { display: none; }
 	#g_menu_parser { text-align: center; }
@@ -2175,6 +2196,7 @@ ody:not(.g_mobile) .g_tooltip_onscreen_mobile, .g_mobile .g_tooltip_onscreen:not
 	#g_billing_table p { min-height: auto; }
 }
 @media only screen and (max-width: 500px) {
+	#g_parser_parse_upload b { display:none; }
 	#g_gtf_column_color_selected { font-size: max(0.4vw, 14px); }
 	#g_gtf_column_name_text, #g_gtf_filter_value_text, #g_gtf_filter_value_replace_text { font-size: max(0.4vw, 12px) !important; }
 }
