@@ -751,7 +751,7 @@ hr {
 	width: 20px;
 }
 .g_logged_out .g_logged_in_show, .g_logged_in .g_logged_out_show { display: none !important; }
-.g_logged_in .g_logged_in_show, .g_logged_out .g_logged_out_show { }
+.g_logged_in_show > div { white-space: nowrap; }
 #g_content {
 	width: calc(100% - 30px);
 	max-height: 100%;
