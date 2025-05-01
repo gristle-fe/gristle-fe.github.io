@@ -341,7 +341,7 @@ GUI: {
 		if($GUI.appMode() && $V('g_error', $H(msg)));
 			$GUI.reset(_V, `g_error ${secs?secs:$minMax(msg.length/15,5,10)}s normal forwards`);
 	},
-	logout: () => $GUI.confirm('Are you sure you want to logout?', $DAT.logout),
+	logout: () => $GUI.confirm('Are you sure you want to logout?', $NET.logout),
 	supportOpen: (confirm, select) => {
 		$E('g_support_checkbox').checked = false;
 		$E('g_support_button_agree').style.display = (confirm?'inline':'none');
@@ -942,16 +942,12 @@ NET: {
 	signUp: (args, passive) => $NET.post('/user', args, $NET.loginResponse, !passive),
 	accountSave: args => $NET.post('/user', args, $NET.loginResponse, true),
 	login: passive => (passive||$DB.clear()) && $NET.get('/user/', null, $NET.loginResponse, !passive),
+	logout: () => $NET.get('/user/logout', null, $NET.loginResponse, true),
 	loginResponse: json => { 
-		if(!json || !json['user'] || !json['auth']) {
-			$DB.clear();
-			$GUI.loggedIn(false);
-			return;
-		}
-		else if($GUI.locked()) {
-			$NET.SYNC_RESPONSE = json;
-			return;
-		}
+		if(!json || !json['user'] || !json['auth'] || json['logout'])
+			return($DAT.logout());
+		else if($GUI.locked())
+			return($NET.SYNC_RESPONSE=json);
 
 		['verified','admin'].forEach(x => $D.body.classList[json[x]?'add':'remove']('g_app_'+x));
 		$DAT.admin = !!json['admin'];
