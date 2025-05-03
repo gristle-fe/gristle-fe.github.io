@@ -784,7 +784,7 @@ MENU: {
 		if($GUI.SWAGGER)
 			return;
 		$GUI.SWAGGER = SwaggerUIBundle({
-			url: "swagger.json", //Location of Open API spec in the repo
+			url: "/swagger.json",
 			dom_id: '#g_api_swagger_container',
 			deepLinking: true,
 			presets: [ SwaggerUIBundle.presets.apis, SwaggerUIBundle.SwaggerUIStandalonePreset ],
