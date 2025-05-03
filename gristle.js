@@ -860,7 +860,7 @@ DAT: {
 				$NET.login(true);
 				break;
 		}
-		history.replaceState(null, null, ' ');
+		history.replaceState(null, null, $DAT.REF ? $DAT.REF : ' ');
 	}
 },
 
@@ -880,7 +880,9 @@ NET: {
 		let headers=new Headers({'Authorization':$NET.credentials()}), params='';
 		if(method=='POST' && typeof(args)=='object' && args?.constructor?.name!='FormData')
 			headers.set('Content-Type', 'application/json');
-		if($DAT.REF)
+		if(location.pathname.length > 1)
+			headers.set('Gristle-Ref', location.pathname);
+		else if($DAT.REF)
 			headers.set('Gristle-Ref', $DAT.REF);
 		else if(method=='GET' && typeof(args)=='object' && args)
 			params = '?'+new URLSearchParams(args);
