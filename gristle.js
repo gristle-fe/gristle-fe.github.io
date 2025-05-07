@@ -31,6 +31,7 @@ _clickMap: {
 	'g_signup_button':_				=> $GUI.login(false),
 	'g_signup_button':_				=> $GUI.login(false),
 	'g_recovery_button':_			=> $GUI.recovery(),
+	'g_promo_button':_				=> $GUI.promo(),
 	'g_signup_link':_				=> $GUI.signUpLink(false),
 	'g_recovery_link':_				=> $GUI.signUpLink(true),
 	'g_captcha_image':_				=> $GUI.captchaUpdate(),
@@ -472,6 +473,7 @@ GUI: {
 			});
 		}
 	},
+	promo: () => $NET.promo(prompt('Enter your promo code:')),
 	tooltipClear: clicked => {
 		$A('.g_tooltip').forEach(e => {
 			if(!e.parentElement || !e.parentElement.classList.contains('g_tooltip_onscreen'))
@@ -939,6 +941,7 @@ NET: {
 		}
 		$A('.g_file').forEach(e => e.value = null);
 	},
+	promo: code => code && $NET.get('/user/promo/'+$basename(code), null, $NET.loginResponse, true),
 	verify: id => $NET.get('/user/verify/'+$basename(id), null, $NET.loginResponse),
 	verifySend: id => $NET.get('/user/verify', null),
 	signUp: (args, passive) => $NET.post('/user', args, $NET.loginResponse, !passive),
@@ -948,6 +951,11 @@ NET: {
 	loginResponse: json => { 
 		if(!json || !json['user'] || !json['auth'] || json['logout'])
 			return($DAT.logout());
+		else if(json['promo']) {
+			if(json['quota'])
+				$V('g_account_quota', json['quota']);
+			return($GUI.alert(json['promo']));
+		}
 		else if($GUI.locked())
 			return($NET.SYNC_RESPONSE=json);
 
