@@ -2046,7 +2046,7 @@ body:not(.g_mobile) .g_tooltip_onscreen_mobile, .g_mobile .g_tooltip_onscreen:no
 		background: linear-gradient(to bottom, #454 5%, #232 100%);
 		background-color: #77a809;
 	}
-	#g_parser_info_input_container button:hover {
+	#g_account_input_container button:hover, #g_parser_info_input_container button:hover {
 		background: linear-gradient(0deg, var(--g-button-secondary) 0%, var(--g-billing-dark) 100%);
 		box-shadow: 0 0 0 2px #ccc, 0 0 0 4px #ddd;
 	}
