@@ -1260,6 +1260,7 @@ input:not([type=file]), select, textarea {
 	background-color: #bdb;
 	overflow: hidden;
 }
+.g_app_no_menu #g_parser_map_upload { margin: auto; }
 #g_parser_map_upload input, #g_parser_parse_upload input {
 	padding: 0.2vw 0.4vw 0.2vw 0.4vw;
 	font-size: max(1vw, 16px);
