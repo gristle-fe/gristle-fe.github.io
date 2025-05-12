@@ -1252,15 +1252,24 @@ input:not([type=file]), select, textarea {
 #g_parser_info, #g_parser_map, #g_parser_parse { display: none; }
 #g_parser_map_upload, #g_parser_parse_upload {
 	border: 2px dashed #080;
-	width: 50%;
+	width: 55%;
 	height: 20%;
 	padding: 10vh 5vw 10vh 5vw;
-	margin-bottom: 10px;
+	margin: auto;
 	text-align: center;
 	background-color: #bdb;
 	overflow: hidden;
 }
-.g_app_no_menu #g_parser_map_upload, .g_app_no_menu #g_parser_parse_upload { margin: auto; }
+body:not(.g_app_no_menu) #g_parser_map_upload, body:not(.g_app_no_menu) #g_parser_content:not(.g_has_files) #g_parser_parse_upload {
+	padding: 10vh 3vw 10vh 3vw !important;
+	margin-top: max(100px, 6%) !important;
+	margin-left: max(175px, 12%) !important;
+}
+.g_app_no_menu #g_parser_map_upload, .g_app_no_menu #g_parser_content:not(.g_has_files) #g_parser_parse_upload {
+	padding: 25vh 3vw 25vh 3vw !important;
+	width: 80% !important;
+	margin: auto !important;
+}
 #g_parser_map_upload input, #g_parser_parse_upload input {
 	padding: 0.2vw 0.4vw 0.2vw 0.4vw;
 	font-size: max(1vw, 16px);
@@ -2107,10 +2116,7 @@ body:not(.g_mobile) .g_tooltip_onscreen_mobile, .g_mobile .g_tooltip_onscreen:no
 	#g_parser_scrollbar:hover #g_parser_scrollbar_button { background-color: #aaa; }
 }
 @media (max-aspect-ratio: 4/3) {
-	#g_parser_map_upload, #g_parser_parse_upload {
-		width: 80%;
-		height: auto;
-	}
+	#g_parser_map_upload, #g_parser_parse_upload { height: auto; }
 	#g_issue_content p { max-width: 80%; }
 	#g_issue_input_container {
 		max-width: 100%;
@@ -2119,7 +2125,6 @@ body:not(.g_mobile) .g_tooltip_onscreen_mobile, .g_mobile .g_tooltip_onscreen:no
 	#g_splash_logo { width: 60%; }
 	#g_splash_banner { font-size: 5vw; }
 }
-
 @media (max-aspect-ratio: 1/1) {
 	#g_splash_logo { width: 90% !important; }
 	#g_account_container { padding-right: 5vw; }
