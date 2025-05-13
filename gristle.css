@@ -2155,6 +2155,10 @@ body:not(.g_mobile) .g_tooltip_onscreen_mobile, .g_mobile .g_tooltip_onscreen:no
 		font-size: max(1vmax, 14px);
 		width: 98%;
 	}
+	body:not(.g_app_no_menu) #g_parser_map_upload, body:not(.g_app_no_menu) #g_parser_content:not(.g_has_files) #g_parser_parse_upload {
+		width: 70% !important;
+		margin: max(100px, 6%) auto 0 auto !important;
+	}
 }
 @media only screen and (max-width: 800px) {
 	button > span { display: none; }
