@@ -1489,10 +1489,10 @@ GTF: {
 		$V('g_gtf_column_join_column', oldJoinSelection);
 
 		columns.forEach((div,n) => {
-			if(joins[n]&&joins[n][0])
+			if(joins[n] && joins[n][0])
 				joins[n][0].forEach(x => divs += x);
 			divs += div;
-			if(joins[n]&&joins[n][1])
+			if(joins[n] && joins[n][1])
 				joins[n][1].forEach(x => divs += x);
 
 		});

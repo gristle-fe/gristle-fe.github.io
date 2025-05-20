@@ -7,7 +7,7 @@
  <link rel="icon" type="image/svg+xml" sizes="any" href="/icon.svg" />
  <link rel="icon" type="image/png" sizes="32x32" href="/icon-32x32.png" />
  <link rel="icon" type="image/png" sizes="256x256" href="/icon-256x256.png" />
- <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon.png" >
+ <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon.png" />
  <link rel="canonical" href="https://gristle.com" />
  <link rel="stylesheet" type="text/css" href="/gristle.css" />
  <link rel="stylesheet" type="text/css" href="/swagger.css" />
@@ -225,7 +225,7 @@
  <div id="g_busy"><div></div></div>
  <div id="g_body">
   <div id="g_menu_cover"></div>
-  <div id="g_menu">
+  <nav id="g_menu">
    <div id="g_home_label"><span>Home</span><b>Admin</b></div><ul>
     <li data-x="about">About</li>
     <li data-x="account">Account</li>
@@ -244,8 +244,8 @@
     <li data-x="terms">Terms</li>
     <li data-x="privacy">Privacy</li>
    </ul>
-  </div>
-  <div id="g_content">
+  </nav>
+  <main id="g_content">
    <div id="g_content_about">
     <div id="g_about_doc_container">
      <div id="g_about_doc_left"><span>Documents come in...</span><span>Docs in...</span></div>
@@ -292,7 +292,7 @@
      </svg>
     </div>
     <div id="g_about_start"><input id="g_start_button" type="button" value="Start App" /></div>
-    <div id="g_about_text">
+    <header id="g_about_text">
      <h1>We cut the gristle out of document ingestion, extracting and normalizing your data.</h1>
      <p>Is your company wasting time tediously transcribing data from the same third-party documents day in and day out? If so, you're not alone. Whether it's PDFs, Word documents, or even images, we understand that you want ordered and predictable data extracted from your documents to streamline your workflows&mdash;and that's exactly what we do.</p>
      <p>We take on the gristly task of transforming unstructured documents into structured data, enabling automated extraction and eliminating the need for manual transcription. Our no-code solution includes an intuitive UI, a robust API, and clear ingestion examples, along with multiple automated export options for seamless integration.</p>
@@ -345,7 +345,7 @@
      <h1>Where are the Terms and Conditions?</h1>
      <p id="g_about_links">The <b data-x="terms">Terms</b>, <b data-x="terms">Conditions</b>, and <b data-x="privacy">Privacy Statement</b> are displayed and must be approved during the account creation process.  However, you can view them at any time in the app's side panel. For any other questions or concerns, you can create a ticket under your account or contact us at:</p>
      <p><a href="mailto:support@gristle.com">support@gristle.com</a></p>
-    </div>
+    </header>
    </div>
    <div id="g_content_account"> 
     <div class="g_logged_out_show">
@@ -1328,7 +1328,7 @@ end
    <div id="g_content_api">
     <div id="g_api_swagger_container"></div>
    </div>
-  </div> <!-- content -->
+  </main>
  </div>  <!--body-->
  <div id="g_fragments">
   <input type="file" id="g_file" />
