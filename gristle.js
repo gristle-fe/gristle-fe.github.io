@@ -1198,7 +1198,7 @@ GTF: {
 		['#440044','#997799']
 	], GROUP_COLORS:['#388E3C','#039BE5','#FB8C00','#8E24AA','#3949AB','#CDDC39','#6D4C41','#AD1457','#81C784','#607D8B','#FF8A65','#BA68C8','#4DD0E1','#F4511E','#FFD54F','#00897B','#9E9D24','#EF6C00','#616161'],
 	NAMES: {
-		COLUMN: ['name_text','fg_color','bg_color','join_line_enabled','join_column','join_delimiter'],
+		COLUMN: ['name_text','fg_color','bg_color','join_line_enabled','join_self_enabled','join_column','join_delimiter'],
 		FILTER: ['enabled','len_min','len_max','hpos_min','hpos_max','vpos_min','vpos_max','page_min','page_max','pre_text','value_text','value_replace_text'],
 		PATTERN: ['skip_rows', 'trim_rows', 'every_count', 'every_skip', 'join_modulo', 'join_modulo_delimiter']
 	},
