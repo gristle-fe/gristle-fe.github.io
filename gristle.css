@@ -2025,7 +2025,7 @@ body:not(.g_app_mode) #g_content, .g_app_no_menu #g_content {
 	margin: 0 5px 0 5px;
 }
 #g_parser_parse_upload b { padding: 0 2vw 0 2vw; }
-.g_file, #g_menu_parser > div > i { display: none; }
+.g_hide, .g_file, #g_menu_parser > div > i { display: none; }
 .g_tooltip_show #g_menu_parser { overflow: visible; }
 .g_tooltip_show #g_menu_parser > div.g_menu_parser_capable > i { display: inline; }
 .g_tooltip_show .g_tooltip_onscreen { display: inline-block; }
