@@ -1545,6 +1545,7 @@ body:not(.g_app_no_menu) #g_parser_map_upload, body:not(.g_app_no_menu) #g_parse
 	overflow: hidden;
 	user-select: none;
 	-webkit-user-select: none;
+	fill: #000000;
 }
 .g_gtf_icon b {
 	top: calc(max(1vw, 24px) * -1);
