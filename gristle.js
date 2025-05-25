@@ -1199,7 +1199,7 @@ GTF: {
 	], GROUP_COLORS:['#388E3C','#039BE5','#FB8C00','#8E24AA','#3949AB','#CDDC39','#6D4C41','#AD1457','#81C784','#607D8B','#FF8A65','#BA68C8','#4DD0E1','#F4511E','#FFD54F','#00897B','#9E9D24','#EF6C00','#616161'],
 	NAMES: {
 		COLUMN: ['name_text','fg_color','bg_color','fill_up_enabled','fill_down_enabled','join_line_enabled','join_self_enabled','join_column','join_delimiter'],
-		FILTER: ['enabled','len_min','len_max','hpos_min','hpos_max','vpos_min','vpos_max','page_min','page_max','pre_text','value_text','value_replace_text'],
+		FILTER: ['enabled','len_min','len_max','hpos_min','hpos_max','vpos_min','vpos_max','page_min','page_max','pre_text','value_text','value_replace_text','starts_within'],
 		PATTERN: ['skip_rows','trim_rows','every_count','every_skip','join_modulo','join_modulo_delimiter']
 	},
 	setup: () => {
@@ -1592,7 +1592,7 @@ GTF: {
 		const len=value?value.length:0, hpos=preText?preText.length:0, f=$GTF.filterList(column);
 		return(f.enabled && (
 			(f.len_min>0&&f.len_min>len) || (f.len_max>0&&f.len_max<len) || 
-			(f.hpos_min>0&&f.hpos_min>hpos+1) || (f.hpos_max>0&&f.hpos_max<hpos+len) ||
+			(f.hpos_min>0&&f.hpos_min>hpos+1) || (f.hpos_max>0&&f.hpos_max<hpos+(f.starts_within?0:len)) ||
 			(f.vpos_min>0&&f.vpos_min>vpos) || (f.vpos_max>0&&f.vpos_max<vpos) || 
 			(f.page_min>0&&f.page_min>page) || (f.page_max>0&&f.page_max<page) ||
 			(f.value_text&&!$regexTest(f.value_text,value)) || (f.pre_text&&!$regexTest(f.pre_text,preText))
@@ -1647,6 +1647,7 @@ GTF: {
 		let widthRuler='<u data-x="@P1">#1</u>';
 		for(let w=1; w <= width; w++)
 			widthRuler += '<u data-x="@W'+w+'" title="'+(w/width*100).toFixed(1)+'%">|</u>';
+		widthRuler += '<u data-x="@Z0" title="Starts within (don\'t count length)">&lt;+&gt;</u>';
 		return('<div id="g_gtf_editor_data_ruler">' + widthRuler + '</div>' + (html?html:''));
 	},
 	rulerToggle: enabled => {
@@ -1667,9 +1668,12 @@ GTF: {
 			case 'W': min='hpos_min'; max='hpos_max'; break;
 			case 'H': min='vpos_min'; max='vpos_max'; break;
 			case 'P': min='page_min'; max='page_max'; break;
+			case 'Z': min='starts_within'; max='starts_within'; break;
 			default: return;
 		}
-		if(!pos)
+		if(min=='starts_within')
+			$V('g_gtf_filter_starts_within', $V('g_gtf_filter_starts_within')=='1' ? '0' : '1');
+		else if(!pos)
 			['hpos_min','hpos_max','vpos_min','vpos_max'].forEach(v => $V('g_gtf_filter_'+v, '0'));
 		else if(f[min] && f[max]) {
 			$V('g_gtf_filter_'+min, '0');
@@ -1728,6 +1732,9 @@ GTF: {
 						x.className = 'g_unfiltered';
 						x.innerText = '++';
 					}
+					break;
+				case 'Z':
+					x.className = f.starts_within ? 'g_unfiltered' : '';
 					break;
 			}
 		}
