@@ -1647,7 +1647,7 @@ GTF: {
 		let widthRuler='<u data-x="@P1">#1</u>';
 		for(let w=1; w <= width; w++)
 			widthRuler += '<u data-x="@W'+w+'" title="'+(w/width*100).toFixed(1)+'%">|</u>';
-		widthRuler += '<u data-x="@Z0" title="Starts within (don\'t count length)">&lt;+&gt;</u>';
+		widthRuler += '<u data-x="@Z0" title="Starts within (don\'t count length)">[&#177;]</u>';
 		return('<div id="g_gtf_editor_data_ruler">' + widthRuler + '</div>' + (html?html:''));
 	},
 	rulerToggle: enabled => {
@@ -1703,7 +1703,7 @@ GTF: {
 					}
 					else {
 						x.className = 'g_unfiltered';
-						x.innerText = '+';
+						x.innerText = f.starts_within ? "\xb1" : '+';
 					}
 					break;
 				case 'P':
