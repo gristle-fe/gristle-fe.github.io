@@ -1061,6 +1061,12 @@ input:not([type=file]), select, textarea {
 }
 #g_about_text p { font-size: max(16px, 1.1vw); }
 #g_about_text h1 { font-size: max(24px, 1.5vw); }
+#g_about_text_mobile_only {
+	display: none;
+	font-style: italic;
+	font-size: max(14px, 1vw) !important;
+}
+.g_mobile #g_about_text_mobile_only { display: block !important; }
 #g_about_doc_container {
 	position: relative;
 	width: 100%;
@@ -2174,7 +2180,7 @@ body:not(.g_mobile) .g_tooltip_onscreen_mobile, .g_mobile .g_tooltip_onscreen:no
 		margin: 0;
 		padding: 2vh 5vw 3vh 5vw;
 	}
-	#g_about_text:before, #g_about_text:after { display: none; }
+	#g_about_text:before, #g_about_text:after, #g_about_text_mobile_only span { display: none; }
 	#g_about_start { background: linear-gradient(90deg, rgba(221,221,228,0) 0%, rgba(221,221,228,1) 50%, rgba(221,221,228,0) 100%); }
 	#g_about_doc_left span:nth-child(1), #g_about_doc_right span:nth-child(1) { display: none; }
 	#g_about_doc_left span:nth-child(2), #g_about_doc_right span:nth-child(2) { display: inline; }
