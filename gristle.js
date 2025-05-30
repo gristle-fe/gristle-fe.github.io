@@ -205,6 +205,8 @@ EVT: {
 		}
 	},
 	keydown: e => {
+		if(e && e.key && e.key=='Escape')
+			return($GUI.modal('no'));
 		if ((e.ctrlKey || e.metaKey) && '+-='.indexOf(e.key) >= 0)
 			e.preventDefault();
 		if(e && e.target && ($GUI.MENU!='parsers' || $GUI.PARSER_MENU!='map' || $I(['INPUT','TEXTAREA'],e.target.tagName) >= 0 || e.target.isContentEditable))
@@ -348,7 +350,7 @@ GUI: {
 		$V('g_modal_text', $H(text).replace(/\n/g,'<br />'));
 	},
 	modal: answer => {
-		if(!answer)
+		if(!answer || !$isVisible($E('g_modal')))
 			return;
 		$GUI.reset('g_modal', 'g_fade_out 0.25s ease forwards');
 		if($GUI.MODAL && answer=='yes')
