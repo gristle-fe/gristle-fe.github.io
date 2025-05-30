@@ -51,24 +51,20 @@ _clickMap: {
 	'g_about_play_alt':_			=> $GUI.aboutVideo(true),
 	'g_tooltip_walk':_				=> $GUI.tooltipWalk(),
 	'g_tooltip_detail':_			=> $GUI.tooltipDetailClick(_),
-
 	'g_issue_send_button':_			=> $GUI.issueSend(_.x),
 	'g_issue_close_button':_		=> $GUI.issueDelete(_.x),
 	'g_issue_attach_button':_		=> $GUI.issueAttach(),
 	'g_issue_attachment_download':_	=> $GUI.download('/upload/'+_.x),
 	'g_contact_issue':_				=> $GUI.supportClose(false) || $DAT.parserIssue($V('g_contact_issue_type')),
-
 	'g_parser_info_issue':_			=> $DAT.parserIssue(_.x),
 	'g_parser_info_save':_			=> $DAT.parserSave(_.x, false),
 	'g_parser_info_delete':_		=> $GUI.parserDelete(_.x),
 	'g_parser_info_clone':_			=> $DAT.parserSave(_.x, true),
 	'g_parser_info_parser_id':_		=> $GUI.parserIdCopy(_.x),
-
 	'g_parser_map_save':_			=> $GUI.mapSave(_.x),
 	'g_parser_map_delete':_			=> $GUI.mapDelete(),
 	'g_parser_map_revert':_			=> $GUI.mapRevert(),
 	'g_parser_map_add':_			=> $GUI.mapAdd(),
-
 	'g_parse_link_has_download':_	=> $GUI.download(_.x), 
 	'g_parse_has_download':_		=> $GUI.download(_.x), 
 	'g_parse_issue':_				=> $DAT.parserIssue(_.x),
@@ -77,36 +73,27 @@ _clickMap: {
 	'g_parse_checkbox_all':_		=> $A('.g_parse_checkbox').forEach(el => $GUI.parseCheckbox(el, _.el.checked)),
 	'g_parses_page_list':_			=> $GUI.parsePage(_.y?_.y:_.x, !!_.y),
 	'g_parse_file_email':_			=> $GUI.parseEmail(),
-
 	'g_support_select':_			=> $GUI.supportSelect('g_support_select_'+_.x+'_header'),
 	'g_support_checkbox_container':_=> $GUI.supportOpen(true, 'terms'),
 	'g_support_button_agree':_		=> $GUI.supportClose(true),
 	'g_support_button_close':_		=> $GUI.supportClose(false),
-
 	'g_snippets_menu':_				=> $GUI.snippetSelect(_.x),
 	'g_snippet_copy_button':_		=> $GUI.snippetCopy(),
-
 	'g_gtf_map_delete':_			=> $GTF.mapDelete(_.x),
 	'g_gtf_map_prev':_				=> $GTF.mapShow(_.x),
 	'g_gtf_map_next':_				=> $GTF.mapShow(_.x),
-
 	'g_gtf_zoom_in_button':_		=> $GTF.zoom(parseInt(_.x)),
 	'g_gtf_zoom_out_button':_		=> $GTF.zoom(parseInt(_.x)),
 	'g_gtf_widescreen_button':_		=> $MENU.toggle(),
-
 	'g_gtf_column_fg_container':_	=> $GTF.columnColorSelect('fg'),
 	'g_gtf_column_bg_container':_	=> $GTF.columnColorSelect('bg'),
 	'g_gtf_column_up_button':_		=> $GTF.columnShift(parseInt(_.x)) && $GTF.columnUpdate(),
 	'g_gtf_column_down_button':_	=> $GTF.columnShift(parseInt(_.x)) && $GTF.columnUpdate(),
 	'g_gtf_column_delete':_			=> $GTF.columnDelete(),
-
 	'g_gtf_editor_data':_			=> $GTF.click(_),
-
 	'g_gtf_filter_activate':_		=> $E('g_gtf_filter_enabled').click(),
-
 	'g_gtf_rule_edit':_				=> $GTF.ruleEdit(_),
 	'g_gtf_pattern_edit':_			=> void(0),
-
 	'g_gtf_column_color_choices':_	=> $GTF.columnSelect(_.x),
 	'g_gtf_column_color_container':_=> $GTF.columnToggle(),
 	'g_gtf_filter_value_container':_=> $GTF.filterValueToggle(),
@@ -208,7 +195,6 @@ EVT: {
 			if(!y && typeof next.dataset=='object' && typeof $Y(next)=='string')
 				y = _Y;
 		}
-
 		if($Q('.g_gtf_rule_active') && ref != 'g_gtf_pattern_edit')
 			$GTF.ruleEdit(null);
 		if(_clickMap[ref])
@@ -744,6 +730,10 @@ GUI: {
 			callback();
 	}
 },
+
+
+/*************************************************************************************************\
+\*******  EXTENDED MENU LOGIC  *********************************************  [ $MENU.* ]  *******/
 MENU: {
 	selectedUpdate: () => $A('#g_menu ul > li').forEach(x => x.classList[$GUI.MENU==$X(x) || ($GUI.MENU=='parsers'&&$X(x)==$DAT.PARSER) || ($GUI.MENU=='issues'&&$X(x)==$DAT.ISSUE)?'add':'remove']('g_menu_selected')) || $GUI.loadState(),
 	scroll: e => $D.body.classList[e.target.scrollTop?'add':'remove']('g_menu_scrolled'),
@@ -760,7 +750,6 @@ MENU: {
 		else
 			$D.body.classList[$GUI.isNoMenu()?'remove':'add']('g_app_no_menu');
 	},
-
 	about: () => {
 		$GUI.aboutRestart(true);
 		$GUI.appMode(false);
@@ -958,13 +947,10 @@ NET: {
 		}
 		else if($GUI.locked())
 			return($NET.SYNC_RESPONSE=json);
-
 		['verified','admin'].forEach(x => $D.body.classList[json[x]?'add':'remove']('g_app_'+x));
 		$DAT.admin = !!json['admin'];
-
 		$DB.set('auth', json['auth']);
 		$DB.set('user', json['user']);
-
 		$V('g_username', json['user']);
 		$V('g_account_user', json['user']);
 		$V('g_account_user_sendmail', $NET.email(json['user']));
@@ -976,10 +962,8 @@ NET: {
 		$V('g_account_allowed_emails', json['allowed_emails']);
 		$V('g_account_quota', json['quota']);
 		_V.readOnly = !$DAT.admin;
-
 		if(typeof json['options'] == 'number')
 			$A('#g_account_container input[type="checkbox"]').forEach(e => e.checked = !!(json['options'] & parseInt(e.value)));
-
 		$GUI.stopSplash();
 		$GUI.appMode(true);
 		$GUI.loggedIn(true);
@@ -1282,7 +1266,6 @@ GTF: {
 			$E('g_gtf_editor_controls').style.left = '-' + (scrollSpan * pct) + 'px';
 			$E('g_parser_scrollbar_button').style.left = (pos-10) + 'px';
 		}
-
 	},
 	scrollFix: () => {
 		$E('g_parser_content').style.overflowX = 'auto';
@@ -1450,7 +1433,6 @@ GTF: {
 		$E('g_gtf_column_join_delimiter').placeholder = si ? '[SEP]' : '[N/A]';
 		$E('g_gtf_column_join_delimiter').disabled = !si;
 		$E('g_gtf_column_join_column_detail').style.display = si ? 'inline' : 'none';
-
 		$GTF.RULES.forEach((x,c) => {
 			const jc=$GTF.RULES[c]['C'][$GTF.join_column], jca=Math.abs(jc), join=jc&&$GTF.RULES[jca-1]&&$GTF.RULES[jca-1]['C'], n=join?jca:(c+1);
 			const columnName=$GTF.RULES[c]['C'][$GTF.name_text]?$GTF.RULES[c]['C'][$GTF.name_text]:'[COLUMN NAME]';
@@ -1476,18 +1458,15 @@ GTF: {
 				}
 			}
 		});
-
 		$V('g_gtf_column_name_text_num', $GTF.columnDisplayNum($GTF.COLUMN, true));
 		$V('g_gtf_column_name_text', $GTF.RULES[$GTF.COLUMN]['C'][$GTF.name_text]?$GTF.RULES[$GTF.COLUMN]['C'][$GTF.name_text]:'');
 		$E('g_gtf_column_name_text').style.color = $GTF.RULES[$GTF.COLUMN]['C'][$GTF.fg_color];
 		$E('g_gtf_column_color_container').style.color = $GTF.RULES[$GTF.COLUMN]['C'][$GTF.fg_color];
 		_E.style.backgroundColor = $GTF.RULES[$GTF.COLUMN]['C'][$GTF.bg_color];
-
 		const oldJoinSelection=$V('g_gtf_column_join_column'), nextColors=$GTF.columnNextColorPair();
 		$E('g_gtf_column_join_column_append').innerHTML = options[0];
 		$E('g_gtf_column_join_column_prepend').innerHTML = options[1];
 		$V('g_gtf_column_join_column', oldJoinSelection);
-
 		columns.forEach((div,n) => {
 			if(joins[n] && joins[n][0])
 				joins[n][0].forEach(x => divs += x);
@@ -1747,13 +1726,10 @@ GTF: {
 		}
 		else
 			$GTF.UPDATE_TIMEOUT = null;
-
 		let gtf, t, tags, colorIdx, groupIdx, excludeIdx, filterIdx, patternList, regexMap={}, wildIds=[], rowCount=0, pageNum=1, line='', columns=($GTF.VIEW?Object.keys($GTF.RULES):[$GTF.COLUMN]);;
 		$GTF.appendBaseRules();
-
 		if(!(tags=$A('#g_gtf_editor_data > I, #g_gtf_editor_data > P, #g_gtf_editor_data > S')))
 			return;
-
 		$E('g_gtf_editor_data').classList.add('g_gtf_editor_hide_groups');
 		patternList = $GTF.filterPatternList();
 		for(t of tags) {
@@ -1769,10 +1745,8 @@ GTF: {
 			}
 			else
 				line += t.innerText;
-
 			if(t.tagName!='I' || _X == '#' || !(gtf=$GTF.strToObj(_X)))
 				continue;
-
 			filterIdx = excludeIdx = groupIdx = colorIdx = -1;
 			for(let c of columns) {
 				if(!$GTF.RULES[c]['R'])
@@ -1785,10 +1759,8 @@ GTF: {
 							groupIdx = colorIdx = c;
 					}
 				}
-
 				if($GTF.RULES[c]['E'] && $I($GTF.RULES[c]['E'],gtf.id) >= 0)
 					excludeIdx = c;
-
 				if(colorIdx >= 0) {
 					if($GTF.RULES[c]['E'] && $I($GTF.RULES[c]['E'],gtf.id) >= 0) {
 						if($GTF.VIEW)
@@ -1911,7 +1883,6 @@ GTF: {
 		$A('.g_gtf_rule_edit').forEach(x => x.style.zIndex = 0);
 		$A('.g_gtf_pattern_edit').forEach(x => x.remove());
 		$A('.g_gtf_rule_active').forEach(x => x.classList.remove('g_gtf_rule_active'));
-
 		if(_)
 			_.el.classList[show?'add':'remove']('g_gtf_rule_active');
 		if(!show) {
