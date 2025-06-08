@@ -2128,6 +2128,10 @@ regexTest: (exp, text) => {
 	try { return(new RegExp($DAT.REGEXES[exp] ? $DAT.REGEXES[exp] : exp).test(text)); }
 	catch { return(null); }
 },
+isVisible: el => {
+	const r=el.getBoundingClientRect(), s=getComputedStyle(el);
+	return((s.display !== 'none') && (s.visibility !== 'hidden' && s.opacity !== '0') && (r.width > 0 && r.height > 0 && r.bottom > 0 && r.right > 0 && r.top < $W.innerHeight && r.left < $W.innerWidth));
+},
 isEmpty: x => {
 	if(typeof x != 'object') return(!x);
 	for(let i in x) return(false);
@@ -2146,6 +2150,5 @@ altKey: () => ['altKey','ctrlKey','shiftKey'].find(k => $W.event && $W.event[k])
 scrollToTop: (el, smooth) => (el.scrollTop ? el.scrollTo({top: 0, behavior: smooth?'smooth':'auto'}) : false) !== false,
 epochNow: () => Math.floor(Date.now() / 1000),
 isMobile: () => /iphone|ip[ao]d|android/i.test(navigator.userAgent),
-isVisible: el => el && el.offsetParent!==null && getComputedStyle(el).visibility!=='hidden' && getComputedStyle(el).opacity!=='0',
 parserName: n => n.replace(/(\b[a-z](?!\s))/g, s => s.toUpperCase()).replace(/[^A-Z0-9]+/ig,'-').replace(/(^-|-$)/g,'').replace(/^$/,'Parser-'+($DAT?.PARSERS?.length??0+1))
 } /* EOF */
