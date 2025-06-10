@@ -2130,7 +2130,7 @@ regexTest: (exp, text) => {
 },
 isVisible: el => {
 	const r=el.getBoundingClientRect(), s=getComputedStyle(el);
-	return((s.display !== 'none') && (s.visibility !== 'hidden' && s.opacity !== '0') && (r.width > 0 && r.height > 0 && r.bottom > 0 && r.right > 0 && r.top < $W.innerHeight && r.left < $W.innerWidth));
+	return(s.display !== 'none' && s.visibility !== 'hidden' && s.opacity !== '0' && r.width > 0 && r.height > 0 && r.bottom > 0 && r.right > 0 && r.top < $W.innerHeight && r.left < $W.innerWidth);
 },
 isEmpty: x => {
 	if(typeof x != 'object') return(!x);
