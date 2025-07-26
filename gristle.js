@@ -499,7 +499,7 @@ GUI: {
 		if($C('g_tooltip').length || !$A('.g_tooltip_onscreen'))
 			return;
 		for(const el of _A) {
-			if(!$isVisible(el))
+			if(!$isVisible(el, true))
 				continue;
 			$GUI.tooltipShow(el);
 			break;
@@ -2128,9 +2128,9 @@ regexTest: (exp, text) => {
 	try { return(new RegExp($DAT.REGEXES[exp] ? $DAT.REGEXES[exp] : exp).test(text)); }
 	catch { return(null); }
 },
-isVisible: el => {
+isVisible: (el, noBoundingCheck) => {
 	const r=el.getBoundingClientRect(), s=getComputedStyle(el);
-	return(s.display !== 'none' && s.visibility !== 'hidden' && s.opacity !== '0' && r.width > 0 && r.height > 0 && r.bottom > 0 && r.right > 0 && r.top < $W.innerHeight && r.left < $W.innerWidth);
+	return((el.offsetParent!==null && s.display !== 'none' && s.visibility !== 'hidden') && (noBoundingCheck || (s.opacity !== '0' && r.width > 0 && r.height > 0 && r.bottom > 0 && r.right > 0 && r.top < $W.innerHeight && r.left < $W.innerWidth)));
 },
 isEmpty: x => {
 	if(typeof x != 'object') return(!x);
