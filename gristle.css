@@ -1647,7 +1647,7 @@ body:not(.g_app_no_menu) #g_parser_map_upload, body:not(.g_app_no_menu) #g_parse
 }
 #g_parser_scrollbar_button {
 	display: block;
-	z-index: 2;
+	z-index: 3;
 	position: absolute;
 	top: 50%;
 	transform: translateY(-50%);
@@ -1663,7 +1663,7 @@ body:not(.g_app_no_menu) #g_parser_map_upload, body:not(.g_app_no_menu) #g_parse
 	display: none;
 }
 #g_parser_scrollbar_line {
-	z-index: 1;
+	z-index: 2;
 	position: absolute;
 	transform: translateY(-50%);
 	top: 50%;
