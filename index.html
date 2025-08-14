@@ -611,8 +611,10 @@
         <div><b>Filename matching (optional):
          <i class="g_tooltip_button" data-x="top:15px;left:-7px|This allows you to require filenames to match a particular format, while|also enabling the ability to implicitly push files to be parsed without|explicitly referencing the parser itself. These options are accessible|on your account page. Traditional asterisk ({*}) wildcards are allowed."></i>
         </b><input id="g_parser_filename_match" type="text" value="" maxlength="255" placeholder="*PartialMatch*.pdf"></div>
+        <div><b>Send Outputs to URL (optional; protocols = ftp, ftps, sftp, http, https, s3):
+         <i class="g_tooltip_button" data-x="top:15px;right:-7px|For AWS S3, place keys or IAM role in the|user field and grant access to the following:||{{arn:aws:iam::049165108458:user/gristle}"></i>
+        </b><input id="g_parser_url" type="text" value="" maxlength="4096" placeholder="protocol://user:pass@domain.com/path/"></div>
         <div><b>Send Outputs to E-mail (optional; from @gristle.net):</b><input id="g_parser_email" type="text" value="" maxlength="255" placeholder="user@domain.com"></div>
-        <div><b>Send Outputs to URL (optional; protocols = ftp, ftps, sftp, http, https, s3):</b><input id="g_parser_url" type="text" value="" maxlength="4096" placeholder="protocol://user:pass@domain.com/path/"></div>
        </div>
        <hr />
        <div id="g_parser_info_input_container">
